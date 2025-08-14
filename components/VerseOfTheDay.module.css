@@ -1,0 +1,164 @@
+/*
+ * استایل‌های سراسری مثل :root و body را باید در یک فایل global.css قرار دهید.
+ * این فایل فقط برای استایل‌های مخصوص کامپوننت VerseOfTheDay است.
+ */
+
+.card {
+  /* کاهش بیشتر عرض باکس */
+  max-width: 500px;
+  
+  /* کاهش پدینگ برای فشرده‌تر شدن ارتفاع */
+  padding: 20px; 
+  margin: 40px auto;
+  
+  /* افکت شیشه‌ای: پس‌زمینه نیمه‌شفاف و تار */
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  
+  /* سایه ملایم */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.8s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* کاهش فاصله بین المان‌ها */
+  gap: 12px; 
+}
+
+.title {
+  font-size: clamp(1.4rem, 4vw, 2rem); /* اندازه فونت عنوان کمتر شد */
+  font-weight: bold;
+  color: #fff;
+  /* افکت نئون برای عنوان */
+  text-shadow: 0 0 10px #03fc03, 0 0 20px #03fc03;
+}
+
+.verseBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  /* کاهش فاصله بین متن‌ها */
+  gap: 8px;
+  
+  text-align: center;
+  
+  /* کاهش پدینگ داخلی باکس */
+  padding: 8px 12px;
+}
+
+.ayaText {
+  font-family: 'Amiri', 'Scheherazade', serif;
+  font-size: clamp(1.8rem, 5vw, 2.5rem); /* اندازه فونت متن عربی کمتر شد */
+  font-weight: 400;
+  
+  /* تغییر رنگ آیه به زرد نئونی */
+  color: #ffd700;
+  
+  line-height: 1.5; /* کاهش ارتفاع خط */
+  /* گلو زرد برای متن عربی */
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6), 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.translation {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  color: #707070;
+  line-height: 1.4; /* کاهش ارتفاع خط */
+  text-align: center;
+}
+
+.tafsir {
+  font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+  color: #555;
+  line-height: 1.5; /* کاهش ارتفاع خط */
+  text-align: center;
+}
+
+.info {
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  font-style: italic;
+  color: #a0a0a0;
+  text-align: center;
+}
+
+.shareButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* کاهش پدینگ دکمه برای ارتفاع کمتر */
+  padding: 7px 18px; 
+  
+  font-size: 0.85rem; /* کاهش اندازه فونت دکمه */
+  font-weight: bold;
+  color: #ffd700;
+  background: transparent;
+  border: 2px solid #ffd700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  
+  /* کاهش فاصله بین متن و آیکون */
+  gap: 5px; 
+  
+  /* افکت نئون زرد */
+  box-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #ffd700, 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.shareButton:hover {
+  background-color: rgba(255, 215, 0, 0.2);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #ffd700, 0 0 40px #ffd700;
+}
+
+.statusBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  gap: 20px;
+  color: #a0a0a0;
+  font-size: 1.2rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 215, 0, 0.3);
+  border-top-color: #ffd700;
+  border-radius: 50%;
+  animation: spin 1s ease-in-out infinite;
+}
+
+.errorIcon {
+  font-size: 3rem;
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+/* --- انیمیشن‌ها --- */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
