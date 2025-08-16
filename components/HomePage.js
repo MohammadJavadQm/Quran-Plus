@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import Link from 'next/link';
 import { useTheme } from '../components/ThemeToggle';
 import { ThemeToggle } from '../components/ThemeToggle';
+import VerseOfTheDay from '../components/VerseOfTheDay';
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube, FaChevronLeft, FaRegLightbulb, FaBook, FaCog, FaStar, FaHandHoldingHeart, FaQuran } from 'react-icons/fa';
 
 // لوگوی جدید شما به عنوان یک کامپوننت SVG
@@ -137,7 +138,7 @@ const AdvancedFeaturesSection = ({ darkMode, currentTheme }) => {
   );
 };
 
-// AnimatedCounter component from the second snippet
+// AnimatedCounter component
 function AnimatedCounter({ target, duration = 3 }) {
   const [count, setCount] = useState(0);
 
@@ -174,7 +175,7 @@ function AnimatedCounter({ target, duration = 3 }) {
   return <>{count.toLocaleString()}</>;
 }
 
-// HoverableFeatureCard component from the second snippet
+// HoverableFeatureCard component
 const HoverableFeatureCard = ({ title, description, icon, href, currentTheme, darkMode }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -245,6 +246,7 @@ const HoverableFeatureCard = ({ title, description, icon, href, currentTheme, da
             }}
           >
             <Link href={href} passHref>
+              {/* Correct way to handle nested anchor tags */}
               <motion.a
                 style={{
                   textDecoration: 'none',
@@ -524,97 +526,97 @@ const ChatPageContent = ({ darkMode, currentTheme, onGoBack }) => {
              <FaBook style={sidebarIconStyle} />
              <span>Read Quran</span>
            </button>
-        </div>
-        
-        <div style={{ width: '100%', marginTop: 'auto' }}>
-          <button style={sidebarButtonStyle}>
-            <FaCog style={sidebarIconStyle} />
-            <span>Settings</span>
-          </button>
-        </div>
-      </div>
+         </div>
+         
+         <div style={{ width: '100%', marginTop: 'auto' }}>
+           <button style={sidebarButtonStyle}>
+             <FaCog style={sidebarIconStyle} />
+             <span>Settings</span>
+           </button>
+         </div>
+       </div>
 
-      {/* Main Content Area */}
-      <div style={mainContentStyle}>
-        {/* Chat Panel */}
-        <div style={chatPanelStyle}>
-          <div style={chatMessageContainerStyle}>
-            <div style={userMessageBubbleStyle}>
-              I understand you're going through a challenging time.
-            </div>
-            
-            <div style={aiMessageBubbleStyle}>
-              <p style={verseTextArStyle}>
-                وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا
-              </p>
-              <p style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.7)' }}>
-                At-Talaq 65:2
-              </p>
-              <p style={verseTranslationStyle}>
-                "And whoever fears Allah - He will make for him a way out." This verse reminds us that divine solutions exist
-              </p>
-            </div>
-          </div>
-          
-          <div style={chatInputContainerStyle}>
-            <input 
-              type="text" 
-              placeholder="شروع گفتگوی واقعی" 
-              style={chatInputStyle}
-            />
-            <button style={exploreButtonStyle}>
-              + Explore Tafsir
-            </button>
-          </div>
-        </div>
+       {/* Main Content Area */}
+       <div style={mainContentStyle}>
+         {/* Chat Panel */}
+         <div style={chatPanelStyle}>
+           <div style={chatMessageContainerStyle}>
+             <div style={userMessageBubbleStyle}>
+               I understand you're going through a challenging time.
+             </div>
+             
+             <div style={aiMessageBubbleStyle}>
+               <p style={verseTextArStyle}>
+                 وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا
+               </p>
+               <p style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.7)' }}>
+                 At-Talaq 65:2
+               </p>
+               <p style={verseTranslationStyle}>
+                 "And whoever fears Allah - He will make for him a way out." This verse reminds us that divine solutions exist
+               </p>
+             </div>
+           </div>
+           
+           <div style={chatInputContainerStyle}>
+             <input 
+               type="text" 
+               placeholder="شروع گفتگوی واقعی" 
+               style={chatInputStyle}
+             />
+             <button style={exploreButtonStyle}>
+               + Explore Tafsir
+             </button>
+           </div>
+         </div>
 
-        {/* Right Panel */}
-        <div style={rightPanelStyle}>
-          <h2 style={{ color: primaryColor, fontSize: '24px', fontWeight: 'bold', margin: 0, marginBottom: '20px' }}>
-            Intelligent Conversations with Purpose
-          </h2>
-          <p style={{ color: mutedTextColor, fontSize: '16px', lineHeight: 1.6, marginBottom: '30px' }}>
-            Our AI understands context, emotion, and spiritual needs. Every response is crafted to provide meaningful guidance rooted in authentic Islamic teachings.
-          </p>
+         {/* Right Panel */}
+         <div style={rightPanelStyle}>
+           <h2 style={{ color: primaryColor, fontSize: '24px', fontWeight: 'bold', margin: 0, marginBottom: '20px' }}>
+             Intelligent Conversations with Purpose
+           </h2>
+           <p style={{ color: mutedTextColor, fontSize: '16px', lineHeight: 1.6, marginBottom: '30px' }}>
+             Our AI understands context, emotion, and spiritual needs. Every response is crafted to provide meaningful guidance rooted in authentic Islamic teachings.
+           </p>
 
-          <div style={featureCardStyle}>
-            <div style={featureIconStyle}>
-              <FaRegLightbulb />
-            </div>
-            <div>
-              <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '600', color: primaryColor }}>Contextual Understanding</h3>
-              <p style={{ margin: 0, fontSize: '14px', color: mutedTextColor }}>AI recognizes your emotional state and life situation</p>
-            </div>
-          </div>
-          
-          <div style={featureCardStyle}>
-            <div style={featureIconStyle}>
-              <FaBook />
-            </div>
-            <div>
-              <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '600', color: primaryColor }}>Authentic Sources</h3>
-              <p style={{ margin: 0, fontSize: '14px', color: mutedTextColor }}>All responses backed by verified Quranic verses and scholarly interpretations</p>
-            </div>
-          </div>
-          
-          <div style={featureCardStyle}>
-            <div style={featureIconStyle}>
-              <FaRegLightbulb />
-            </div>
-            <div>
-              <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '600', color: primaryColor }}>Personalized Guidance</h3>
-              <p style={{ margin: 0, fontSize: '14px', color: mutedTextColor }}>Tailored advice that grows with your spiritual journey</p>
-            </div>
-          </div>
-          
-          <button style={tryAiButtonStyle}>
-            <FaRegLightbulb />
-            Try AI Assistant Now
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+           <div style={featureCardStyle}>
+             <div style={featureIconStyle}>
+               <FaRegLightbulb />
+             </div>
+             <div>
+               <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '600', color: primaryColor }}>Contextual Understanding</h3>
+               <p style={{ margin: 0, fontSize: '14px', color: mutedTextColor }}>AI recognizes your emotional state and life situation</p>
+             </div>
+           </div>
+           
+           <div style={featureCardStyle}>
+             <div style={featureIconStyle}>
+               <FaBook />
+             </div>
+             <div>
+               <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '600', color: primaryColor }}>Authentic Sources</h3>
+               <p style={{ margin: 0, fontSize: '14px', color: mutedTextColor }}>All responses backed by verified Quranic verses and scholarly interpretations</p>
+             </div>
+           </div>
+           
+           <div style={featureCardStyle}>
+             <div style={featureIconStyle}>
+               <FaRegLightbulb />
+             </div>
+             <div>
+               <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '600', color: primaryColor }}>Personalized Guidance</h3>
+               <p style={{ margin: 0, fontSize: '14px', color: mutedTextColor }}>Tailored advice that grows with your spiritual journey</p>
+             </div>
+           </div>
+           
+           <button style={tryAiButtonStyle}>
+             <FaRegLightbulb />
+             Try AI Assistant Now
+           </button>
+         </div>
+       </div>
+     </div>
+   );
 };
 
 // Main HomePage component with dynamic rendering
@@ -982,6 +984,19 @@ export default function HomePage() {
                 </motion.button>
               </div>
 
+              {/* بخش آیه روز */}
+              <div style={{
+                maxWidth: '800px',
+                margin: '60px auto',
+                padding: '20px',
+                borderRadius: '20px',
+                backgroundColor: currentTheme.background,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                textAlign: 'center'
+              }}>
+                <VerseOfTheDay />
+              </div>
+
               {/* این بخش اول از پایین قرار داده شده است */}
               <motion.div
                 style={{
@@ -1093,7 +1108,7 @@ export default function HomePage() {
   );
 }
 
-// Footer component, kept the same
+// Footer component
 const Footer = ({ darkMode, currentTheme }) => {
   const footerLinkStyle = {
     color: darkMode ? '#d4d4d4' : '#4a6d3b',
@@ -1109,7 +1124,8 @@ const Footer = ({ darkMode, currentTheme }) => {
       backgroundColor: darkMode ? '#181818' : '#f0f4e8',
       color: darkMode ? '#d4d4d4' : '#4a6d3b',
       padding: '80px 20px 20px',
-      borderTop: `1px solid ${darkMode ? '#333' : '#e0e0e0'}`,
+      borderTop: `1px solid ${darkMode ? '#444' : '#ccc'}`,
+      textAlign: 'center',
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '40px' }}>
         {/* About Section */}

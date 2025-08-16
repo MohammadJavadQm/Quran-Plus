@@ -1,21 +1,16 @@
-/*
+/* 
  * استایل‌های سراسری مثل :root و body را باید در یک فایل global.css قرار دهید.
  * این فایل فقط برای استایل‌های مخصوص کامپوننت VerseOfTheDay است.
  */
 
 .card {
-  /* کاهش بیشتر عرض باکس */
-  max-width: 500px;
-  
-  /* کاهش پدینگ برای فشرده‌تر شدن ارتفاع */
-  padding: 20px; 
-  margin: 40px auto;
-  
+  padding: 18px; 
+  margin: auto auto;
   /* افکت شیشه‌ای: پس‌زمینه نیمه‌شفاف و تار */
   background-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  /* border: 1px solid rgba(255, 255, 255, 0.15); */
   border-radius: 25px;
   
   /* سایه ملایم */
