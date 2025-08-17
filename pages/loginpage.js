@@ -1,25 +1,20 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { LoginForm } from '../components/LoginForm';
+import Head from 'next/head';
+import Layout from 'components/Layout';
+// ما یک کامپوننت فرم جداگانه می‌سازیم تا کد تمیز باشد
+import AuthForm from 'components/AuthForm';
 
-export default function LoginPage() {
-  const router = useRouter();
-  
-  const handleBack = () => {
-    router.back();
-  };
+const LoginPage = () => {
+    return (
+        <>
+            <Head>
+                <title>Login - QuranPlus</title>
+            </Head>
+            <Layout>
+                <AuthForm isLogin />
+            </Layout>
+        </>
+    );
+};
 
-  const handleLoginSuccess = () => {
-    // You can add logic here to redirect the user to another page after a successful login.
-    // For example:
-    // router.push('/dashboard');
-  };
-
-  return (
-    <LoginForm 
-      onBack={handleBack} 
-      onSwitchToSignup={() => router.push('/signuppage')}
-      onLoginSuccess={handleLoginSuccess}
-    />
-  );
-}
+export default LoginPage;

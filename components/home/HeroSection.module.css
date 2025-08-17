@@ -1,0 +1,84 @@
+.heroWrapper {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.highlight {
+  color: var(--accent-primary);
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.button {
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.primary {
+  background-color: var(--accent-secondary);
+  color: white;
+}
+.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -10px var(--shadow-color);
+}
+
+.secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+.secondary:hover {
+  background-color: var(--accent-primary);
+  color: var(--background);
+}
+
+.verseContainer {
+  margin-top: 80px;
+  width: 100%;
+  max-width: 700px;
+  padding: 24px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  backdrop-filter: blur(10px);
+}

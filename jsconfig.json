@@ -1,0 +1,6 @@
+// File: jsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "."
+  }
+}

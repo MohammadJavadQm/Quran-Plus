@@ -1,24 +1,19 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { SignupForm } from '../components/SignupForm';
+import Head from 'next/head';
+import Layout from 'components/Layout';
+import AuthForm from 'components/AuthForm';
 
-export default function SignupPage() {
-  const router = useRouter();
-  
-  const handleBack = () => {
-    router.back();
-  };
+const SignupPage = () => {
+    return (
+        <>
+            <Head>
+                <title>Signup - QuranPlus</title>
+            </Head>
+            <Layout>
+                <AuthForm isLogin={false} />
+            </Layout>
+        </>
+    );
+};
 
-  const handleSignupSuccess = () => {
-    // بعد از ثبت‌نام موفق، کاربر به صفحه ورود منتقل می‌شود
-    router.push('/loginpage');
-  };
-
-  return (
-    <SignupForm 
-      onBack={handleBack} 
-      onSwitchToLogin={() => router.push('/loginpage')}
-      onSignupSuccess={handleSignupSuccess}
-    />
-  );
-}
+export default SignupPage;

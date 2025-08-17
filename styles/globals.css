@@ -2,79 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes sparkle {
-  0%, 100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 1;
-  }
+:root {
+  /* متغیرهای حالت روشن (پیش‌فرض) */
+  --background: #f8f8f4;
+  --text-primary: #3a5a2b;
+  --text-secondary: #555;
+  --accent-primary: #a7c957;
+  --accent-secondary: #4a6d3b;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(74, 109, 59, 0.1);
+  --header-bg: rgba(248, 248, 244, 0.7);
+  --shadow-color: rgba(61, 91, 48, 0.18);
 }
 
-@keyframes moveStars1 {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(100%, 100%, 0);
-  }
+[data-theme='dark'] {
+  /* متغیرهای حالت تاریک */
+  --background: #121212;
+  --text-primary: #a7c957;
+  --text-secondary: #c1c1c1;
+  --accent-primary: #a7c957;
+  --accent-secondary: #4a6d3b;
+  --card-bg: rgba(27, 41, 10, 0.8);
+  --card-border: rgba(167, 201, 87, 0.2);
+  --header-bg: rgba(18, 18, 18, 0.7);
+  --shadow-color: rgba(167, 201, 87, 0.3);
 }
 
-@keyframes moveStars2 {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-100%, -100%, 0);
-  }
+/* --- تغییر اصلی اینجاست --- */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--background);
+  color: var(--text-secondary);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-.star-field-animation-layer-1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  background: transparent;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.star-field-animation-layer-1::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+/* این بخش‌ها دیگر برای چیدمان لازم نیستند و حذف می‌شوند */
+/*
+body > div:first-child,
+div#__next {
   height: 100%;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1.5" fill="rgba(255, 255, 255, 0.8)"/></svg>') repeat;
-  background-size: 50px 50px;
-  animation: sparkle 15s infinite ease-in-out, moveStars1 100s linear infinite;
-  opacity: 0.8;
+  display: flex;
+  flex-direction: column;
 }
+*/
 
-.star-field-animation-layer-2 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  background: transparent;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.star-field-animation-layer-2::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255, 255, 255, 0.6)"/></svg>') repeat;
-  background-size: 40px 40px;
-  animation: sparkle 10s infinite ease-in-out, moveStars2 150s linear infinite;
-  opacity: 0.6;
+* {
+  box-sizing: border-box;
 }

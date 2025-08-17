@@ -1,4 +1,4 @@
-import quranData from '../../lib/verses-data.json';
+import quranData from 'lib/verses-data.json';
 
 export default async function handler(req, res) {
   // انتخاب آیه پیش‌فرض از JSON داخلی

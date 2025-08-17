@@ -1,0 +1,112 @@
+/* این استایل‌ها از متغیرهای تعریف شده در globals.css استفاده می‌کنند */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px; /* کمی ارتفاع بیشتر برای ظاهر بهتر */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background-color: var(--header-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--card-border);
+  z-index: 10;
+  transition: background-color 0.4s ease;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 26px;
+  color: var(--text-primary);
+}
+
+.logoText {
+  font-weight: 900;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 1.1px;
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.button {
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.primary {
+  background-color: var(--accent-secondary);
+  color: white;
+}
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px -8px var(--shadow-color);
+}
+
+.secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+.secondary:hover {
+  background-color: var(--accent-primary);
+  color: var(--background);
+}
+
+.hamburgerButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  font-size: 24px;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--text-primary);
+  transition: background-color 0.2s ease;
+}
+
+.mobileNav {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  background-color: var(--background);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 220px;
+  z-index: 1000;
+  border: 1px solid var(--card-border);
+}
+
+.mobileNavItem {
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 768px) { /* Breakpoint را کمی بزرگتر کردم */
+  .navContainer {
+    display: none;
+  }
+  .hamburgerButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

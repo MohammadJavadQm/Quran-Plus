@@ -1,5 +1,5 @@
-import { ThemeProvider } from '../components/ThemeToggle';
-import '../styles/globals.css';
+import { ThemeProvider } from 'components/ThemeToggle';
+import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
