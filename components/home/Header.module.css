@@ -1,112 +1,89 @@
-/* این استایل‌ها از متغیرهای تعریف شده در globals.css استفاده می‌کنند */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 70px; /* کمی ارتفاع بیشتر برای ظاهر بهتر */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-  background-color: var(--header-bg);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--card-border);
-  z-index: 10;
-  transition: background-color 0.4s ease;
+/*
+  این فایل شامل تمام استایل‌های سفارشی برای هدر جدید است.
+  ما از Tailwind CSS برای بیشتر استایل‌ها استفاده می‌کنیم، اما این کلاس‌ها برای انیمیشن‌ها و فونت‌های خاص لازم هستند.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lateef:wght@400;500;600;700&display=swap');
+
+.arabicText {
+    font-family: 'Lateef', serif;
+    font-size: 1.2em;
 }
 
-.logoContainer {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 26px;
-  color: var(--text-primary);
+.btnHoverLift {
+    transition: all 0.3s ease;
 }
 
-.logoText {
-  font-weight: 900;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  letter-spacing: 1.1px;
+.btnHoverLift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
 }
 
-.navContainer {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.btnGradient {
+    background: linear-gradient(to right, #2563eb, #7c3aed);
+    color: white;
 }
 
-.button {
-  padding: 10px 24px;
-  border-radius: 50px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-  text-decoration: none;
+.btnGradient:hover {
+    background: linear-gradient(to right, #1d4ed8, #6d28d9);
 }
 
-.primary {
-  background-color: var(--accent-secondary);
-  color: white;
-}
-.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 15px -8px var(--shadow-color);
+.logoBook {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.3);
 }
 
-.secondary {
-  background-color: transparent;
-  color: var(--text-primary);
-  border-color: var(--accent-primary);
-}
-.secondary:hover {
-  background-color: var(--accent-primary);
-  color: var(--background);
+.logoWave {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
 }
 
-.hamburgerButton {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1001;
-  font-size: 24px;
-  padding: 8px;
-  border-radius: 8px;
-  color: var(--text-primary);
-  transition: background-color 0.2s ease;
+.animateFadeInLeft {
+    animation: fadeInLeft 0.5s forwards;
 }
 
-.mobileNav {
-  position: absolute;
-  top: 80px;
-  right: 20px;
-  background-color: var(--background);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-width: 220px;
-  z-index: 1000;
-  border: 1px solid var(--card-border);
+.animateFadeInUp {
+    animation: fadeInUp 0.5s forwards;
 }
 
-.mobileNavItem {
-  width: 100%;
-  text-align: center;
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-@media (max-width: 768px) { /* Breakpoint را کمی بزرگتر کردم */
-  .navContainer {
-    display: none;
-  }
-  .hamburgerButton {
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* استایل‌های اضافه شده برای منوی موبایل */
+.mobileMenu {
+    position: absolute;
+    top: 100%; /* دقیقا زیر هدر */
+    left: 0;
+    right: 0;
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-top: 1px solid var(--card-border);
+    box-shadow: 0 10px 15px -3px var(--shadow-color);
+    backdrop-filter: blur(10px);
+}
+
+.mobileMenuNav {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-  }
+    gap: 0.75rem; /* 12px */
 }

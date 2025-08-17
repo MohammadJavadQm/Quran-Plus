@@ -1,237 +1,132 @@
-// components/QuranPlusLoading.js
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { CSSPlugin } from "gsap/CSSPlugin";
-
-gsap.registerPlugin(CSSPlugin);
+import React, { useEffect, useRef } from 'react';
+import styles from './QuranPlusLoading.module.css';
+import BrandLogo from 'components/ui/BrandLogo';
 
 const QuranPlusLoading = () => {
-  const arcRef = useRef(null);
-  const glowRef = useRef(null);
-  const coreRef = useRef(null);
-  const shapesRef = useRef([]);
-  const textRef = useRef(null);
-  const containerRef = useRef(null);
+    const progressRingRef = useRef(null);
+    const outerGlowRef = useRef(null);
+    const englishPhraseRef = useRef(null);
+    const arabicPhraseRef = useRef(null);
+    const brandingRef = useRef(null);
+    const particlesContainerRef = useRef(null);
 
-  useEffect(() => {
-    if (!containerRef.current || !arcRef.current || !glowRef.current || !coreRef.current || !textRef.current) {
-      return;
-    }
-
-    const masterTimeline = gsap.timeline();
-
-    // Background animation
-    masterTimeline.to(containerRef.current, {
-      backgroundPosition: "200% 0",
-      duration: 20,
-      ease: "linear",
-      repeat: -1,
-    }, 0);
-
-    // Core pulse animation
-    masterTimeline.to(coreRef.current, {
-      scale: 1.15,
-      opacity: 0.8,
-      duration: 1.5,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-      boxShadow: "0 0 20px 5px rgba(255, 215, 0, 0.9)",
-    }, 0);
-
-    // Circle fill and shadow animation
-    const arcLength = arcRef.current.getTotalLength();
-    gsap.set(arcRef.current, {
-      strokeDasharray: arcLength,
-      strokeDashoffset: arcLength,
-      filter: "none",
-    });
-
-    gsap.set(glowRef.current, { opacity: 0, filter: "blur(0px)" });
-
-    masterTimeline.to(arcRef.current, {
-      strokeDashoffset: 0,
-      duration: 5,
-      ease: "power2.inOut",
-      onUpdate: () => {
-        if (arcRef.current) {
-          const progress = 1 - parseFloat(arcRef.current.style.strokeDashoffset) / arcLength;
-          arcRef.current.style.filter = `drop-shadow(0 0 ${progress * 10}px rgba(255,215,0,0.8))`;
+    useEffect(() => {
+        // ... (تمام منطق جاوااسکریپت شما بدون تغییر باقی می‌ماند)
+        const loadingPhrases = [
+            { english: "Illuminating your path with wisdom...", arabic: "ننير طريقك بالحكمة..." },
+            { english: "Connecting you to divine guidance...", arabic: "نصلك بالهداية الإلهية..." },
+            { english: "Preparing your spiritual journey...", arabic: "نحضر رحلتك الروحية..." },
+            { english: "Opening the gates of knowledge...", arabic: "نفتح أبواب المعرفة..." }
+        ];
+        const duration = 4000;
+        const circumference = 2 * Math.PI * 90;
+        const { current: progressRing } = progressRingRef;
+        const { current: outerGlow } = outerGlowRef;
+        const { current: englishPhrase } = englishPhraseRef;
+        const { current: arabicPhrase } = arabicPhraseRef;
+        const { current: branding } = brandingRef;
+        const { current: particlesContainer } = particlesContainerRef;
+        if (particlesContainer.children.length === 0) {
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = styles.floatingParticle;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 6}s`;
+                particle.style.animationDuration = `${6 + Math.random() * 4}s`;
+                particlesContainer.appendChild(particle);
+            }
         }
-      },
-    }, 0);
+        let progress = 0;
+        let currentPhraseIndex = 0;
+        const progressInterval = setInterval(() => {
+            progress += (100 / (duration / 50));
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(progressInterval);
+            }
+            const strokeDashoffset = circumference - (progress / 100) * circumference;
+            progressRing.style.strokeDashoffset = strokeDashoffset;
+            outerGlow.style.background = `conic-gradient(from 0deg, #D4AF37 0%, #F0D080 ${progress * 0.25}%, #FFD700 ${progress * 0.5}%, #DAA520 ${progress * 0.75}%, #B8860B ${progress}%, rgba(212, 175, 55, 0.1) ${progress}%, transparent 100%)`;
+        }, 50);
+        const phraseInterval = setInterval(() => {
+            currentPhraseIndex = (currentPhraseIndex + 1) % loadingPhrases.length;
+            englishPhrase.textContent = loadingPhrases[currentPhraseIndex].english;
+            arabicPhrase.textContent = loadingPhrases[currentPhraseIndex].arabic;
+            englishPhrase.style.opacity = 0;
+            arabicPhrase.style.opacity = 0;
+            setTimeout(() => {
+                englishPhrase.style.opacity = 1;
+                arabicPhrase.style.opacity = 1;
+            }, 100);
+        }, 3000);
+        const brandingTimeout = setTimeout(() => {
+            branding.style.opacity = 1;
+        }, 1000);
+        const resetTimeout = setTimeout(() => {
+            clearInterval(progressInterval);
+            progress = 0;
+            progressRing.style.strokeDashoffset = circumference;
+        }, duration + 500);
+        return () => {
+            clearInterval(progressInterval);
+            clearInterval(phraseInterval);
+            clearTimeout(brandingTimeout);
+            clearTimeout(resetTimeout);
+        };
+    }, []);
 
-    masterTimeline.to(glowRef.current, {
-      opacity: 0.7,
-      filter: "blur(12px)",
-      duration: 1.5,
-      ease: "power2.inOut",
-      yoyo: true,
-      repeat: -1,
-    }, 0);
+    return (
+        <div className={styles.body}>
+            <div className={styles.loadingContainer}>
+                <div ref={particlesContainerRef} className={styles.particlesContainer}></div>
+                
+                <div className={styles.progressContainer}>
+                    <div className={styles.progressWrapper}>
+                        <div ref={outerGlowRef} className={styles.outerGlow}></div>
+                        <div style={{ position: 'relative', width: '192px', height: '192px' }}>
+                            <svg className={styles.progressSvg} viewBox="0 0 192 192">
+                                <circle className={styles.backgroundRing} cx="96" cy="96" r="90"></circle>
+                                <defs>
+                                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#FFD700" />
+                                        <stop offset="100%" stopColor="#B8860B" />
+                                    </linearGradient>
+                                    <filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                                </defs>
+                                <circle ref={progressRingRef} className={styles.progressRing} cx="96" cy="96" r="90"></circle>
+                            </svg>
+                            <div className={styles.islamicPatterns}>
+                                <div className={styles.islamicPattern1}><svg viewBox="0 0 32 32"><path d="M16 8 L24 16 L16 24 L8 16 Z" fill="none" stroke="rgba(212, 175, 55, 0.6)" strokeWidth="1.5"/></svg></div>
+                                <div className={styles.islamicPattern2}><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="rgba(212, 175, 55, 0.7)" strokeWidth="1"/></svg></div>
+                                <div className={styles.islamicPattern3}><svg viewBox="0 0 16 16"><rect x="4" y="4" width="8" height="8" fill="none" stroke="rgba(212, 175, 55, 0.8)" strokeWidth="1" transform="rotate(45 8 8)"/></svg></div>
+                            </div>
+                            <div className={styles.divineOrb}>
+                                <div className={styles.orbInner}></div>
+                                <div className={styles.orbHighlight}></div>
+                                <div className={styles.orbPulse}></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    // Floating shapes (stars) animation
-    shapesRef.current.forEach((shape, i) => {
-      const tl = gsap.timeline({ repeat: -1, delay: gsap.utils.random(0, 5) });
-      const size = gsap.utils.random(2, 6);
-      const startX = gsap.utils.random(0, window.innerWidth);
-      const startY = gsap.utils.random(0, window.innerHeight);
+                <div ref={brandingRef} className={styles.textContent}>
+                    {/* --- تغییر اصلی چیدمان اینجاست --- */}
+                    {/* حالا متن‌های متحرک اول می‌آیند */}
+                    <div className={styles.phraseContainer}>
+                        <p ref={englishPhraseRef} className={styles.englishText}>Illuminating your path with wisdom...</p>
+                        <p ref={arabicPhraseRef} className={styles.arabicText}>ننير طريقك بالحكمة...</p>
+                    </div>
 
-      tl.set(shape, {
-          x: startX,
-          y: startY,
-          opacity: 0,
-          scale: 0,
-        })
-        .to(shape, {
-          opacity: gsap.utils.random(0.4, 1),
-          scale: gsap.utils.random(0.8, 1.2),
-          duration: gsap.utils.random(1, 2),
-          ease: "power2.inOut",
-        })
-        .to(shape, {
-          x: gsap.utils.random(-200, 200),
-          y: gsap.utils.random(-200, 200),
-          duration: gsap.utils.random(8, 15),
-          ease: "sine.inOut",
-        })
-        .to(shape, {
-          opacity: 0,
-          scale: 0,
-          duration: gsap.utils.random(1, 2),
-          ease: "power2.inOut",
-        }, "+=1");
-    });
-
-    // Text typing animation
-    const texts = ["Illuminating your path with wisdom...", "تنویر طریقک بالحکمة..."];
-    let textIndex = 0;
-    
-    const animateText = () => {
-        if (!textRef.current) return;
-        const currentText = texts[textIndex];
-        textRef.current.innerHTML = "";
-        gsap.to(textRef.current, { opacity: 1, duration: 0.5 });
-        
-        currentText.split("").forEach((letter, i) => {
-            const span = document.createElement("span");
-            span.textContent = letter;
-            textRef.current.appendChild(span);
-            gsap.fromTo(span, { opacity: 0, y: 10 }, {
-                opacity: 1,
-                y: 0,
-                duration: 0.1,
-                delay: i * 0.05,
-                ease: "back.out(1.7)",
-                onComplete: () => {
-                    if (i === currentText.length - 1) {
-                        gsap.delayedCall(2, () => {
-                            gsap.to(textRef.current, {
-                                opacity: 0,
-                                duration: 0.5,
-                                onComplete: () => {
-                                    textIndex = (textIndex + 1) % texts.length;
-                                    animateText();
-                                },
-                            });
-                        });
-                    }
-                },
-            });
-        });
-    };
-    animateText();
-    
-  }, []);
-
-  return (
-    <div 
-      ref={containerRef} 
-      className="fixed inset-0 flex flex-col items-center justify-center text-white overflow-hidden 
-                 bg-gradient-to-br from-teal-900 to-green-950 bg-[200%_200%] 
-                 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]"
-    >
-      {/* Floating shapes (stars) */}
-      {[...Array(40)].map((_, i) => (
-        <div
-          key={i}
-          ref={(el) => (shapesRef.current[i] = el)}
-          className="absolute rounded-full"
-          style={{
-            background: `rgba(255, 215, 0, ${gsap.utils.random(0.5, 1)})`,
-            boxShadow: `0 0 ${gsap.utils.random(4, 10)}px gold`,
-            width: `${gsap.utils.random(2, 6)}px`,
-            height: `${gsap.utils.random(2, 6)}px`,
-            top: `${gsap.utils.random(10, 90)}%`,
-            left: `${gsap.utils.random(10, 90)}%`,
-            zIndex: 1,
-          }}
-        />
-      ))}
-
-      {/* Main SVG content */}
-      <div className="relative z-20 flex items-center justify-center flex-shrink-0">
-        <svg width="450" height="450" viewBox="0 0 450 450">
-          {/* Golden glow */}
-          <circle
-            ref={glowRef}
-            cx="225" cy="225" r="150"
-            fill="none"
-            stroke="gold"
-            strokeWidth="20"
-            opacity="0.5"
-            style={{ filter: "blur(12px)" }}
-          />
-          {/* Background circle */}
-          <circle
-            cx="225" cy="225" r="150"
-            stroke="rgba(255,215,0,0.2)"
-            strokeWidth="6"
-            fill="none"
-          />
-          {/* Main arc */}
-          <circle
-            ref={arcRef}
-            cx="225" cy="225" r="150"
-            stroke="gold"
-            strokeWidth="6"
-            fill="none"
-            strokeLinecap="round"
-            transform="rotate(-90 225 225)"
-          />
-          {/* Core */}
-          <circle
-            cx="225" cy="225" r="35"
-            fill="gold"
-            ref={coreRef}
-            style={{ filter: "drop-shadow(0 0 15px rgba(255,215,0,0.9))" }}
-          />
-        </svg>
-      </div>
-
-      {/* Text container */}
-      <div className="mt-6 text-center h-12 flex items-center justify-center z-20">
-        <div 
-          ref={textRef} 
-          className="text-2xl font-light text-yellow-400"
-          style={{ textShadow: '0 0 10px rgba(255,255,0,0.6)' }}
-        ></div>
-      </div>
-
-      {/* Bottom logo */}
-      <div className="absolute bottom-12 flex items-center gap-4 z-30">
-        <div className="w-14 h-14 bg-gradient-to-br from-yellow-300 to-amber-500 rounded-full flex items-center justify-center text-black font-extrabold text-3xl shadow-xl">
-          ق
+                    {/* و بعد لوگو و عنوان */}
+                    <div className={styles.branding}>
+                        <BrandLogo />
+                        <p className={styles.brandingSubtitle}>Your AI-Powered Spiritual Companion</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className="flex flex-col">
-          <strong className="text-2xl font-extrabold text-white">QuranPlus</strong>
-          <span className="text-sm block text-yellow-300 tracking-wide font-light">
-            Your AI-Powered Spiritual Companion
-          </span>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default QuranPlusLoading;

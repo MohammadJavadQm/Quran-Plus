@@ -15,6 +15,7 @@ import HeroSection from 'components/home/HeroSection';
 import StatsSection from 'components/home/StatsSection';
 import AdvancedFeatures from 'components/home/AdvancedFeatures';
 import FeatureCards from 'components/home/FeatureCards';
+import PersonalizationPanel from 'components/home/PersonalizationPanel';
 
 export default function Index() {
     // 1. مقدار اولیه state را true می‌گذاریم
@@ -90,6 +91,7 @@ export default function Index() {
                                 <StatsSection />
                                 <AdvancedFeatures />
                                 <FeatureCards />
+                                <PersonalizationPanel />
                             </motion.div>
                         )}
                     </AnimatePresence>
