@@ -53,3 +53,34 @@ div#__next {
 * {
   box-sizing: border-box;
 }
+
+/* In globals.css or index.css */
+
+:root {
+  --bg: #f5efe4;
+  --green-dark: #1f5f3a;
+  --green-mid: #2e7d46;
+  --gold: #c7a545;
+  --card-border: rgba(199, 165, 69, 0.95);
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--green-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optional: a subtle repeating geometric diamond pattern for the background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='none' stroke='%23d9d4c7' stroke-width='1' opacity='0.25'><path d='M40 0 L80 40 L40 80 L0 40 Z'/><path d='M120 40 L160 80 L120 120 L80 80 Z'/><path d='M80 0 L120 40 L80 80 L40 40 Z'/><path d='M0 120 L40 160 L80 120 L40 80 Z'/><path d='M80 80 L120 120 L80 160 L40 120 Z'/></g></svg>");
+  background-repeat: repeat;
+  opacity: 0.18;
+  z-index: -1;
+  pointer-events: none;
+}
