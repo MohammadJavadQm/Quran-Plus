@@ -1,11 +1,16 @@
+/* ==========================================================================
+   Optimized Feature Cards Styles
+   - Uses a global variable for the section background.
+   ========================================================================== */
+
 .wrapper {
   padding: 80px 24px;
-  background-color: rgba(0,0,0,0.02);
+  background-color: var(--section-bg); /* USE VAR */
 }
 
-[data-theme='dark'] .wrapper {
-  background-color: rgba(255,255,255,0.02);
-}
+/* دیگر نیازی به تعریف جداگانه برای تم تاریک در این فایل نیست، 
+  چون متغیر --section-bg به طور خودکار با تغییر تم، مقدار مناسب را می‌گیرد.
+*/
 
 .grid {
   display: grid;

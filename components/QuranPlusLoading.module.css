@@ -1,16 +1,17 @@
-.body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background: #0a3a22;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  color: #f8f5f0;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
+/* ==========================================================================
+   Optimized Loading Component Styles
+   - Fully integrated with the global theme system.
+   - Defines component-specific variables for light & dark modes.
+   ========================================================================== */
+
+/* 1. Component-Specific Theme Variables */
+/* The @layer wrapper has been removed from here */
+
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 .loadingContainer {
@@ -20,12 +21,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: radial-gradient(circle, #0A5C36 0%, #0A3A22 100%);
+  /* THEMED GRADIENT */
+  background: radial-gradient(
+    circle,
+    var(--loading-grad-start) 0%,
+    var(--loading-grad-end) 100%
+  );
   overflow: hidden;
-  /* --- تغییر اصلی اینجاست: فاصله از بالا اضافه شد --- */
-  padding: 5rem 0 2rem 0; /* فاصله از بالا بیشتر شد */
+  padding: 5rem 1rem 2rem 1rem; /* Added horizontal padding */
 }
 
+/* (No changes needed for layout helpers like particlesContainer, progressContainer) */
 .particlesContainer {
   position: absolute;
   inset: 0;
@@ -51,52 +57,48 @@
   transition: opacity 1s;
 }
 
+/* 3. Progress Ring & Glow Effects */
 .progressWrapper {
   position: relative;
 }
 
-.outerGlow {
-  position: absolute;
-  inset: -32px;
-  border-radius: 50%;
-  opacity: 0.4;
-  filter: blur(32px);
+/* (No changes needed for structure like outerGlow, progressSvg) */
+.outerGlow, .progressSvg {
+    position: absolute;
+    inset: -32px;
 }
+.progressSvg { inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); filter: drop-shadow(0 0 8px rgba(0,0,0,0.5)); }
+.outerGlow { border-radius: 50%; opacity: 0.4; filter: blur(32px); }
 
-.progressSvg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-  filter: drop-shadow(0 0 8px rgba(0,0,0,0.5));
-}
 
 .backgroundRing {
-  stroke: rgba(248, 245, 240, 0.08);
+  stroke: var(--loading-ring-bg); /* USE VAR */
   stroke-width: 2;
   fill: none;
 }
 
 .progressRing {
-  stroke: url(#progressGradient);
+  stroke: url(#progressGradient); /* Note: Gradient colors must be themed in SVG */
   stroke-width: 3;
   fill: none;
   stroke-linecap: round;
   stroke-dasharray: 565.48;
   stroke-dashoffset: 565.48;
-  filter: url(#glow);
+  filter: url(#glow); /* Note: Glow color must be themed in SVG */
   transition: stroke-dashoffset 0.3s ease-out;
 }
 
+/* 4. Decorative Elements */
 .islamicPatterns {
   position: absolute;
   inset: -16px;
-}
-.islamicPattern1, .islamicPattern2, .islamicPattern3 {
-  position: absolute;
+  /* Using text color for patterns allows them to theme automatically */
+  color: var(--accent-primary);
   opacity: 0.4;
 }
+
+/* (No changes needed for pattern positioning) */
+.islamicPattern1, .islamicPattern2, .islamicPattern3 { position: absolute; }
 .islamicPattern1 { top: 16px; right: 16px; width: 32px; height: 32px; }
 .islamicPattern2 { bottom: 16px; left: 16px; width: 24px; height: 24px; }
 .islamicPattern3 { top: 32px; left: 32px; width: 16px; height: 16px; }
@@ -109,31 +111,33 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: linear-gradient(to bottom right, rgba(255,215,0,0.6), rgba(255,215,0,0.4), rgba(255,215,0,0.6));
-  box-shadow: 0 0 20px rgba(212,175,55,0.4), inset 0 0 10px rgba(255,255,255,0.3);
+  /* THEMED ORB */
+  background: linear-gradient(
+    to bottom right,
+    hsla(45, 100%, 59%, 0.6), /* Using HSL of gold for variations */
+    hsla(45, 100%, 59%, 0.4),
+    hsla(45, 100%, 59%, 0.6)
+  );
+  box-shadow: 0 0 20px var(--loading-orb-shadow), /* USE VAR */
+    inset 0 0 10px hsla(0, 0%, 100%, 0.3);
 }
-.orbHighlight {
-  position: absolute;
-  inset: 8px;
-  border-radius: 50%;
-  background: linear-gradient(to bottom right, rgba(255,255,255,0.2), transparent);
-}
+
 .orbPulse {
   position: absolute;
   inset: 50%;
   width: 4px;
   height: 4px;
   margin: -2px;
-  background-color: rgba(255,255,255,0.8);
+  background-color: hsla(0, 0%, 100%, 0.8);
   border-radius: 50%;
-  animation: pulse 1s infinite;
+  animation: pulse 1.5s infinite ease-in-out;
 }
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0%, 100% { transform: scale(1); box-shadow: 0 0 5px hsla(0, 0%, 100%, 0.2); }
+  50% { transform: scale(1.4); box-shadow: 0 0 15px hsla(0, 0%, 100%, 0.6); }
 }
 
+/* 5. Branding & Text Content */
 .branding {
   margin-bottom: 48px;
 }
@@ -149,27 +153,25 @@
 .logoText {
   font-size: 1.75rem;
   font-weight: bold;
-  color: #F8F5F0;
+  color: var(--text-primary); /* USE VAR */
   letter-spacing: 1px;
 }
 
 .brandingSubtitle {
   font-size: 1rem;
-  opacity: 0.7;
-  color: #D4AF37;
+  opacity: 0.8; /* Slightly increased opacity for better readability */
+  color: var(--accent-primary); /* USE VAR */
   font-weight: 300;
 }
 
 .phraseContainer {
   max-width: 384px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 48px;
+  margin: 0 auto 48px auto;
 }
 
 .englishText {
   font-size: 1.25rem;
-  color: #F8F5F0;
+  color: var(--text-primary); /* USE VAR */
   margin-bottom: 0.5rem;
   font-weight: 300;
   transition: opacity 0.8s;
@@ -177,19 +179,20 @@
 
 .arabicText {
   font-size: 1.4rem;
-  color: #D4AF37;
+  color: var(--accent-primary); /* USE VAR */
   direction: rtl;
   font-weight: 500;
   transition: opacity 0.8s;
 }
 
+/* 6. Floating Particles */
 .floatingParticle {
   position: absolute;
   width: 4px;
   height: 4px;
-  background-color: #FFD700;
+  background-color: var(--accent-primary); /* USE VAR */
   border-radius: 50%;
-  opacity: 0.2;
+  opacity: var(--loading-particle-opacity); /* USE VAR */
   animation: float 6s infinite ease-in-out;
 }
 
