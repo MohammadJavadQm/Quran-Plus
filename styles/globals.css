@@ -1,30 +1,22 @@
 /* ==========================================================================
    Final & Perfected Global Stylesheet
-   - Manages all global styles, theme variables, and font imports.
-   - This is the single source of truth for the application's design system.
+   - Full Day/Night theming with all original capabilities preserved
    ========================================================================== */
 
-/* 1. Font Imports */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lateef:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+/* 1) Fonts (kept, de-duplicated) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&family=Lateef:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap');
 
-/* 2. Tailwind CSS Directives */
+/* 2) Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 3. Custom Base Styles */
+/* 3) Custom Base Styles */
 @layer base {
-  /* 3.1. Theming & Color Variables */
+  /* 3.1) Day (Light) Theme */
   :root {
     /* --- Light Theme ("Green & Gold") --- */
-
-    /* 🔵 Core Palette */
+    /* Core Palette */
     --background: hsl(45, 33%, 93%);
     --foreground: hsl(111, 40%, 8%);
     --text-primary: hsl(148, 51%, 25%);
@@ -32,20 +24,22 @@
     --accent-primary: hsl(45, 52%, 53%);   /* Gold */
     --accent-secondary: hsl(148, 47%, 33%); /* Mid Green */
 
-    /* 🟢 UI Elements */
+    /* UI Elements */
     --card-bg: hsla(0, 0%, 100%, 0.75);
-    --card-border: hsla(45, 52%, 53%, 0.5);
+    --card-border: hsla(45, 52%, 53%, 0.5); /* gold border (day default) */
+    --card-border-gold: hsla(45, 52%, 53%, 0.5);
+    --card-border-purple: rgba(106, 46, 189, 0.7); /* keep original alt border */
     --input-bg: hsla(148, 51%, 25%, 0.03);
     --section-bg: hsla(0, 0%, 0%, 0.02);
 
-    /* 🟡 Interactive States & Accents */
+    /* Interactive */
     --focus-ring-color: hsla(45, 52%, 53%, 0.25);
     --selection-bg: hsla(148, 47%, 33%, 0.1);
     --accent-primary-bg: hsla(45, 52%, 53%, 0.1);
     --accent-primary-border: hsla(45, 52%, 53%, 0.2);
     --glow-color: hsla(45, 100%, 70%, 0.8);
-    
-    /* 🔴 Buttons */
+
+    /* Buttons */
     --btn-text-color: hsl(45, 33%, 95%);
     --btn-grad-start: var(--accent-secondary);
     --btn-grad-end: hsl(148, 47%, 40%);
@@ -53,7 +47,10 @@
     --btn-grad-start-hover: hsl(148, 47%, 28%);
     --btn-grad-end-hover: hsl(148, 47%, 35%);
     --btn-arrow-bg: hsla(0, 0%, 100%, 0.12);
+    --btn-hover-shadow: hsla(148, 47%, 33%, 0.3);
+    --btn-primary-shadow: hsla(148, 51%, 25%, 0.2);
 
+    /* Extra Palettes kept from original */
     --bg-dark: #0c0b15;
     --bg-darker: #070610;
     --purple-dark: #3a1f5f;
@@ -61,20 +58,17 @@
     --neon-blue: #00d0ff;
     --neon-green: #00ff9d;
     --gold-neon: #ffd700;
-    --card-border: rgba(106, 46, 189, 0.7);
     --glass-bg: rgba(20, 15, 40, 0.45);
     --text-main: #f0f0ff;
     --text-subtle: #b0b0d0;
 
-    /* ⚫️ Shadows & Effects */
+    /* Shadows & Effects */
     --shadow-color: hsla(148, 51%, 25%, 0.1);
     --soft-shadow: hsla(148, 51%, 25%, 0.1);
-    --btn-hover-shadow: hsla(148, 47%, 33%, 0.3);
-    --btn-primary-shadow: hsla(148, 51%, 25%, 0.2);
     --pattern-color: hsl(147, 8%, 70%);
     --pattern-opacity: 0.1;
 
-    /* 🟣 Component-Specific */
+    /* Component-Specific / Loading / Footer */
     --footer-bg: linear-gradient(135deg, hsl(150, 60%, 20%), hsl(145, 55%, 25%));
     --footer-text: hsl(45, 33%, 85%);
     --spinner-track-color: hsla(148, 47%, 33%, 0.2);
@@ -85,33 +79,31 @@
     --loading-ring-bg: hsla(147, 8%, 31%, 0.1);
     --loading-orb-shadow: hsla(45, 52%, 53%, 0.3);
     --loading-particle-opacity: 0.6;
-        /* --- "Premium Dark" Theme Variables --- */
-    
-    /* Palette */
-    --bg: hsl(0, 0%, 7%);           /* #121212 */
-    --bg-2: hsl(0, 0%, 10%);         /* #1a1a1a */
-    --text-light: hsl(0, 0%, 94%);   /* #f0f0f0 */
-    --text-muted: hsl(0, 0%, 63%);   /* #a0a0a0 */
-    --accent-dark: hsl(148, 51%, 25%);/* #1f5f3a */
-    --accent-mid: hsl(148, 47%, 33%); /* #2e7d46 */
-    --accent-gold: hsl(45, 52%, 53%); /* #c7a545 */
-    
-    /* UI Elements */
-    --footer-bg: linear-gradient(180deg, hsl(152, 45%, 10%), hsl(152, 45%, 6%));
-    --card-glass: hsla(0, 0%, 12%, 0.7);
-    --border-color: hsla(148, 47%, 33%, 0.15);
-    --border-color-hover: hsla(148, 47%, 33%, 0.25);
-    
-    /* Shadows */
-    --shadow-deep: hsla(0, 0%, 0%, 0.4);
+
+    /* Premium variables kept */
+    --bg: hsl(0, 0%, 7%);         /* kept for compatibility */
+    --bg-2: hsl(0, 0%, 10%);
+    --text-light: hsl(0, 0%, 94%);
+    --text-muted: hsl(0, 0%, 63%);
+    --accent-dark: hsl(148, 51%, 25%);
+    --accent-mid: hsl(148, 47%, 33%);
+    --accent-gold: hsl(45, 52%, 53%);
+
+    /* Extra Shadows */
+    --shadow-deep: hsla(0, 0%, 0%, 0.2);
     --shadow-glow-green: hsla(148, 47%, 33%, 0.15);
     --shadow-glow-gold: hsla(45, 52%, 53%, 0.2);
+
+    /* Hero / Page colors */
+    --hero-glow-1: rgba(176, 137, 104, 0.2);
+    --hero-glow-2: rgba(127, 85, 57, 0.15);
+    --page-background-color: #00B5D1; /* ☀️ day */
   }
 
+  /* 3.2) Night (Dark) Theme */
   [data-theme='dark'] {
-    /* --- Dark Theme ("Night Sky & Gold" with "Emerald" Accents) --- */
-
-    /* 🔵 Core Palette */
+    /* --- Dark Theme ("Night Sky & Gold" + Emerald) --- */
+    /* Core Palette */
     --background: hsl(220, 40%, 15%);
     --foreground: hsl(45, 33%, 93%);
     --text-primary: hsl(46, 31%, 89%);
@@ -119,20 +111,22 @@
     --accent-primary: hsl(45, 52%, 53%);
     --accent-secondary: hsl(143, 45%, 45%);
 
-    /* 🟢 UI Elements */
+    /* UI Elements */
     --card-bg: hsla(220, 40%, 18%, 0.75);
-    --card-border: hsla(45, 52%, 53%, 0.3);
+    --card-border: hsla(45, 52%, 53%, 0.3); /* gold border for dark */
+    --card-border-gold: hsla(45, 52%, 53%, 0.3);
+    --card-border-purple: rgba(106, 46, 189, 0.7);
     --input-bg: hsla(220, 30%, 20%, 0.5);
     --section-bg: hsla(220, 40%, 20%, 0.1);
 
-    /* 🟡 Interactive States & Accents */
+    /* Interactive */
     --focus-ring-color: hsla(45, 52%, 53%, 0.25);
     --selection-bg: hsla(220, 40%, 25%, 0.2);
     --accent-primary-bg: hsla(45, 52%, 53%, 0.1);
     --accent-primary-border: hsla(45, 52%, 53%, 0.25);
     --glow-color: hsla(45, 100%, 70%, 0.7);
 
-    /* 🔴 Buttons */
+    /* Buttons */
     --btn-text-color: hsl(220, 30%, 95%);
     --btn-grad-start: hsl(215, 70%, 55%);
     --btn-grad-end: hsl(225, 75%, 60%);
@@ -140,16 +134,28 @@
     --btn-grad-start-hover: hsl(215, 70%, 65%);
     --btn-grad-end-hover: hsl(225, 75%, 70%);
     --btn-arrow-bg: hsla(220, 50%, 80%, 0.15);
-    
-    /* ⚫️ Shadows & Effects */
-    --shadow-color: hsla(220, 50%, 5%, 0.4);
-    --soft-shadow: hsla(220, 50%, 5%, 0.2);
     --btn-hover-shadow: hsla(220, 70%, 55%, 0.4);
     --btn-primary-shadow: hsla(220, 70%, 55%, 0.25);
+
+    /* Extra Palettes kept */
+    --bg-dark: #0c0b15;
+    --bg-darker: #070610;
+    --purple-dark: #3a1f5f;
+    --purple-neon: #6a2ebd;
+    --neon-blue: #00d0ff;
+    --neon-green: #00ff9d;
+    --gold-neon: #ffd700;
+    --glass-bg: rgba(20, 15, 40, 0.45);
+    --text-main: #f0f0ff;
+    --text-subtle: #b0b0d0;
+
+    /* Shadows & Effects */
+    --shadow-color: hsla(220, 50%, 5%, 0.4);
+    --soft-shadow: hsla(220, 50%, 5%, 0.2);
     --pattern-color: hsl(220, 15%, 60%);
     --pattern-opacity: 0.04;
 
-    /* 🟣 Component-Specific */
+    /* Component-Specific / Loading / Footer */
     --footer-bg: linear-gradient(135deg, hsl(160, 70%, 12%), hsl(175, 60%, 15%));
     --footer-text: hsl(220, 15%, 80%);
     --spinner-track-color: hsla(220, 40%, 30%, 0.5);
@@ -160,24 +166,48 @@
     --loading-ring-bg: hsla(46, 31%, 89%, 0.1);
     --loading-orb-shadow: hsla(45, 52%, 53%, 0.4);
     --loading-particle-opacity: 0.3;
+
+    /* Premium variables kept */
+    --bg: hsl(0, 0%, 7%);
+    --bg-2: hsl(0, 0%, 10%);
+    --text-light: hsl(0, 0%, 94%);
+    --text-muted: hsl(0, 0%, 63%);
+    --accent-dark: hsl(148, 51%, 25%);
+    --accent-mid: hsl(148, 47%, 33%);
+    --accent-gold: hsl(45, 52%, 53%);
+
+    /* Extra Shadows */
+    --shadow-deep: hsla(0, 0%, 0%, 0.4);
+    --shadow-glow-green: hsla(148, 47%, 33%, 0.15);
+    --shadow-glow-gold: hsla(45, 52%, 53%, 0.2);
+
+    /* Hero / Page colors */
+    --hero-glow-1: rgba(106, 46, 189, 0.15);
+    --hero-glow-2: rgba(0, 208, 255, 0.1);
+    --page-background-color: #000F95; /* 🌙 night */
   }
 
-  /* 3.2. Global Base Styles */
+  /* 3.3) Global Base Styles (kept) */
   body {
-    background: linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 100%);
-    color: var(--text-light);
-    font-family: 'Poppins', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    /* آدرس تصویر پس‌زمینه طرح‌دار شما */
+    background-image: url('/path-to-your-pattern.png');
+    /* تصویر ثابت */
+    background-attachment: fixed;
+    /* ظاهر بهتر */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* Theme base */
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: 'Inter','Roboto','Poppins',sans-serif;
+    transition: background-color .4s ease, color .4s ease;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* 3.3. Theme-Aware Background Pattern (Using CSS Mask) */
+  /* 3.4) Theme-Aware Background Pattern (Using CSS Mask) (kept) */
   body::before {
     content: '';
     position: fixed;
@@ -190,21 +220,23 @@
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='black'><path d='M40 0 L80 40 L40 80 L0 40 Z'/><path d='M120 40 L160 80 L120 120 L80 80 Z'/><path d='M80 0 L120 40 L80 80 L40 40 Z'/><path d='M0 120 L40 160 L80 120 L40 80 Z'/><path d='M80 80 L120 120 L80 160 L40 120 Z'/></g></svg>");
     -webkit-mask-repeat: repeat;
     opacity: var(--pattern-opacity);
-    transition: opacity 0.3s ease, background-color 0.3s ease;
+    transition: opacity .3s ease, background-color .3s ease;
   }
-  
-  /* 3.4. Basic Typography & Links */
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--text-primary);
-  }
+
+  /* 3.5) Typography & Links (kept) */
+  h1, h2, h3, h4, h5, h6 { color: var(--text-primary); }
 
   a {
     color: var(--accent-secondary);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color .2s ease;
   }
+  a:hover { color: var(--accent-primary); }
+}
 
-  a:hover {
-    color: var(--accent-primary);
+/* 4) Optional: honor system preference if no JS sets data-theme */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) body {
+    background-color: hsl(220, 40%, 15%);
   }
 }

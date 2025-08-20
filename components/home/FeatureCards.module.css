@@ -5,7 +5,7 @@
 
 .wrapper {
   padding: 80px 24px;
-  background-color: var(--section-bg); /* USE VAR */
+  background-color: transparent; 
 }
 
 /* دیگر نیازی به تعریف جداگانه برای تم تاریک در این فایل نیست، 
