@@ -203,6 +203,9 @@
     color: var(--text-primary);
     font-family: 'Inter','Roboto','Poppins',sans-serif;
     transition: background-color .4s ease, color .4s ease;
+    margin: 0; /* This is the key line that removes the top space */
+    padding: 0;
+    font-family: sans-serif; /* Or your preferred font */
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
