@@ -1,3 +1,5 @@
+// pages/index.js (Final Code)
+
 import React, { useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import Head from 'next/head';
@@ -18,7 +20,6 @@ import FeatureCards from 'components/home/FeatureCards';
 import PersonalizationPanel from 'components/home/PersonalizationPanel';
 
 export default function Index() {
-    // 1. مقدار اولیه state را true می‌گذاریم
     const [showLoading, setShowLoading] = useState(true);
     const { theme } = useTheme();
     const [isChatOpen, setIsChatOpen] = useState(false);
@@ -27,24 +28,19 @@ export default function Index() {
         document.documentElement.setAttribute('data-theme', theme);
     }, [theme]);
     
-    // 2. این useEffect جدید، منطق لودینگ را مدیریت می‌کند
     useEffect(() => {
-        // چک می‌کنیم آیا قبلاً لودینگ نمایش داده شده است یا نه
         const hasLoadedBefore = sessionStorage.getItem('hasLoadedBefore');
 
         if (hasLoadedBefore) {
-            // اگر قبلاً نمایش داده شده، بلافاصله لودینگ را غیرفعال کن
             setShowLoading(false);
         } else {
-            // اگر اولین بار است، لودینگ را برای مدتی نمایش بده
             const timer = setTimeout(() => {
                 setShowLoading(false);
-                // و در حافظه مرورگر ثبت کن که دیگر نمایش داده نشود
                 sessionStorage.setItem('hasLoadedBefore', 'true');
             }, 2500);
             return () => clearTimeout(timer);
         }
-    }, []); // [] یعنی این افکت فقط یک بار بعد از رندر اولیه اجرا می‌شود
+    }, []);
 
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -57,8 +53,6 @@ export default function Index() {
         mouseY.set(e.clientY - rect.top);
     };
 
-    // 3. اگر showLoading همچنان true بود، کامپوننت لودینگ را نمایش بده
-    // (این حالت فقط در رندر اولیه و قبل از اجرای useEffect اتفاق می‌افتد)
     if (showLoading) {
         return <QuranPlusLoading />;
     }
@@ -77,7 +71,8 @@ export default function Index() {
             >
                 <BackgroundEffects springMouseX={springMouseX} springMouseY={springMouseY} />
                 
-                <Header onStartConversation={() => setIsChatOpen(true)} />
+                {/* هدر فقط زمانی نمایش داده می‌شود که چت باز نباشد */}
+                {!isChatOpen && <Header onStartConversation={() => setIsChatOpen(true)} />}
                 
                 <main>
                     <AnimatePresence mode="wait">
@@ -97,6 +92,7 @@ export default function Index() {
                     </AnimatePresence>
                 </main>
 
+                {/* فوتر نیز فقط زمانی نمایش داده می‌شود که چت باز نباشد */}
                 {!isChatOpen && <Footer />}
             </div>
         </>

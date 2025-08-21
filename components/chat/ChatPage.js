@@ -1,75 +1,132 @@
+// components/chat/ChatPage.js (Final and Corrected Version)
+
 import React from 'react';
-import { FaChevronLeft, FaRegLightbulb, FaBook, FaCog } from 'react-icons/fa';
-import NewLogo from 'components/ui/NewLogo';
+import { useState, useEffect, useRef } from 'react';
+import styles from 'components/chat/ChatPage.module.css';
+import { 
+    FaRobot, 
+    FaCommentDots, 
+    FaBookOpen, 
+    FaArrowRight, 
+    FaBrain, 
+    FaCheckCircle, 
+    FaUserCog,
+    FaArrowLeft
+} from 'react-icons/fa';
 
-const ChatPage = ({ darkMode, currentTheme, onGoBack }) => {
-    const primaryColor = darkMode ? '#a7c957' : '#4a6d3b';
-    const secondaryColor = darkMode ? '#a7c957' : '#a7c957';
-    const mutedTextColor = darkMode ? '#c1c1c1' : '#888';
-    const chatBgColor = darkMode ? '#181818' : '#f0f4e8';
-    const panelBgColor = darkMode ? '#222' : 'white';
-    const panelShadow = darkMode ? '0 8px 30px rgba(0,0,0,0.4)' : '0 8px 30px rgba(0,0,0,0.08)';
+const sampleConversation = [
+    { id: '1', type: 'user', content: "I'm feeling stressed today...", timestamp: "2:30 PM" },
+    { id: '2', type: 'ai', content: "I understand. Let me share a verse that brings peace:", verse: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا", reference: "At-Talaq 65:2", timestamp: "2:31 PM" },
+    { id: '3', type: 'ai', content: "\"And whoever fears Allah - He will make for him a way out.\" This verse reminds us that divine solutions exist for every difficulty.", timestamp: "2:31 PM" }
+];
 
-    // All style objects from the original ChatPageContent go here...
-    // To keep it brief, I'm omitting the large style objects, but you should copy them from your original file.
-    const containerStyle = { display: 'flex', minHeight: 'calc(100vh - 60px)', fontFamily: '"Segoe UI", sans-serif', backgroundColor: 'white', color: darkMode ? '#d4d4d4' : '#333', maxWidth: '1200px', margin: '30px auto', borderRadius: '24px', overflow: 'hidden', boxShadow: panelShadow, flexGrow: 1 };
-    const sidebarStyle = { width: '280px', backgroundColor: panelBgColor, padding: '24px 16px', borderRight: `1px solid ${darkMode ? '#333' : '#e0e0e0'}`, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 };
-    const sidebarHeaderStyle = { display: 'flex', alignItems: 'center', gap: '12px', width: '100%', marginBottom: '20px' };
-    const sidebarTitleStyle = { fontSize: '24px', fontWeight: '900', color: primaryColor, letterSpacing: '1px' };
-    const sidebarButtonContainerStyle = { display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', flexGrow: 1, marginTop: '20px' };
-    const sidebarButtonStyle = { display: 'flex', alignItems: 'center', gap: '16px', padding: '12px 16px', borderRadius: '12px', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: '600', color: primaryColor, transition: 'background-color 0.2s, transform 0.1s' };
-    const sidebarButtonHoverStyle = { backgroundColor: darkMode ? 'rgba(167, 201, 87, 0.1)' : 'rgba(74, 109, 59, 0.1)' };
-    const sidebarIconStyle = { fontSize: '20px' };
-    const mainContentStyle = { flexGrow: 1, display: 'flex', flexDirection: 'row', padding: '24px', backgroundColor: chatBgColor };
-    const chatPanelStyle = { flex: 2, display: 'flex', flexDirection: 'column', backgroundColor: panelBgColor, borderRadius: '24px', boxShadow: panelShadow, marginRight: '24px', padding: '24px' };
-    const chatMessageContainerStyle = { flexGrow: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' };
-    const aiMessageBubbleStyle = { backgroundColor: primaryColor, color: 'white', padding: '16px 20px', borderRadius: '20px 20px 20px 6px', maxWidth: '70%', alignSelf: 'flex-start', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' };
-    const userMessageBubbleStyle = { backgroundColor: darkMode ? '#333' : '#e0e8e0', color: darkMode ? '#d4d4d4' : '#333', padding: '16px 20px', borderRadius: '20px 20px 6px 20px', maxWidth: '70%', alignSelf: 'flex-end', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' };
-    const verseTextArStyle = { fontFamily: '"Amiri", serif', fontSize: '22px', direction: 'rtl', lineHeight: 1.8, borderBottom: '1px solid rgba(255, 255, 255, 0.4)', paddingBottom: '10px', marginBottom: '10px' };
-    const verseTranslationStyle = { fontSize: '16px', fontWeight: '400', fontStyle: 'italic', lineHeight: 1.5, opacity: 0.9 };
-    const chatInputContainerStyle = { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', marginTop: '20px' };
-    const chatInputStyle = { width: '100%', padding: '16px 24px', borderRadius: '30px', border: `1px solid ${darkMode ? '#444' : '#ddd'}`, fontSize: '16px', outline: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', backgroundColor: darkMode ? '#333' : '#fff', color: darkMode ? '#fff' : '#333' };
-    const exploreButtonStyle = { backgroundColor: 'transparent', border: `2px solid ${primaryColor}`, color: primaryColor, padding: '12px 24px', borderRadius: '30px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', transition: 'background-color 0.2s, color 0.2s' };
-    const rightPanelStyle = { flex: 1, backgroundColor: panelBgColor, borderRadius: '24px', padding: '30px', boxShadow: panelShadow };
-    const featureCardStyle = { display: 'flex', alignItems: 'center', gap: '16px', padding: '16px', borderRadius: '16px', backgroundColor: darkMode ? 'rgba(167, 201, 87, 0.1)' : '#f8f8f4', marginBottom: '16px' };
-    const featureIconStyle = { width: '40px', height: '40px', borderRadius: '12px', backgroundColor: secondaryColor, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' };
-    const tryAiButtonStyle = { marginTop: '30px', width: '100%', padding: '16px', borderRadius: '30px', backgroundColor: primaryColor, color: 'white', border: 'none', fontSize: '18px', fontWeight: 'bold', cursor: 'pointer', transition: 'background-color 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' };
+const ChatPage = ({ onGoBack }) => {
+    const [messages, setMessages] = useState([]);
+    const [isTyping, setIsTyping] = useState(false);
+    const chatEndRef = useRef(null);
+
+    // شبیه‌سازی مکالمه
+    useEffect(() => {
+        let currentMessageIndex = 0;
+        const totalMessages = sampleConversation.length;
+
+        const showNextMessage = () => {
+            if (currentMessageIndex >= totalMessages) {
+                // *** تغییر کلیدی اینجاست ***
+                // بعد از اینکه همه پیام‌ها نمایش داده شدند، یک بار اسکرول کن
+                setTimeout(() => {
+                    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }); // می‌توانیم به smooth برگردانیم
+                }, 100); // یک تأخیر کوتاه برای اطمینان
+                return;
+            }
+
+            const message = sampleConversation[currentMessageIndex];
+            
+            if (message.type === 'ai' && (currentMessageIndex === 0 || sampleConversation[currentMessageIndex - 1].type === 'user')) {
+                setIsTyping(true);
+                setTimeout(() => {
+                    setIsTyping(false);
+                    setMessages(prev => [...prev, message]);
+                    currentMessageIndex++;
+                    setTimeout(showNextMessage, 1200);
+                }, 1500);
+            } else {
+                 setMessages(prev => [...prev, message]);
+                 currentMessageIndex++;
+                 setTimeout(showNextMessage, 1200);
+            }
+        };
+        const timeoutId = setTimeout(showNextMessage, 1000);
+        return () => clearTimeout(timeoutId);
+    }, []); // این useEffect فقط یک بار اجرا می‌شود
+
+    // *** تغییر کلیدی: useEffect قبلی برای اسکرول حذف شد ***
+    // ما دیگر نیازی به گوش دادن به تغییرات messages برای اسکرول نداریم.
 
     return (
-        <div style={containerStyle}>
-            {/* JSX for the chat page goes here, exactly as it was in the original file */}
-            {/* Make sure to replace <NewLogo ... /> with the imported component */}
-            <div style={sidebarStyle}>
-                <div style={{ width: '100%' }}>
-                    <div style={sidebarHeaderStyle}>
-                        <NewLogo width={36} darkMode={darkMode} />
-                        <span style={sidebarTitleStyle}>QuranPlus AI</span>
+        <div className={styles.pageContainer}>
+             <button onClick={onGoBack} className={styles.backButton}>
+                <FaArrowLeft />
+                <span>Back to Home</span>
+            </button>
+            <div className={styles.container}>
+                <section className={styles.section}>
+                    <div className={styles.header}>
+                        <h1>Experience AI-Powered Spiritual Guidance</h1>
+                        <p>See how our intelligent assistant provides personalized Quranic wisdom for life's moments</p>
                     </div>
-                    <p style={{ color: mutedTextColor, fontSize: '14px', marginTop: '4px' }}>Your spiritual companion</p>
-                </div>
-                <div style={sidebarButtonContainerStyle}>
-                    <button style={{ ...sidebarButtonStyle, ...sidebarButtonHoverStyle }} onClick={onGoBack}>
-                        <FaChevronLeft style={sidebarIconStyle} />
-                        <span>Go Back to Home</span>
-                    </button>
-                    <button style={sidebarButtonStyle} >
-                        <FaRegLightbulb style={sidebarIconStyle} />
-                        <span>Discover Insights</span>
-                    </button>
-                    <button style={sidebarButtonStyle}>
-                        <FaBook style={sidebarIconStyle} />
-                        <span>Read Quran</span>
-                    </button>
-                </div>
-                <div style={{ width: '100%', marginTop: 'auto' }}>
-                    <button style={sidebarButtonStyle}>
-                        <FaCog style={sidebarIconStyle} />
-                        <span>Settings</span>
-                    </button>
-                </div>
-            </div>
-            <div style={mainContentStyle}>
-                {/* ... rest of the ChatPage JSX */}
+                    
+                    <div className={styles.grid}>
+                        <div className={styles.chatContainer}>
+                            <div className={styles.chatHeader}>
+                                <div className={styles.chatHeaderContent}>
+                                    <div className={styles.chatIcon}><FaRobot /></div>
+                                    <div className={styles.chatTitle}>
+                                        <h2>QuranPlus AI</h2>
+                                        <p>Your spiritual companion</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.chatMessages}>
+                                {messages.map((msg) => (
+                                    <div key={msg.id} className={`${styles.message} ${msg.type === 'user' ? styles.userMessage : styles.aiMessage}`}>
+                                        <p>{msg.content}</p>
+                                        {msg.verse && (
+                                            <div className={styles.verseContainer}>
+                                                <p className={styles.verseText}>{msg.verse}</p>
+                                                <p className={styles.verseReference}>{msg.reference}</p>
+                                            </div>
+                                        )}
+                                        <p className={styles.messageTime}>{msg.timestamp}</p>
+                                    </div>
+                                ))}
+                                {isTyping && (
+                                    <div className={styles.typingIndicator}>
+                                        <div className={styles.typingDot}></div><div className={styles.typingDot}></div><div className={styles.typingDot}></div>
+                                    </div>
+                                )}
+                                <div ref={chatEndRef} />
+                            </div>
+                            <div className={styles.actionButtons}>
+                                <button className={`${styles.btn} ${styles.btnPrimary}`}><FaCommentDots style={{marginRight: '10px'}}/>Start Real Conversation<FaArrowRight style={{marginLeft: '10px'}}/></button>
+                                <button className={`${styles.btn} ${styles.btnAccent}`}><FaBookOpen style={{marginRight: '10px'}}/>Explore Tafsir<FaArrowRight style={{marginLeft: '10px'}}/></button>
+                            </div>
+                        </div>
+
+                        <div className={styles.contentSection}>
+                            <div>
+                                <h2>Intelligent Conversations with Purpose</h2>
+                                <p>Our AI understands context, emotion, and spiritual needs. Every response is crafted to provide meaningful guidance rooted in authentic Islamic teachings.</p>
+                            </div>
+                            <div className={styles.features}>
+                                <div className={styles.feature}><div className={styles.featureIcon}><FaBrain/></div><div className={styles.featureContent}><h3>Contextual Understanding</h3><p>AI recognizes your emotional state and life situation to provide relevant guidance.</p></div></div>
+                                <div className={styles.feature}><div className={styles.featureIcon}><FaCheckCircle/></div><div className={styles.featureContent}><h3>Authentic Sources</h3><p>All responses backed by verified Quranic verses and scholarly interpretations.</p></div></div>
+                                <div className={styles.feature}><div className={styles.featureIcon}><FaUserCog/></div><div className={styles.featureContent}><h3>Personalized Guidance</h3><p>Tailored advice that grows with your spiritual journey and personal needs.</p></div></div>
+                            </div>
+                            <button className={styles.ctaBtn}><FaRobot/>Try AI Assistant Now<FaArrowRight style={{marginLeft: '12px'}}/></button>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     );
