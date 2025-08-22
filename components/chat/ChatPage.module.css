@@ -62,7 +62,6 @@
     background: linear-gradient(to right, var(--neon-blue), var(--neon-purple));
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
     margin-bottom: 24px;
     line-height: 1.2;
     text-shadow: 0 0 15px rgba(170, 0, 255, 0.3);

@@ -1,7 +1,14 @@
 /* ==========================================================================
-   Final & Perfected Global Stylesheet
-   - Full Day/Night theming with all original capabilities preserved
-   ========================================================================== */
+ * Final & Perfected Global Stylesheet (v2.1 - Enhanced Edition) - Corrected
+ * - Full Day/Night theming with all original capabilities preserved
+ * - ADDED: Animated gradient background from the Ultimate UI Kit.
+ * - ADDED: Scroll-driven progress bar from the Ultimate UI Kit.
+ * - [خفن‌تر شد] ADDED: Custom theme-aware scrollbars.
+ * - [خفن‌تر شد] ADDED: Subtle interactive animations for cards, buttons, and links.
+ * - [خفن‌تر شد] ADDED: Dynamic aurora effect to the background gradient.
+ * - [خفن‌تر شد] ADDED: Universal smooth transitions for theme switching.
+ * - [خفن‌تر شد] ADDED: Enhanced focus states and text selection styles.
+ * ========================================================================== */
 
 /* 1) Fonts (kept, de-duplicated) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&family=Lateef:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap');
@@ -10,6 +17,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+ * [جدید] ثبت پراپرتی سفارشی برای انیمیشن بهینه نوار پیشرفت اسکرول
+ */
+@property --scroll-progress {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
 
 /* 3) Custom Base Styles */
 @layer base {
@@ -24,6 +40,18 @@
     --accent-primary: hsl(45, 52%, 53%);   /* Gold */
     --accent-secondary: hsl(148, 47%, 33%); /* Mid Green */
 
+    /* [جدید] متغیرهای پس‌زمینه گرادینت از کیت UI */
+    --gradient-bg-1: oklch(97% 0.02 50);
+    --gradient-bg-2: oklch(97% 0.03 90);
+    --gradient-bg-3: oklch(97% 0.02 30);
+    --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    --z-scroll-progress: 9999; /* Z-index برای نوار پیشرفت */
+
+    /* [خفن‌تر شد] متغیرهای افکت شفق قطبی (Aurora) */
+    --aurora-1: hsla(148, 50%, 60%, 0.15);
+    --aurora-2: hsla(45, 60%, 65%, 0.1);
+
+
     /* UI Elements */
     --card-bg: hsla(0, 0%, 100%, 0.75);
     --card-border: hsla(45, 52%, 53%, 0.5); /* gold border (day default) */
@@ -33,8 +61,8 @@
     --section-bg: hsla(0, 0%, 0%, 0.02);
 
     /* Interactive */
-    --focus-ring-color: hsla(45, 52%, 53%, 0.25);
-    --selection-bg: hsla(148, 47%, 33%, 0.1);
+    --focus-ring-color: hsla(45, 52%, 53%, 0.8); /* [خفن‌تر شد] Opacity increased */
+    --selection-bg: hsla(148, 47%, 33%, 0.25);
     --accent-primary-bg: hsla(45, 52%, 53%, 0.1);
     --accent-primary-border: hsla(45, 52%, 53%, 0.2);
     --glow-color: hsla(45, 100%, 70%, 0.8);
@@ -111,6 +139,16 @@
     --accent-primary: hsl(45, 52%, 53%);
     --accent-secondary: hsl(143, 45%, 45%);
 
+    /* [جدید] متغیرهای پس‌زمینه گرادینت از کیت UI */
+    --gradient-bg-1: oklch(10% 0.05 280);
+    --gradient-bg-2: oklch(10% 0.06 310);
+    --gradient-bg-3: oklch(10% 0.04 260);
+    --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+
+    /* [خفن‌تر شد] متغیرهای افکت شفق قطبی (Aurora) */
+    --aurora-1: hsla(143, 50%, 50%, 0.1);
+    --aurora-2: hsla(220, 60%, 60%, 0.15);
+
     /* UI Elements */
     --card-bg: hsla(220, 40%, 18%, 0.75);
     --card-border: hsla(45, 52%, 53%, 0.3); /* gold border for dark */
@@ -120,8 +158,8 @@
     --section-bg: hsla(220, 40%, 20%, 0.1);
 
     /* Interactive */
-    --focus-ring-color: hsla(45, 52%, 53%, 0.25);
-    --selection-bg: hsla(220, 40%, 25%, 0.2);
+    --focus-ring-color: hsla(45, 52%, 53%, 0.8); /* [خفن‌تر شد] Opacity increased */
+    --selection-bg: hsla(45, 52%, 53%, 0.25);
     --accent-primary-bg: hsla(45, 52%, 53%, 0.1);
     --accent-primary-border: hsla(45, 52%, 53%, 0.25);
     --glow-color: hsla(45, 100%, 70%, 0.7);
@@ -187,31 +225,63 @@
     --page-background-color: #000F95; /* 🌙 night */
   }
 
-  /* 3.3) Global Base Styles (kept) */
-  body {
-    /* آدرس تصویر پس‌زمینه طرح‌دار شما */
-    background-image: url('/path-to-your-pattern.png');
-    /* تصویر ثابت */
-    background-attachment: fixed;
-    /* ظاهر بهتر */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 
-    /* Theme base */
-    background-color: var(--background);
+  /* 3.3) Global Base Styles (Updated) */
+  html {
+    /* [خفن‌تر شد] رفتار اسکرول نرم برای لینک‌های داخلی */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* [خفن‌تر شد] پس‌زمینه گرادینت متحرک + افکت شفق قطبی */
+    background:
+      radial-gradient(ellipse at 10% 10%, var(--aurora-1) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, var(--aurora-2) 0%, transparent 50%),
+      linear-gradient(-45deg, var(--gradient-bg-1), var(--gradient-bg-2), var(--gradient-bg-3));
+
+    background-size: 400% 400%;
+
+    /* [خفن‌تر شد] انیمیشن‌های لایه‌های مختلف پس‌زمینه */
+    animation:
+      gradient-flow 25s ease infinite,
+      aurora-1 30s ease-in-out infinite alternate,
+      aurora-2 40s ease-in-out infinite alternate;
+
+    /* استایل‌های اصلی شما حفظ شده است */
     color: var(--text-primary);
-    font-family: 'Inter','Roboto','Poppins',sans-serif;
+    font-family: 'Inter', 'Roboto', 'Poppins', sans-serif;
     transition: background-color .4s ease, color .4s ease;
-    margin: 0; /* This is the key line that removes the top space */
+    margin: 0;
     padding: 0;
-    font-family: sans-serif; /* Or your preferred font */
+    overflow-x: hidden;
+    min-height: 100vh;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  /* [خفن‌تر شد] انتقال نرم بین تم‌ها برای همه چیز */
+  *, *::before, *::after {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease, stroke 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  }
 
-  /* 3.4) Theme-Aware Background Pattern (Using CSS Mask) (kept) */
+  /* [جدید] نوار پیشرفت مطالعه وابسته به اسکرول */
   body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--scroll-progress); /* متصل به @property */
+    height: 4px;
+    background: var(--gradient-accent);
+    z-index: var(--z-scroll-progress);
+    animation: scroll-progress-animation linear;
+    animation-timeline: scroll(root);
+    /* [خفن‌تر شد] افکت درخشش برای نوار پیشرفت */
+    box-shadow: 0 0 10px var(--accent-primary), 0 0 5px var(--accent-primary);
+  }
+
+  /* 3.4) Theme-Aware Background Pattern (Moved to ::after to allow for progress bar) */
+  body::after { /* <<<< توجه: به ::after منتقل شد */
     content: '';
     position: fixed;
     inset: 0;
@@ -223,23 +293,146 @@
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='black'><path d='M40 0 L80 40 L40 80 L0 40 Z'/><path d='M120 40 L160 80 L120 120 L80 80 Z'/><path d='M80 0 L120 40 L80 80 L40 40 Z'/><path d='M0 120 L40 160 L80 120 L40 80 Z'/><path d='M80 80 L120 120 L80 160 L40 120 Z'/></g></svg>");
     -webkit-mask-repeat: repeat;
     opacity: var(--pattern-opacity);
-    transition: opacity .3s ease, background-color .3s ease;
+    /* transition: opacity .3s ease, background-color .3s ease;  <-- Redundant due to universal transition */
   }
 
-  /* 3.5) Typography & Links (kept) */
+  /* 3.5) Typography & Links (kept & enhanced) */
   h1, h2, h3, h4, h5, h6 { color: var(--text-primary); }
 
   a {
     color: var(--accent-secondary);
     text-decoration: none;
-    transition: color .2s ease;
+    position: relative; /* [خفن‌تر شد] برای انیمیشن خط زیر */
+    /* transition: color .2s ease; <-- Redundant */
   }
   a:hover { color: var(--accent-primary); }
+
+  /* [خفن‌تر شد] انیمیشن خط زیر برای لینک‌ها */
+  a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  
+  /* [خفن‌تر شد] استایل انتخاب متن (Text Selection) */
+  ::selection {
+    background-color: var(--selection-bg);
+    color: var(--text-primary);
+  }
+
+  /* [خفن‌تر شد] استایل فوکوس برای دسترس‌پذیری بهتر */
+  :is(a, button, input, textarea, select):focus-visible {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* [جدید] انیمیشن‌های مورد نیاز برای پس‌زمینه و نوار پیشرفت */
+  @keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes scroll-progress-animation {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+
+  /* [خفن‌تر شد] انیمیشن‌های افکت شفق قطبی */
+  @keyframes aurora-1 {
+    from { background-position: 10% 10%; }
+    to { background-position: 60% 80%; }
+  }
+  @keyframes aurora-2 {
+    from { background-position: 80% 90%; }
+    to { background-position: 20% 20%; }
+  }
 }
 
-/* 4) Optional: honor system preference if no JS sets data-theme */
+
+/* [خفن‌تر شد] 4) لایه کامپوننت‌ها برای استایل‌های تعاملی */
+@layer components {
+  /* استایل پیش‌فرض برای کارت‌ها */
+  .card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    /* * این دو خط حذف شدند تا مشکل تاری برطرف شود
+     * backdrop-filter: blur(10px);
+     * -webkit-backdrop-filter: blur(10px);
+    */
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-deep);
+    border-color: var(--accent-primary);
+  }
+
+  /* استایل پیش‌فرض برای دکمه‌ها */
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    background-image: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-mid), var(--btn-grad-end));
+    color: var(--btn-text-color);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 10px var(--btn-primary-shadow);
+    /* transition already set universally */
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--btn-hover-shadow);
+    background-image: linear-gradient(135deg, var(--btn-grad-start-hover), var(--btn-grad-start-hover), var(--btn-grad-end-hover));
+  }
+  
+  .btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 5px var(--btn-primary-shadow);
+  }
+}
+
+
+/* 5) Optional: honor system preference if no JS sets data-theme */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) body {
+    /* این بخش حفظ شده اما پس‌زمینه گرادینت اولویت خواهد داشت */
     background-color: hsl(220, 40%, 15%);
   }
+}
+
+/* [خفن‌تر شد] 6) استایل اسکرول‌بار سفارشی */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent-secondary);
+  border-radius: 20px;
+  border: 2px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent-primary);
 }
