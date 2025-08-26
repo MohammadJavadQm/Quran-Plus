@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
+import style from './SignupForm.module.css'; // مسیر اصلاح‌شده
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMail, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import { User, Lock, Mail, ChevronLeft, UserPlus } from 'lucide-react';
-import {
-  AlertCircle,
-  CheckCircle,
-  Loader2,
-} from 'lucide-react';
+import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
 
 const Card = ({ children }) => {
   return (
@@ -20,7 +17,7 @@ const Card = ({ children }) => {
         scale: 1.01,
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
       }}
-      className="w-full max-w-sm p-8 bg-gray-900/80 backdrop-blur-md rounded-3xl border border-gray-700 shadow-[0_15px_30px_-5px_rgba(0,0,0,0.6)] relative overflow-hidden"
+      className={style.card}
     >
       {children}
     </motion.div>
@@ -113,21 +110,16 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
     visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
   };
 
-  const buttonGradient = 'linear-gradient(90deg, #6366f1 0%, #a855f7 100%)';
-  const buttonHoverGradient = 'linear-gradient(90deg, #4f46e5 0%, #9333ea 100%)';
-  const socialButtonShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-
   return (
-    <div className="relative flex items-center justify-center min-h-screen p-6 bg-gray-950 overflow-hidden">
+    <div className={style.container}>
       <motion.div
-        className="absolute inset-0 z-0 overflow-hidden"
+        className={style.bgGradient}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
       >
-        <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,#111827_0%,#000_100%)]"></div>
-        <div className="absolute inset-0 star-field-animation-layer-1"></div>
-        <div className="absolute inset-0 star-field-animation-layer-2"></div>
+        <div className={style.starFieldAnimationLayer1}></div>
+        <div className={style.starFieldAnimationLayer2}></div>
       </motion.div>
 
       <motion.div
@@ -139,9 +131,9 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
         <Card>
           <motion.button
             onClick={onBack}
-            className="absolute top-4 left-4 p-2 text-gray-400 hover:text-white transition duration-300 rounded-full bg-gray-800/50"
+            className={style.backButton}
             aria-label="Back"
-            whileHover={{ scale: 1.1, backgroundColor: '#3f3f46' }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             variants={itemVariants}
           >
@@ -150,13 +142,13 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
 
           <motion.h2
             variants={itemVariants}
-            className="text-4xl font-extrabold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500"
+            className={style.formHeading}
           >
             Create Your Account
           </motion.h2>
           <motion.p
             variants={itemVariants}
-            className="text-gray-400 text-center mb-6 text-sm"
+            className={style.formSubheading}
           >
             Join us to explore a new spiritual journey.
           </motion.p>
@@ -167,8 +159,9 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className={`p-3 rounded-xl text-center font-semibold text-white mb-4
-                ${message.type === 'error' ? 'bg-red-500/20 text-red-300 border border-red-500' : 'bg-green-500/20 text-green-300 border border-green-500'}`}
+                className={`${style.alert} ${
+                  message.type === 'error' ? style.alertError : style.alertSuccess
+                }`}
               >
                 {message.text}
               </motion.div>
@@ -176,8 +169,8 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
           </AnimatePresence>
 
           <motion.form onSubmit={handleSubmit} className="space-y-4">
-            <motion.div variants={itemVariants} className="relative">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+            <motion.div variants={itemVariants} className={style.inputContainer}>
+              <User className={style.inputIcon} size={20} />
               <input
                 id="name"
                 type="text"
@@ -186,11 +179,11 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 placeholder="Full Name"
                 disabled={isLoading}
                 required
-                className="w-full pl-12 pr-4 py-3 bg-gray-800 text-white rounded-xl border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 placeholder-gray-500"
+                className={style.input}
               />
             </motion.div>
-            <motion.div variants={itemVariants} className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+            <motion.div variants={itemVariants} className={style.inputContainer}>
+              <Mail className={style.inputIcon} size={20} />
               <input
                 id="email"
                 type="email"
@@ -199,11 +192,11 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 placeholder="you@email.com"
                 disabled={isLoading}
                 required
-                className="w-full pl-12 pr-4 py-3 bg-gray-800 text-white rounded-xl border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 placeholder-gray-500"
+                className={style.input}
               />
             </motion.div>
-            <motion.div variants={itemVariants} className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+            <motion.div variants={itemVariants} className={style.inputContainer}>
+              <Lock className={style.inputIcon} size={20} />
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
@@ -212,22 +205,22 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 placeholder="Password"
                 disabled={isLoading}
                 required
-                className="w-full pl-12 pr-12 py-3 bg-gray-800 text-white rounded-xl border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 placeholder-gray-500"
+                className={style.input}
               />
               <motion.button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 disabled={isLoading}
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition duration-300"
+                className={style.passwordToggle}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
                 {showPassword ? <AiOutlineEye size={20} /> : <AiOutlineEyeInvisible size={20} />}
               </motion.button>
             </motion.div>
-            <motion.div variants={itemVariants} className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+            <motion.div variants={itemVariants} className={style.inputContainer}>
+              <Lock className={style.inputIcon} size={20} />
               <input
                 id="confirmPassword"
                 type={showConfirmPassword ? 'text' : 'password'}
@@ -236,14 +229,14 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 placeholder="Confirm Password"
                 disabled={isLoading}
                 required
-                className="w-full pl-12 pr-12 py-3 bg-gray-800 text-white rounded-xl border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 placeholder-gray-500"
+                className={style.input}
               />
               <motion.button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 disabled={isLoading}
                 aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition duration-300"
+                className={style.passwordToggle}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -254,29 +247,26 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
               variants={itemVariants}
               type="submit"
               disabled={isLoading}
-              className={`w-full py-3 rounded-xl font-bold text-lg tracking-wide shadow-lg transition-all duration-300 relative overflow-hidden group
-                ${isLoading ? 'bg-gray-700 cursor-not-allowed text-gray-400' : 'text-white'}`}
-              style={{
-                background: isLoading ? 'var(--gray-700)' : buttonGradient,
-                boxShadow: isLoading ? 'none' : '0 10px 20px rgba(168, 85, 247, 0.25)',
-              }}
+              className={`${style.submitButton} ${
+                isLoading ? style.submitButtonDisabled : style.submitButtonEnabled
+              }`}
               whileHover={!isLoading ? { scale: 1.02 } : {}}
               whileTap={!isLoading ? { scale: 0.98 } : {}}
             >
               {isLoading ? (
-                <div className="flex items-center justify-center space-x-2">
+                <div className={style.submitButtonLoading}>
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                    className="w-6 h-6 border-2 border-white border-t-transparent rounded-full"
+                    className={style.loader}
                   />
                   <span>Creating Account...</span>
                 </div>
               ) : (
                 <>
                   <motion.div
-                    className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ background: buttonHoverGradient }}
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ background: 'linear-gradient(90deg, #4f46e5 0%, #9333ea 100%)' }}
                   />
                   <span className="relative z-10">Create Account</span>
                 </>
@@ -286,12 +276,12 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
 
           <motion.div
             variants={itemVariants}
-            className="mt-6 text-center text-gray-400"
+            className={style.signinLinkContainer}
           >
             Already have an account?{' '}
             <motion.button
               onClick={onSwitchToLogin}
-              className="font-semibold text-purple-400 hover:text-purple-300 transition-colors duration-300"
+              className={style.signinLink}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
