@@ -30,7 +30,7 @@
 /* 3) Custom Base Styles */
 @layer base {
   /* 3.1) Day (Light) Theme */
-  :root {
+:root {
     /* --- Light Theme ("Green & Gold") --- */
     /* Core Palette */
     --background: hsl(45, 33%, 93%);
@@ -126,10 +126,26 @@
     --hero-glow-1: rgba(176, 137, 104, 0.2);
     --hero-glow-2: rgba(127, 85, 57, 0.15);
     --page-background-color: #00B5D1; /* ☀️ day */
-  }
 
-  /* 3.2) Night (Dark) Theme */
-  [data-theme='dark'] {
+    /* ==========================================================================
+      Theme Variables for Auth Form
+      ========================================================================== */
+    --auth-bg: #ffffff;
+    --auth-text-primary: #1a202c;
+    --auth-text-secondary: #718096;
+    --auth-input-bg: #f7fafc;
+    --auth-input-border: #e2e8f0;
+    --auth-input-focus-border: #4a90e2;
+    --auth-button-bg: linear-gradient(135deg, #0A5C36 0%, #1A744A 100%);
+    --auth-button-text: #ffffff;
+    --auth-button-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --auth-link-color: #0A5C36;
+    --auth-container-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --auth-logo-icon-bg: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+}
+
+/* 3.2) Night (Dark) Theme */
+[data-theme='dark'] {
     /* --- Dark Theme ("Night Sky & Gold" + Emerald) --- */
     /* Core Palette */
     --background: hsl(220, 40%, 15%);
@@ -223,7 +239,21 @@
     --hero-glow-1: rgba(106, 46, 189, 0.15);
     --hero-glow-2: rgba(0, 208, 255, 0.1);
     --page-background-color: #000F95; /* 🌙 night */
-  }
+
+    /* Auth Form Dark Variables */
+    --auth-bg: #1A202C;
+    --auth-text-primary: #edf2f7;
+    --auth-text-secondary: #a0aec0;
+    --auth-input-bg: #2d3748;
+    --auth-input-border: #4a5568;
+    --auth-input-focus-border: #38b2ac;
+    --auth-button-bg: linear-gradient(135deg, #38b2ac 0%, #4fd1c5 100%);
+    --auth-button-text: #1a202c;
+    --auth-button-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+    --auth-link-color: #38b2ac;
+    --auth-container-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    --auth-logo-icon-bg: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+}
 
 
   /* 3.3) Global Base Styles (Updated) */

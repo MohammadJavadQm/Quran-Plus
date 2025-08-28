@@ -1,14 +1,12 @@
-// pages/index.js (Final Code)
+// pages/index.js
 
 import React, { useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import Head from 'next/head';
 
-// کامپوننت‌های اصلی
+// کامپوننت‌ها
 import QuranPlusLoading from 'components/QuranPlusLoading';
-import { useTheme } from 'components/ThemeToggle';
-import Footer from 'components/Footer';
-import Header from 'components/home/Header';
+import { useTheme } from 'components/ThemeToggle'; // مسیر صحیح بر اساس فایل‌های شما
 import BackgroundEffects from 'components/home/BackgroundEffects';
 import ChatPage from 'components/chat/ChatPage';
 
@@ -71,9 +69,6 @@ export default function Index() {
             >
                 <BackgroundEffects springMouseX={springMouseX} springMouseY={springMouseY} />
                 
-                {/* هدر فقط زمانی نمایش داده می‌شود که چت باز نباشد */}
-                {!isChatOpen && <Header onStartConversation={() => setIsChatOpen(true)} />}
-                
                 <main>
                     <AnimatePresence mode="wait">
                         {isChatOpen ? (
@@ -91,9 +86,6 @@ export default function Index() {
                         )}
                     </AnimatePresence>
                 </main>
-
-                {/* فوتر نیز فقط زمانی نمایش داده می‌شود که چت باز نباشد */}
-                {!isChatOpen && <Footer />}
             </div>
         </>
     );

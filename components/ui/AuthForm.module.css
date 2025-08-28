@@ -1,0 +1,193 @@
+/* AuthForm.module.css - نسخه نهایی */
+
+.authContainer {
+  --auth-padding: 2.5rem;
+  --auth-radius: 24px;
+  --auth-bg: hsla(225, 25%, 12%, 0.6);
+  --auth-border-color: hsla(225, 15%, 30%, 0.6);
+  --auth-primary-accent: #82aaff;
+  --auth-secondary-accent: #c792ea;
+  --auth-glow-color: hsla(222, 93%, 72%, 0.2);
+  --auth-text-primary: #FFFFFF; /* رنگ متن اصلی واضح‌تر شد */
+  --auth-text-secondary: #B0B8C4; /* رنگ متن دوم واضح‌تر شد */
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  padding: var(--auth-padding);
+  background: var(--auth-bg);
+  border-radius: var(--auth-radius);
+  border: 1px solid var(--auth-border-color);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  max-width: 460px;
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.authContainer:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.65);
+}
+
+.authContainer::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(from 180deg at 50% 50%, var(--auth-secondary-accent), var(--auth-primary-accent), transparent 70%);
+  animation: rotateGlow 10s linear infinite;
+  filter: blur(100px);
+  z-index: -2;
+  opacity: 0.6;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--auth-text-primary);
+  margin: 0;
+  text-align: center;
+}
+
+.backButton {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  background: hsla(225, 20%, 90%, 0.1);
+  border: 1px solid var(--auth-border-color);
+  border-radius: 50%;
+  color: var(--auth-text-secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.backButton:hover {
+  background: hsla(225, 30%, 100%, 0.2);
+  color: var(--auth-text-primary);
+  transform: scale(1.1);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 1.3rem 1rem 0.7rem;
+  border: 1px solid var(--auth-border-color);
+  background-color: hsla(225, 25%, 10%, 0.7);
+  color: var(--auth-text-primary);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--auth-primary-accent);
+  box-shadow: 0 0 0 4px hsla(222, 93%, 72%, 0.25);
+  background-color: hsla(225, 25%, 14%, 0.8);
+}
+
+.label {
+  position: absolute;
+  top: 1.1rem;
+  left: 1rem;
+  color: var(--auth-text-secondary);
+  font-size: 0.95rem;
+  transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+  top: 0.45rem;
+  font-size: 0.78rem;
+  color: var(--auth-primary-accent);
+}
+
+.submitButton {
+  padding: 0.9rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--auth-primary-accent), var(--auth-secondary-accent));
+  color: #12121c;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submitButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.4), transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.submitButton:hover::before {
+  transform: translateX(100%);
+}
+
+.submitButton:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px hsla(230, 100%, 75%, 0.4);
+}
+
+.footerText {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--auth-text-secondary);
+}
+
+.link {
+  color: var(--auth-primary-accent);
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--auth-primary-accent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: right;
+}
+
+.link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
