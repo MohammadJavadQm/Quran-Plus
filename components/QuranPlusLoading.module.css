@@ -1,46 +1,26 @@
-/* ==========================================================================
-   Optimized Loading Component Styles
-   - Fully integrated with the global theme system.
-   - Defines component-specific variables for light & dark modes.
-   ========================================================================== */
+/* QuranPlusLoading.module.css */
 
-/* 1. Component-Specific Theme Variables */
-/* The @layer wrapper has been removed from here */
-
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-.loadingContainer {
+/* کانتینر اصلی که کل صفحه را می‌پوشاند */
+.loadingScreen {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100vh; /* کلید اصلی: همیشه حداقل به اندازه ارتفاع صفحه است */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* چیدمان عمودی */
   align-items: center;
-  /* THEMED GRADIENT */
+  justify-content: center; /* محتوا را در مرکز قرار می‌دهد */
   background: radial-gradient(
     circle,
     var(--loading-grad-start) 0%,
     var(--loading-grad-end) 100%
   );
   overflow: hidden;
-  padding: 5rem 1rem 2rem 1rem; /* Added horizontal padding */
+  padding: 2rem 1rem;
 }
 
-/* (No changes needed for layout helpers like particlesContainer, progressContainer) */
-.particlesContainer {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 1;
-}
-
+/* بخش بالایی: انیمیشن دایره‌ای */
 .progressContainer {
-  flex-grow: 1;
+  flex-grow: 1; /* بخش بالایی را هل می‌دهد تا فضای بیشتری بگیرد */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,21 +28,47 @@
   z-index: 2;
 }
 
+/* بخش پایینی: متن‌ها و لوگو */
 .textContent {
-  flex-shrink: 0;
-  padding-bottom: 80px;
+  flex-shrink: 0; /* جلوگیری از کوچک شدن این بخش */
+  padding-bottom: 2rem; /* فاصله از پایین صفحه */
   z-index: 2;
   text-align: center;
   opacity: 0;
   transition: opacity 1s;
+  display: flex;
+  flex-direction: column; /* چیدمان عمودی برای متن و لوگو */
+  align-items: center;
+  justify-content: flex-end;
 }
 
-/* 3. Progress Ring & Glow Effects */
+/* کانتینر متن‌های متحرک */
+.phraseContainer {
+  max-width: 384px;
+  margin-bottom: 2rem; /* فاصله بین متن متحرک و لوگو */
+  order: 1; /* متن متحرک اول میاد */
+}
+
+/* کانتینر لوگو */
+.branding {
+  order: 2; /* لوگو دوم میاد */
+}
+
+/* ==========================================================================
+   بقیه استایل‌های شما (بدون تغییر)
+   ========================================================================== */
+
+.particlesContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
 .progressWrapper {
   position: relative;
 }
 
-/* (No changes needed for structure like outerGlow, progressSvg) */
 .outerGlow, .progressSvg {
     position: absolute;
     inset: -32px;
@@ -70,34 +76,30 @@
 .progressSvg { inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); filter: drop-shadow(0 0 8px rgba(0,0,0,0.5)); }
 .outerGlow { border-radius: 50%; opacity: 0.4; filter: blur(32px); }
 
-
 .backgroundRing {
-  stroke: var(--loading-ring-bg); /* USE VAR */
+  stroke: var(--loading-ring-bg);
   stroke-width: 2;
   fill: none;
 }
 
 .progressRing {
-  stroke: url(#progressGradient); /* Note: Gradient colors must be themed in SVG */
+  stroke: url(#progressGradient);
   stroke-width: 3;
   fill: none;
   stroke-linecap: round;
   stroke-dasharray: 565.48;
   stroke-dashoffset: 565.48;
-  filter: url(#glow); /* Note: Glow color must be themed in SVG */
+  filter: url(#glow);
   transition: stroke-dashoffset 0.3s ease-out;
 }
 
-/* 4. Decorative Elements */
 .islamicPatterns {
   position: absolute;
   inset: -16px;
-  /* Using text color for patterns allows them to theme automatically */
   color: var(--accent-primary);
   opacity: 0.4;
 }
 
-/* (No changes needed for pattern positioning) */
 .islamicPattern1, .islamicPattern2, .islamicPattern3 { position: absolute; }
 .islamicPattern1 { top: 16px; right: 16px; width: 32px; height: 32px; }
 .islamicPattern2 { bottom: 16px; left: 16px; width: 24px; height: 24px; }
@@ -111,14 +113,13 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  /* THEMED ORB */
   background: linear-gradient(
     to bottom right,
-    hsla(45, 100%, 59%, 0.6), /* Using HSL of gold for variations */
+    hsla(45, 100%, 59%, 0.6),
     hsla(45, 100%, 59%, 0.4),
     hsla(45, 100%, 59%, 0.6)
   );
-  box-shadow: 0 0 20px var(--loading-orb-shadow), /* USE VAR */
+  box-shadow: 0 0 20px var(--loading-orb-shadow),
     inset 0 0 10px hsla(0, 0%, 100%, 0.3);
 }
 
@@ -137,41 +138,16 @@
   50% { transform: scale(1.4); box-shadow: 0 0 15px hsla(0, 0%, 100%, 0.6); }
 }
 
-/* 5. Branding & Text Content */
-.branding {
-  margin-bottom: 48px;
-}
-
-.brandingLogo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.logoText {
-  font-size: 1.75rem;
-  font-weight: bold;
-  color: var(--text-primary); /* USE VAR */
-  letter-spacing: 1px;
-}
-
 .brandingSubtitle {
   font-size: 1rem;
-  opacity: 0.8; /* Slightly increased opacity for better readability */
-  color: var(--accent-primary); /* USE VAR */
+  opacity: 0.8;
+  color: var(--accent-primary);
   font-weight: 300;
-}
-
-.phraseContainer {
-  max-width: 384px;
-  margin: 0 auto 48px auto;
 }
 
 .englishText {
   font-size: 1.25rem;
-  color: var(--text-primary); /* USE VAR */
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
   font-weight: 300;
   transition: opacity 0.8s;
@@ -179,20 +155,19 @@
 
 .arabicText {
   font-size: 1.4rem;
-  color: var(--accent-primary); /* USE VAR */
+  color: var(--accent-primary);
   direction: rtl;
   font-weight: 500;
   transition: opacity 0.8s;
 }
 
-/* 6. Floating Particles */
 .floatingParticle {
   position: absolute;
   width: 4px;
   height: 4px;
-  background-color: var(--accent-primary); /* USE VAR */
+  background-color: var(--accent-primary);
   border-radius: 50%;
-  opacity: var(--loading-particle-opacity); /* USE VAR */
+  opacity: var(--loading-particle-opacity);
   animation: float 6s infinite ease-in-out;
 }
 

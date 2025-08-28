@@ -1,20 +1,19 @@
 /* ==========================================================
-   Footer Component Styles - "Premium Dark" Design
+   Footer Component Styles - "Premium Dark" RTL Design
    ========================================================== */
 
 .footer {
   background: var(--footer-bg);
   color: var(--text-light);
   width: 100%;
-  /* max-width: 1200px;  <-- این خط حذف شود */
-  border-radius: 0; /* <-- این مقدار به 0 تغییر کند */
+  border-radius: 0;
   overflow: hidden;
   box-shadow: 0 20px 40px var(--shadow-deep), 0 0 30px var(--shadow-glow-green);
   margin-top: 20px;
   border: 1px solid var(--border-color);
-  /* مرزهای چپ و راست را حذف می‌کنیم تا به لبه‌ها بچسبد */
   border-left: none;
   border-right: none;
+  direction: rtl; /* کلید اصلی: فعال کردن راست‌چین */
 }
 
 .arabesqueDivider {
@@ -34,6 +33,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
   padding: 40px 0;
+  text-align: right; /* متن‌ها راست‌چین می‌شوند */
 }
 
 @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
@@ -43,38 +43,24 @@
 /* --- Section 1: Logo & Verse --- */
 .logoContainer { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
 .logoIcon {
-  width: 50px;
-  height: 50px;
+  width: 50px; height: 50px;
   background: linear-gradient(135deg, var(--accent-mid), hsla(0, 0%, 100%, 0.05));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
   box-shadow: 0 8px 20px var(--shadow-deep);
 }
 .logoText h3 {
-  font-weight: 700;
-  font-size: 22px;
-  margin-bottom: 5px;
-  color: var(--text-light);
+  font-weight: 700; font-size: 22px; margin-bottom: 5px; color: var(--text-light);
   text-shadow: 0 0 10px var(--shadow-glow-green);
 }
 .logoText p { font-family: 'Amiri', serif; font-size: 14px; opacity: 0.85; color: hsla(0, 0%, 100%, 0.8); }
 .description { font-weight: 300; line-height: 1.7; margin-bottom: 25px; opacity: 0.92; color: hsla(0, 0%, 100%, 0.85); }
 .verseBox {
-  padding: 20px;
-  background: hsla(0, 0%, 0%, 0.2);
-  backdrop-filter: blur(6px);
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 15px hsla(0, 0%, 0%, 0.5);
+  padding: 20px; background: hsla(0, 0%, 0%, 0.2); backdrop-filter: blur(6px);
+  border-radius: 10px; border: 1px solid var(--border-color);
+  position: relative; overflow: hidden; box-shadow: inset 0 0 15px hsla(0, 0%, 0%, 0.5);
 }
 .verseBox::before {
-  content: "";
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 3px;
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
   background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
 }
 .verseBox p.arabic {
@@ -91,7 +77,7 @@
   margin-bottom: 20px; position: relative; padding-bottom: 8px;
 }
 .sectionTitle::after {
-  content: ""; position: absolute; bottom: 0; left: 0;
+  content: ""; position: absolute; bottom: 0; right: 0; /* اصلاح شد: left -> right */
   width: 50px; height: 2px;
   background: var(--accent-gold);
   box-shadow: 0 0 8px var(--shadow-glow-gold);
@@ -104,48 +90,41 @@
   padding: 3px 0; position: relative;
 }
 .linksList a::after {
-  content: ""; position: absolute; bottom: 0; left: 0;
+  content: ""; position: absolute; bottom: 0; right: 0; /* اصلاح شد: left -> right */
   width: 0; height: 1px;
   background: var(--accent-gold);
   transition: width 0.3s ease;
 }
-.linksList a:hover { color: var(--accent-gold); transform: translateX(5px); }
+.linksList a:hover { color: var(--accent-gold); transform: translateX(-5px); } /* اصلاح شد: 5px -> -5px */
 .linksList a:hover::after { width: 100%; }
 
 
 /* --- Section 4: Newsletter & Social --- */
 .newsletter p { font-weight: 300; line-height: 1.7; opacity: 0.9; margin-bottom: 20px; font-size: 14px; }
 .inputField {
-  width: 100%; padding: 14px 18px;
-  background: hsla(0, 0%, 0%, 0.3);
-  border: 1px solid var(--border-color);
-  border-radius: 8px; color: white;
-  font-size: 14px; margin-bottom: 12px;
-  transition: all 0.3s ease;
+  width: 100%; padding: 14px 18px; background: hsla(0, 0%, 0%, 0.3);
+  border: 1px solid var(--border-color); border-radius: 8px; color: white;
+  font-size: 14px; margin-bottom: 12px; transition: all 0.3s ease;
 }
 .inputField::placeholder { color: hsla(0, 0%, 100%, 0.6); }
 .inputField:focus {
-  outline: none;
-  border-color: var(--accent-gold);
+  outline: none; border-color: var(--accent-gold);
   box-shadow: 0 0 0 6px hsla(45, 52%, 53%, 0.1);
 }
 .btnSubscribe {
-  width: 100%; padding: 14px 20px;
-  background: linear-gradient(135deg, var(--accent-mid), var(--accent-gold));
-  color: white; border: none; border-radius: 8px;
-  font-weight: 500; font-size: 15px; cursor: pointer;
+  width: 100%; padding: 14px 20px; background: linear-gradient(135deg, var(--accent-mid), var(--accent-gold));
+  color: white; border: none; border-radius: 8px; font-weight: 500; font-size: 15px; cursor: pointer;
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  transition: all 0.3s ease; position: relative;
-  overflow: hidden; z-index: 1;
+  transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 1;
   box-shadow: 0 8px 24px hsla(148, 51%, 25%, 0.25);
 }
 .btnSubscribe::before {
-  content: ""; position: absolute; top: 0; left: -100%;
+  content: ""; position: absolute; top: 0; right: -100%; /* اصلاح شد: left -> right */
   width: 100%; height: 100%;
   background: linear-gradient(135deg, var(--accent-gold), var(--accent-mid));
   transition: all 0.6s ease; z-index: -1;
 }
-.btnSubscribe:hover::before { left: 0; }
+.btnSubscribe:hover::before { right: 0; } /* اصلاح شد: left -> right */
 .btnSubscribe:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 28px hsla(148, 60%, 10%, 0.35), 0 0 15px var(--shadow-glow-green);
@@ -181,20 +160,17 @@
   color: hsla(0, 0%, 100%, 0.8);
 }
 .legalLinks { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-@media (min-width: 768px) { .legalLinks { justify-content: flex-end; } }
+@media (min-width: 768px) { .legalLinks { justify-content: flex-start; } } /* اصلاح شد: flex-end -> flex-start */
 .legalLinks a {
-  font-weight: 300; font-size: 14px;
-  color: hsla(0, 0%, 100%, 0.8);
-  text-decoration: none;
-  transition: all 0.3s ease;
+  font-weight: 300; font-size: 14px; color: hsla(0, 0%, 100%, 0.8);
+  text-decoration: none; transition: all 0.3s ease;
 }
 .legalLinks a:hover { color: var(--accent-gold); }
 
 
 /* --- Generic Icon Style --- */
 .icon {
-  width: 20px;
-  height: 20px;
+  width: 20px; height: 20px;
   fill: hsla(0, 0%, 100%, 0.9);
   transition: fill 0.3s ease;
 }

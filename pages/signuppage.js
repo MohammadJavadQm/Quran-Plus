@@ -1,18 +1,28 @@
-// pages/signuppage.js
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import AuthForm from '../components/ui/AuthForm';
 
-import AuthLayout from 'components/ui/AuthLayout';
-import AuthForm from 'components/ui/AuthForm'; // وارد کردن کامپوننت جدید
+export default function SignupPage() {
+  const router = useRouter();
 
-const SignupPage = () => {
+  const handleBack = () => router.push('/');
+  const handleSubmit = (e) => { e.preventDefault(); console.log('Signup'); };
+  const navigateToLogin = () => router.push('/loginpage');
+
   return (
-    // به کامپوننت می‌گوییم که این صفحه، صفحه لاگین نیست (یعنی ثبت‌نام است)
-    <AuthForm isLogin={false} />
+    <>
+      <Head>
+        <title>ایجاد حساب کاربری</title>
+      </Head>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '1rem' }}>
+        <AuthForm
+          type="signup"
+          onBack={handleBack}
+          title="ایجاد حساب جدید"
+          onSubmit={handleSubmit}
+          onToggleForm={navigateToLogin}
+        />
+      </div>
+    </>
   );
-};
-
-// این تابع به _app.js می‌گوید که برای این صفحه از AuthLayout استفاده کند
-SignupPage.getLayout = function getLayout(page) {
-  return <AuthLayout>{page}</AuthLayout>;
-};
-
-export default SignupPage;
+}

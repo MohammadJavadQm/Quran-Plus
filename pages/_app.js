@@ -1,15 +1,15 @@
 // pages/_app.js
-import Layout from 'components/Layout';
-// ThemeProvider را از فایل ThemeToggle وارد می‌کنیم
-import { ThemeProvider } from 'components/ThemeToggle';
+
+import { ThemeProvider } from '../components/ThemeToggle';
 import '../styles/globals.css';
 
+// این فایل دیگر هیچ منطق Layoutـی ندارد
 function MyApp({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
-
   return (
     <ThemeProvider>
-      {getLayout(<Component {...pageProps} />)}
+      <div dir="rtl">
+        <Component {...pageProps} />
+      </div>
     </ThemeProvider>
   );
 }

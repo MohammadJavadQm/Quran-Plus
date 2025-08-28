@@ -1,3 +1,5 @@
+// components/QuranPlusLoading.js
+
 import React, { useEffect, useRef } from 'react';
 import styles from './QuranPlusLoading.module.css';
 import BrandLogo from 'components/ui/BrandLogo';
@@ -77,52 +79,50 @@ const QuranPlusLoading = () => {
     }, []);
 
     return (
-        <div className={styles.body}>
-            <div className={styles.loadingContainer}>
-                <div ref={particlesContainerRef} className={styles.particlesContainer}></div>
-                
-                <div className={styles.progressContainer}>
-                    <div className={styles.progressWrapper}>
-                        <div ref={outerGlowRef} className={styles.outerGlow}></div>
-                        <div style={{ position: 'relative', width: '192px', height: '192px' }}>
-                            <svg className={styles.progressSvg} viewBox="0 0 192 192">
-                                <circle className={styles.backgroundRing} cx="96" cy="96" r="90"></circle>
-                                <defs>
-                                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#FFD700" />
-                                        <stop offset="100%" stopColor="#B8860B" />
-                                    </linearGradient>
-                                    <filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                                </defs>
-                                <circle ref={progressRingRef} className={styles.progressRing} cx="96" cy="96" r="90"></circle>
-                            </svg>
-                            <div className={styles.islamicPatterns}>
-                                <div className={styles.islamicPattern1}><svg viewBox="0 0 32 32"><path d="M16 8 L24 16 L16 24 L8 16 Z" fill="none" stroke="rgba(212, 175, 55, 0.6)" strokeWidth="1.5"/></svg></div>
-                                <div className={styles.islamicPattern2}><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="rgba(212, 175, 55, 0.7)" strokeWidth="1"/></svg></div>
-                                <div className={styles.islamicPattern3}><svg viewBox="0 0 16 16"><rect x="4" y="4" width="8" height="8" fill="none" stroke="rgba(212, 175, 55, 0.8)" strokeWidth="1" transform="rotate(45 8 8)"/></svg></div>
-                            </div>
-                            <div className={styles.divineOrb}>
-                                <div className={styles.orbInner}></div>
-                                <div className={styles.orbHighlight}></div>
-                                <div className={styles.orbPulse}></div>
-                            </div>
+        // به جای body از loadingScreen استفاده می‌کنیم
+        <div className={styles.loadingScreen}>
+            <div ref={particlesContainerRef} className={styles.particlesContainer}></div>
+            
+            <div className={styles.progressContainer}>
+                <div className={styles.progressWrapper}>
+                    <div ref={outerGlowRef} className={styles.outerGlow}></div>
+                    <div style={{ position: 'relative', width: '192px', height: '192px' }}>
+                        <svg className={styles.progressSvg} viewBox="0 0 192 192">
+                            <circle className={styles.backgroundRing} cx="96" cy="96" r="90"></circle>
+                            <defs>
+                                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stopColor="#FFD700" />
+                                    <stop offset="100%" stopColor="#B8860B" />
+                                </linearGradient>
+                                <filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                            </defs>
+                            <circle ref={progressRingRef} className={styles.progressRing} cx="96" cy="96" r="90"></circle>
+                        </svg>
+                        <div className={styles.islamicPatterns}>
+                            <div className={styles.islamicPattern1}><svg viewBox="0 0 32 32"><path d="M16 8 L24 16 L16 24 L8 16 Z" fill="none" stroke="rgba(212, 175, 55, 0.6)" strokeWidth="1.5"/></svg></div>
+                            <div className={styles.islamicPattern2}><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="rgba(212, 175, 55, 0.7)" strokeWidth="1"/></svg></div>
+                            <div className={styles.islamicPattern3}><svg viewBox="0 0 16 16"><rect x="4" y="4" width="8" height="8" fill="none" stroke="rgba(212, 175, 55, 0.8)" strokeWidth="1" transform="rotate(45 8 8)"/></svg></div>
+                        </div>
+                        <div className={styles.divineOrb}>
+                            <div className={styles.orbInner}></div>
+                            <div className={styles.orbHighlight}></div>
+                            <div className={styles.orbPulse}></div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div ref={brandingRef} className={styles.textContent}>
-                    {/* --- تغییر اصلی چیدمان اینجاست --- */}
-                    {/* حالا متن‌های متحرک اول می‌آیند */}
-                    <div className={styles.phraseContainer}>
-                        <p ref={englishPhraseRef} className={styles.englishText}>Illuminating your path with wisdom...</p>
-                        <p ref={arabicPhraseRef} className={styles.arabicText}>ننير طريقك بالحكمة...</p>
-                    </div>
+            <div ref={brandingRef} className={styles.textContent}>
+                {/* --- چیدمان اصلاح شد: متن‌های متحرک اول می‌آیند --- */}
+                <div className={styles.phraseContainer}>
+                    <p ref={englishPhraseRef} className={styles.englishText}>Illuminating your path with wisdom...</p>
+                    <p ref={arabicPhraseRef} className={styles.arabicText}>ننير طريقك بالحكمة...</p>
+                </div>
 
-                    {/* و بعد لوگو و عنوان */}
-                    <div className={styles.branding}>
-                        <BrandLogo />
-                        <p className={styles.brandingSubtitle}>Your AI-Powered Spiritual Companion</p>
-                    </div>
+                {/* --- و بعد لوگو و عنوان --- */}
+                <div className={styles.branding}>
+                    <BrandLogo />
+                    <p className={styles.brandingSubtitle}>Your AI-Powered Spiritual Companion</p>
                 </div>
             </div>
         </div>
