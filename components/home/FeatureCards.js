@@ -4,9 +4,9 @@ import HoverableCard from 'components/ui/HoverableCard';
 import styles from './FeatureCards.module.css';
 
 const featuresData = [
-    { title: "AI-Powered Insights", description: "Get instant answers to your spiritual questions", icon: "💡" },
-    { title: "Progress Tracking", description: "Monitor your spiritual growth and learning", icon: "📊" },
-    { title: "Interactive Reading", description: "Experience the Quran with modern tools", icon: "📖" },
+    { title: "بینش مبتنی بر هوش مصنوعی", description: "پاسخ‌های فوری برای سؤالات معنوی خود دریافت کنید", icon: "💡" },
+    { title: "پیگیری پیشرفت", description: "رشد معنوی و یادگیری خود را دنبال کنید", icon: "📊" },
+    { title: "قرائت تعاملی", description: "قرآن را با ابزارهای مدرن تجربه کنید", icon: "📖" },
 ];
 
 const FeatureCards = () => {

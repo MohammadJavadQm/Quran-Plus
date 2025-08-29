@@ -1,17 +1,14 @@
 /* ==========================================================================
- * Final & Perfected Global Stylesheet (v2.1 - Enhanced Edition) - Corrected
- * - Full Day/Night theming with all original capabilities preserved
- * - ADDED: Animated gradient background from the Ultimate UI Kit.
- * - ADDED: Scroll-driven progress bar from the Ultimate UI Kit.
- * - [خفن‌تر شد] ADDED: Custom theme-aware scrollbars.
- * - [خفن‌تر شد] ADDED: Subtle interactive animations for cards, buttons, and links.
- * - [خفن‌تر شد] ADDED: Dynamic aurora effect to the background gradient.
- * - [خفن‌تر شد] ADDED: Universal smooth transitions for theme switching.
- * - [خفن‌تر شد] ADDED: Enhanced focus states and text selection styles.
+ * Final & Perfected Global Stylesheet (v6.0 - Warm Beige & Gold Theme)
+ * - Merges "Enhanced Edition" with "Calm Dawn" themes.
+ * - MODIFIED: Default light theme completely replaced with new "Warm Beige & Gold" palette.
+ * - MODIFIED: Background animation removed for a static, elegant look.
+ * - MODIFIED: Dark theme background is significantly darker (near-black) - UNCHANGED from v5.0.
+ * - All other themes and rules remain untouched.
  * ========================================================================== */
 
-/* 1) Fonts (kept, de-duplicated) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&family=Lateef:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap');
+/* 1) Combined & De-duplicated Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&family=Lateef:wght@400;500;600;700&family=Amiri:wght@400;700&family=Vazirmatn:wght@300;400;500;700&display=swap');
 
 /* 2) Tailwind Directives */
 @tailwind base;
@@ -29,56 +26,69 @@
 
 /* 3) Custom Base Styles */
 @layer base {
-  /* 3.1) Day (Light) Theme */
-:root {
-    /* --- Light Theme ("Green & Gold") --- */
-    /* Core Palette */
-    --background: hsl(45, 33%, 93%);
-    --foreground: hsl(111, 40%, 8%);
-    --text-primary: hsl(148, 51%, 25%);
-    --text-secondary: hsl(147, 8%, 31%);
-    --accent-primary: hsl(45, 52%, 53%);   /* Gold */
-    --accent-secondary: hsl(148, 47%, 33%); /* Mid Green */
 
-    /* [جدید] متغیرهای پس‌زمینه گرادینت از کیت UI */
-    --gradient-bg-1: oklch(97% 0.02 50);
-    --gradient-bg-2: oklch(97% 0.03 90);
-    --gradient-bg-3: oklch(97% 0.02 30);
+  /* ======================================================================== */
+  /* Theme Definitions                                                        */
+  /* ======================================================================== */
+
+  /* 3.1) Day (Light) Theme - NEW "Warm Beige & Gold" Palette */
+  :root {
+    /* --- New "Warm Beige & Gold" Font & Generic Vars --- */
+    --font-primary: 'Vazirmatn', sans-serif;
+    --font-arabic: 'Amiri', serif;
+    --border-radius: 12px;
+    --transition-speed: 0.3s;
+
+    /* --- New "Warm Beige & Gold" Core Palette --- */
+    --background: hsl(40, 25%, 95%);          /* پس‌زمینه اصلی: کرم ملایم */
+    --foreground: hsl(30, 15%, 25%);          /* متن اصلی: قهوه‌ای-خاکستری تیره */
+    --text-primary: hsl(30, 15%, 28%);         /* متن اصلی تیره‌تر */
+    --text-secondary: hsl(35, 10%, 45%);       /* متن دوم: قهوه‌ای روشن‌تر */
+    --accent-primary: hsl(45, 65%, 55%);        /* تاکید اصلی: طلایی گرم و جذاب */
+    --accent-secondary: hsl(35, 30%, 65%);      /* تاکید دوم: بژ کاراملی */
+
+    /* --- New "Warm Beige & Gold" Gradient & Aurora --- */
+    --gradient-bg-1: oklch(98% 0.02 90);       /* کرم شیری */
+    --gradient-bg-2: oklch(96% 0.03 70);       /* بژ روشن */
+    --gradient-bg-3: oklch(97% 0.02 110);      /* شنی ملایم */
     --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    --z-scroll-progress: 9999; /* Z-index برای نوار پیشرفت */
+    --aurora-1: hsla(45, 80%, 90%, 0.25);    /* درخشش طلایی ملایم */
+    --aurora-2: hsla(30, 70%, 85%, 0.3);     /* درخشش هلویی گرم */
 
-    /* [خفن‌تر شد] متغیرهای افکت شفق قطبی (Aurora) */
-    --aurora-1: hsla(148, 50%, 60%, 0.15);
-    --aurora-2: hsla(45, 60%, 65%, 0.1);
-
-
-    /* UI Elements */
+    /* --- UI Elements --- */
     --card-bg: hsla(0, 0%, 100%, 0.75);
-    --card-border: hsla(45, 52%, 53%, 0.5); /* gold border (day default) */
-    --card-border-gold: hsla(45, 52%, 53%, 0.5);
-    --card-border-purple: rgba(106, 46, 189, 0.7); /* keep original alt border */
-    --input-bg: hsla(148, 51%, 25%, 0.03);
-    --section-bg: hsla(0, 0%, 0%, 0.02);
+    --card-border: hsla(40, 25%, 85%, 0.7);
+    --card-border-gold: hsla(45, 65%, 55%, 0.5); /* Primary gold border */
+    --card-border-purple: rgba(106, 46, 189, 0.7); /* Kept for compatibility */
+    --input-bg: hsla(40, 20%, 90%, 0.6);
+    --section-bg: hsla(40, 20%, 90%, 0.3);
 
-    /* Interactive */
-    --focus-ring-color: hsla(45, 52%, 53%, 0.8); /* [خفن‌تر شد] Opacity increased */
-    --selection-bg: hsla(148, 47%, 33%, 0.25);
-    --accent-primary-bg: hsla(45, 52%, 53%, 0.1);
-    --accent-primary-border: hsla(45, 52%, 53%, 0.2);
+    /* --- Interactive --- */
+    --focus-ring-color: hsla(45, 65%, 55%, 0.8);
+    --selection-bg: hsla(45, 65%, 55%, 0.25);
+    --accent-primary-bg: hsla(45, 65%, 55%, 0.1);
+    --accent-primary-border: hsla(45, 65%, 55%, 0.2);
     --glow-color: hsla(45, 100%, 70%, 0.8);
 
-    /* Buttons */
-    --btn-text-color: hsl(45, 33%, 95%);
-    --btn-grad-start: var(--accent-secondary);
-    --btn-grad-end: hsl(148, 47%, 40%);
-    --btn-grad-mid: hsl(135, 45%, 34%);
-    --btn-grad-start-hover: hsl(148, 47%, 28%);
-    --btn-grad-end-hover: hsl(148, 47%, 35%);
-    --btn-arrow-bg: hsla(0, 0%, 100%, 0.12);
-    --btn-hover-shadow: hsla(148, 47%, 33%, 0.3);
-    --btn-primary-shadow: hsla(148, 51%, 25%, 0.2);
+    /* --- Buttons --- */
+    --btn-text-color: hsl(0, 0%, 100%);
+    --btn-grad-start: var(--accent-primary);
+    --btn-grad-end: hsl(35, 50%, 45%);
+    --btn-grad-mid: hsl(40, 55%, 50%);
+    --btn-grad-start-hover: hsl(45, 70%, 60%);
+    --btn-grad-end-hover: hsl(35, 55%, 50%);
+    --btn-arrow-bg: hsla(0, 0%, 100%, 0.15);
+    --btn-hover-shadow: hsla(40, 60%, 50%, 0.3);
+    --btn-primary-shadow: hsla(40, 50%, 40%, 0.2);
 
-    /* Extra Palettes kept from original */
+    /* --- Shadows & Effects --- */
+    --shadow-color: hsla(30, 20%, 20%, 0.1);
+    --soft-shadow: hsla(30, 20%, 20%, 0.1);
+    --pattern-color: hsl(35, 15%, 70%);
+    --pattern-opacity: 0.1;
+
+    /* --- Preserved Variables (Untouched) --- */
+    --z-scroll-progress: 9999;
     --bg-dark: #0c0b15;
     --bg-darker: #070610;
     --purple-dark: #3a1f5f;
@@ -89,66 +99,48 @@
     --glass-bg: rgba(20, 15, 40, 0.45);
     --text-main: #f0f0ff;
     --text-subtle: #b0b0d0;
-
-    /* Shadows & Effects */
-    --shadow-color: hsla(148, 51%, 25%, 0.1);
-    --soft-shadow: hsla(148, 51%, 25%, 0.1);
-    --pattern-color: hsl(147, 8%, 70%);
-    --pattern-opacity: 0.1;
-
-    /* Component-Specific / Loading / Footer */
-    --footer-bg: linear-gradient(135deg, hsl(150, 60%, 20%), hsl(145, 55%, 25%));
-    --footer-text: hsl(45, 33%, 85%);
-    --spinner-track-color: hsla(148, 47%, 33%, 0.2);
+    --footer-bg: linear-gradient(135deg, hsl(30, 20%, 20%), hsl(35, 25%, 25%));
+    --footer-text: hsl(40, 30%, 88%);
+    --spinner-track-color: hsla(45, 65%, 55%, 0.2);
     --loading-bg: var(--background);
     --loading-text: var(--text-secondary);
-    --loading-grad-start: hsl(45, 33%, 95%);
+    --loading-grad-start: hsl(40, 25%, 98%);
     --loading-grad-end: var(--background);
-    --loading-ring-bg: hsla(147, 8%, 31%, 0.1);
-    --loading-orb-shadow: hsla(45, 52%, 53%, 0.3);
+    --loading-ring-bg: hsla(35, 10%, 45%, 0.1);
+    --loading-orb-shadow: hsla(45, 65%, 55%, 0.3);
     --loading-particle-opacity: 0.6;
-
-    /* Premium variables kept */
-    --bg: hsl(0, 0%, 7%);         /* kept for compatibility */
+    --bg: hsl(0, 0%, 7%);
     --bg-2: hsl(0, 0%, 10%);
     --text-light: hsl(0, 0%, 94%);
     --text-muted: hsl(0, 0%, 63%);
     --accent-dark: hsl(148, 51%, 25%);
     --accent-mid: hsl(148, 47%, 33%);
     --accent-gold: hsl(45, 52%, 53%);
-
-    /* Extra Shadows */
-    --shadow-deep: hsla(0, 0%, 0%, 0.2);
+    --shadow-deep: hsla(30, 15%, 25%, 0.15);
     --shadow-glow-green: hsla(148, 47%, 33%, 0.15);
     --shadow-glow-gold: hsla(45, 52%, 53%, 0.2);
-
-    /* Hero / Page colors */
     --hero-glow-1: rgba(176, 137, 104, 0.2);
     --hero-glow-2: rgba(127, 85, 57, 0.15);
-    --page-background-color: #00B5D1; /* ☀️ day */
-
-    /* ==========================================================================
-      Theme Variables for Auth Form
-      ========================================================================== */
+    --page-background-color: #E0B589; /* ☀️ day - updated for theme */
     --auth-bg: #ffffff;
     --auth-text-primary: #1a202c;
     --auth-text-secondary: #718096;
     --auth-input-bg: #f7fafc;
     --auth-input-border: #e2e8f0;
-    --auth-input-focus-border: #4a90e2;
-    --auth-button-bg: linear-gradient(135deg, #0A5C36 0%, #1A744A 100%);
+    --auth-input-focus-border: #d4af37;
+    --auth-button-bg: linear-gradient(135deg, #a78b4b 0%, #c4a76b 100%);
     --auth-button-text: #ffffff;
     --auth-button-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --auth-link-color: #0A5C36;
+    --auth-link-color: #a78b4b;
     --auth-container-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --auth-logo-icon-bg: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
-}
+    --auth-logo-icon-bg: linear-gradient(135deg, #fdf8f3 0%, #faecd7 100%);
+  }
 
-/* 3.2) Night (Dark) Theme */
-[data-theme='dark'] {
+  /* 3.2) Night (Dark) Theme - "Night Sky & Gold" - ALL ORIGINAL VARIABLES PRESERVED */
+  [data-theme='dark'] {
     /* --- Dark Theme ("Night Sky & Gold" + Emerald) --- */
     /* Core Palette */
-    --background: hsl(220, 40%, 15%);
+    --background: hsl(220, 40%, 8%); /* تاریک‌تر شد */
     --foreground: hsl(45, 33%, 93%);
     --text-primary: hsl(46, 31%, 89%);
     --text-secondary: hsl(220, 15%, 70%);
@@ -156,9 +148,9 @@
     --accent-secondary: hsl(143, 45%, 45%);
 
     /* [جدید] متغیرهای پس‌زمینه گرادینت از کیت UI */
-    --gradient-bg-1: oklch(10% 0.05 280);
-    --gradient-bg-2: oklch(10% 0.06 310);
-    --gradient-bg-3: oklch(10% 0.04 260);
+    --gradient-bg-1: oklch(6% 0.05 280); /* بسیار تاریک‌تر شد */
+    --gradient-bg-2: oklch(6% 0.06 310); /* بسیار تاریک‌تر شد */
+    --gradient-bg-3: oklch(6% 0.04 260); /* بسیار تاریک‌تر شد */
     --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
 
     /* [خفن‌تر شد] متغیرهای افکت شفق قطبی (Aurora) */
@@ -174,7 +166,7 @@
     --section-bg: hsla(220, 40%, 20%, 0.1);
 
     /* Interactive */
-    --focus-ring-color: hsla(45, 52%, 53%, 0.8); /* [خفن‌تر شد] Opacity increased */
+    --focus-ring-color: hsla(45, 52%, 53%, 0.8);
     --selection-bg: hsla(45, 52%, 53%, 0.25);
     --accent-primary-bg: hsla(45, 52%, 53%, 0.1);
     --accent-primary-border: hsla(45, 52%, 53%, 0.25);
@@ -191,7 +183,7 @@
     --btn-hover-shadow: hsla(220, 70%, 55%, 0.4);
     --btn-primary-shadow: hsla(220, 70%, 55%, 0.25);
 
-    /* Extra Palettes kept */
+    /* Extra Palettes kept - PRESERVED */
     --bg-dark: #0c0b15;
     --bg-darker: #070610;
     --purple-dark: #3a1f5f;
@@ -209,7 +201,7 @@
     --pattern-color: hsl(220, 15%, 60%);
     --pattern-opacity: 0.04;
 
-    /* Component-Specific / Loading / Footer */
+    /* Component-Specific / Loading / Footer - PRESERVED */
     --footer-bg: linear-gradient(135deg, hsl(160, 70%, 12%), hsl(175, 60%, 15%));
     --footer-text: hsl(220, 15%, 80%);
     --spinner-track-color: hsla(220, 40%, 30%, 0.5);
@@ -221,7 +213,7 @@
     --loading-orb-shadow: hsla(45, 52%, 53%, 0.4);
     --loading-particle-opacity: 0.3;
 
-    /* Premium variables kept */
+    /* Premium variables kept - PRESERVED */
     --bg: hsl(0, 0%, 7%);
     --bg-2: hsl(0, 0%, 10%);
     --text-light: hsl(0, 0%, 94%);
@@ -230,17 +222,17 @@
     --accent-mid: hsl(148, 47%, 33%);
     --accent-gold: hsl(45, 52%, 53%);
 
-    /* Extra Shadows */
+    /* Extra Shadows - PRESERVED */
     --shadow-deep: hsla(0, 0%, 0%, 0.4);
     --shadow-glow-green: hsla(148, 47%, 33%, 0.15);
     --shadow-glow-gold: hsla(45, 52%, 53%, 0.2);
 
-    /* Hero / Page colors */
+    /* Hero / Page colors - PRESERVED */
     --hero-glow-1: rgba(106, 46, 189, 0.15);
     --hero-glow-2: rgba(0, 208, 255, 0.1);
     --page-background-color: #000F95; /* 🌙 night */
 
-    /* Auth Form Dark Variables */
+    /* Auth Form Dark Variables - PRESERVED */
     --auth-bg: #1A202C;
     --auth-text-primary: #edf2f7;
     --auth-text-secondary: #a0aec0;
@@ -253,33 +245,57 @@
     --auth-link-color: #38b2ac;
     --auth-container-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
     --auth-logo-icon-bg: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-}
+  }
 
+  /* 3.3) NEW THEME: "Calm Dawn" (Light) - from second file */
+  /* This theme is effectively superseded by the new :root theme for light mode,
+     but kept for compatibility if explicitly called by data-theme='calm-light' */
+  [data-theme='calm-light'] {
+    --background-main: #F8F7F4;       /* پس‌زمینه اصلی: کرم بسیار ملایم */
+    --background-card: #FFFFFF;     /* پس‌زمینه کارت‌ها: سفید خالص */
+    --text-primary: #2D3748;         /* رنگ متن اصلی: خاکستری تیره */
+    --text-secondary: #718096;        /* رنگ متن دوم: خاکستری روشن‌تر */
+    --accent-primary: #C0A062;         /* رنگ تاکید: طلایی ملایم و مات */
+    --accent-secondary: #E9E2D5;    /* رنگ تاکید دوم: کرم تیره‌تر */
+    --border-color: #E2E8F0;          /* رنگ حاشیه */
+    --shadow-color: rgba(45, 55, 72, 0.1); /* سایه بسیار نرم */
+    --btn-gradient-start: #C0A062;
+    --btn-gradient-end: #AD8F54;
+  }
 
-  /* 3.3) Global Base Styles (Updated) */
+  /* 3.4) NEW THEME: "Calm Dawn" (Dark) - from second file */
+  [data-theme='calm-dark'] {
+    --background-main: #121828;
+    --background-card: #1A2033;
+    --text-primary: #E2E8F0;
+    --text-secondary: #A0AEC0;
+    --accent-primary: #F0D080;
+    --accent-secondary: #2D3748;
+    --border-color: #2D3748;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --btn-gradient-start: #F0D080;
+    --btn-gradient-end: #D4AF37;
+  }
+
+  /* ======================================================================== */
+  /* Global Base & Element Styles                                             */
+  /* ======================================================================== */
+
   html {
-    /* [خفن‌تر شد] رفتار اسکرول نرم برای لینک‌های داخلی */
     scroll-behavior: smooth;
   }
 
   body {
-    /* [خفن‌تر شد] پس‌زمینه گرادینت متحرک + افکت شفق قطبی */
     background:
       radial-gradient(ellipse at 10% 10%, var(--aurora-1) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 90%, var(--aurora-2) 0%, transparent 50%),
       linear-gradient(-45deg, var(--gradient-bg-1), var(--gradient-bg-2), var(--gradient-bg-3));
-
-    background-size: 400% 400%;
-
-    /* [خفن‌تر شد] انیمیشن‌های لایه‌های مختلف پس‌زمینه */
-    animation:
-      gradient-flow 25s ease infinite,
-      aurora-1 30s ease-in-out infinite alternate,
-      aurora-2 40s ease-in-out infinite alternate;
-
-    /* استایل‌های اصلی شما حفظ شده است */
+    background-size: cover; /* Fixed background size */
+    background-attachment: fixed; /* Ensures background stays fixed during scroll */
+    /* animation: gradient-flow 35s ease infinite, aurora-1 30s ease-in-out infinite alternate, aurora-2 40s ease-in-out infinite alternate; */
+    /* All background animations are removed for a static look */
     color: var(--text-primary);
-    font-family: 'Inter', 'Roboto', 'Poppins', sans-serif;
+    font-family: var(--font-primary);
     transition: background-color .4s ease, color .4s ease;
     margin: 0;
     padding: 0;
@@ -287,9 +303,20 @@
     min-height: 100vh;
   }
 
+  /* Original base styles from second file - PRESERVED */
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-primary);
+    /* Note: background-color is handled by the more complex `body` rule above */
+    /* background-color: var(--background-main); */
+    color: var(--text-primary);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  /* [خفن‌تر شد] انتقال نرم بین تم‌ها برای همه چیز */
+
   *, *::before, *::after {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease, stroke 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
   }
@@ -306,12 +333,11 @@
     z-index: var(--z-scroll-progress);
     animation: scroll-progress-animation linear;
     animation-timeline: scroll(root);
-    /* [خفن‌تر شد] افکت درخشش برای نوار پیشرفت */
     box-shadow: 0 0 10px var(--accent-primary), 0 0 5px var(--accent-primary);
   }
 
-  /* 3.4) Theme-Aware Background Pattern (Moved to ::after to allow for progress bar) */
-  body::after { /* <<<< توجه: به ::after منتقل شد */
+  /* Theme-Aware Background Pattern (Moved to ::after to allow for progress bar) */
+  body::after {
     content: '';
     position: fixed;
     inset: 0;
@@ -323,21 +349,19 @@
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='black'><path d='M40 0 L80 40 L40 80 L0 40 Z'/><path d='M120 40 L160 80 L120 120 L80 80 Z'/><path d='M80 0 L120 40 L80 80 L40 40 Z'/><path d='M0 120 L40 160 L80 120 L40 80 Z'/><path d='M80 80 L120 120 L80 160 L40 120 Z'/></g></svg>");
     -webkit-mask-repeat: repeat;
     opacity: var(--pattern-opacity);
-    /* transition: opacity .3s ease, background-color .3s ease;  <-- Redundant due to universal transition */
   }
 
-  /* 3.5) Typography & Links (kept & enhanced) */
+  /* Typography & Links (Enhanced) */
   h1, h2, h3, h4, h5, h6 { color: var(--text-primary); }
 
   a {
     color: var(--accent-secondary);
     text-decoration: none;
-    position: relative; /* [خفن‌تر شد] برای انیمیشن خط زیر */
-    /* transition: color .2s ease; <-- Redundant */
+    position: relative;
   }
   a:hover { color: var(--accent-primary); }
 
-  /* [خفن‌تر شد] انیمیشن خط زیر برای لینک‌ها */
+  /* Animated underline for links */
   a::after {
     content: '';
     position: absolute;
@@ -354,57 +378,37 @@
     transform: scaleX(1);
     transform-origin: bottom left;
   }
-  
-  /* [خفن‌تر شد] استایل انتخاب متن (Text Selection) */
+
+  /* Text Selection Style */
   ::selection {
     background-color: var(--selection-bg);
     color: var(--text-primary);
   }
 
-  /* [خفن‌تر شد] استایل فوکوس برای دسترس‌پذیری بهتر */
+  /* Accessibility Focus Style */
   :is(a, button, input, textarea, select):focus-visible {
     outline: 2px solid var(--focus-ring-color);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
-  /* [جدید] انیمیشن‌های مورد نیاز برای پس‌زمینه و نوار پیشرفت */
-  @keyframes gradient-flow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
+  /* Keyframe Animations */
   @keyframes scroll-progress-animation {
     from { width: 0%; }
     to { width: 100%; }
   }
-
-  /* [خفن‌تر شد] انیمیشن‌های افکت شفق قطبی */
-  @keyframes aurora-1 {
-    from { background-position: 10% 10%; }
-    to { background-position: 60% 80%; }
-  }
-  @keyframes aurora-2 {
-    from { background-position: 80% 90%; }
-    to { background-position: 20% 20%; }
-  }
 }
 
 
-/* [خفن‌تر شد] 4) لایه کامپوننت‌ها برای استایل‌های تعاملی */
+/* 4) Component Layer */
 @layer components {
-  /* استایل پیش‌فرض برای کارت‌ها */
+  /* Default Card Style */
   .card {
     background-color: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 4px 15px var(--shadow-color);
-    /* * این دو خط حذف شدند تا مشکل تاری برطرف شود
-     * backdrop-filter: blur(10px);
-     * -webkit-backdrop-filter: blur(10px);
-    */
   }
 
   .card:hover {
@@ -413,7 +417,7 @@
     border-color: var(--accent-primary);
   }
 
-  /* استایل پیش‌فرض برای دکمه‌ها */
+  /* Default Button Style */
   .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -424,7 +428,6 @@
     border: none;
     cursor: pointer;
     box-shadow: 0 2px 10px var(--btn-primary-shadow);
-    /* transition already set universally */
   }
 
   .btn:hover {
@@ -432,7 +435,7 @@
     box-shadow: 0 4px 15px var(--btn-hover-shadow);
     background-image: linear-gradient(135deg, var(--btn-grad-start-hover), var(--btn-grad-start-hover), var(--btn-grad-end-hover));
   }
-  
+
   .btn:active {
     transform: translateY(1px);
     box-shadow: 0 1px 5px var(--btn-primary-shadow);
@@ -443,12 +446,13 @@
 /* 5) Optional: honor system preference if no JS sets data-theme */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) body {
-    /* این بخش حفظ شده اما پس‌زمینه گرادینت اولویت خواهد داشت */
+    /* This section is kept for compatibility but will be overridden by the
+       more specific :root and [data-theme='dark'] rules. */
     background-color: hsl(220, 40%, 15%);
   }
 }
 
-/* [خفن‌تر شد] 6) استایل اسکرول‌بار سفارشی */
+/* 6) Custom Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 10px;
 }

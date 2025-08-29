@@ -10,42 +10,44 @@ import styles from './Header.module.css';
 
 // انیمیشن‌های Framer Motion برای منو و آیتم‌ها
 const menuVariants = {
-  hidden: {
-    opacity: 0,
-    clipPath: 'circle(10px at 90% 40px)', // شروع انیمیشن از کنار دکمه همبرگری
-    transition: {
-      type: 'spring',
-      stiffness: 400,
-      damping: 40,
+    hidden: {
+        opacity: 0,
+        clipPath: 'circle(10px at 90% 40px)', // شروع انیمیشن از کنار دکمه همبرگری
+        transition: {
+            type: 'spring',
+            stiffness: 400,
+            damping: 40,
+        },
     },
-  },
-  visible: {
-    opacity: 1,
-    clipPath: 'circle(150% at 90% 40px)', // باز شدن به صورت دایره‌ای
-    transition: {
-      type: 'spring',
-      stiffness: 50,
-      restDelta: 2,
-      staggerChildren: 0.1, // تاخیر در نمایش آیتم‌ها
+    visible: {
+        opacity: 1,
+        clipPath: 'circle(150% at 90% 40px)', // باز شدن به صورت دایره‌ای
+        transition: {
+            type: 'spring',
+            stiffness: 50,
+            restDelta: 2,
+            staggerChildren: 0.1, // تاخیر در نمایش آیتم‌ها
+        },
     },
-  },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } },
 };
 
 
 const Header = ({ onStartConversation }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    // افکت برای جلوگیری از اسکرول صفحه هنگام باز بودن منوی موبایل
     useEffect(() => {
         if (isMenuOpen) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
         }
+        // تابع پاکسازی: هنگام بسته شدن کامپوننت، اسکرول را فعال می‌کند
         return () => {
             document.body.style.overflow = 'auto';
         };
@@ -57,6 +59,7 @@ const Header = ({ onStartConversation }) => {
             <header className="sticky top-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 w-full">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-between h-16">
+                        {/* منوی دسکتاپ */}
                         <nav className="hidden md:flex items-center gap-x-2">
                             <button onClick={onStartConversation} className={`px-6 py-2 font-medium rounded-md text-sm ${styles.btnHoverLift} ${styles.btnGradient}`}>
                                 <FaPlay className="w-4 h-4 ml-2 inline" /> دمو
@@ -68,12 +71,16 @@ const Header = ({ onStartConversation }) => {
                                 <FaUser className="w-4 h-4 ml-2 inline" /> ورود
                             </Link>
                         </nav>
+                        
+                        {/* لوگو و دکمه تم */}
                         <div className="flex items-center gap-x-4">
                             <div className="hidden md:block">
                                <ThemeToggle />
                             </div>
                             <BrandLogo />
                         </div>
+
+                        {/* دکمه منوی همبرگری برای موبایل */}
                         <button onClick={() => setIsMenuOpen(true)} className="md:hidden p-2 text-gray-800 dark:text-gray-200">
                             <FaBars className="w-6 h-6" />
                         </button>
@@ -81,6 +88,7 @@ const Header = ({ onStartConversation }) => {
                 </div>
             </header>
 
+            {/* منوی موبایل تمام‌صفحه */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div 

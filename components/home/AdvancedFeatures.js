@@ -1,24 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaQuran, FaBook, FaHandHoldingHeart, FaStar } from 'react-icons/fa';
-import styles from './AdvancedFeatures.module.css'; // Import the new CSS module
+import styles from './AdvancedFeatures.module.css'; // فایل CSS بدون تغییر باقی می‌ماند
 
 const features = [
-    { title: "Verse-by-Verse Tafsir", description: "Dive deep into the meaning of each verse with multiple interpretations from leading scholars.", icon: <FaQuran /> },
-    { title: "Hadith Integration", description: "Connect Quranic verses to relevant prophetic sayings for a holistic understanding.", icon: <FaBook /> },
-    { title: "Emotional Support AI", description: "Our AI is trained to provide gentle, empathetic responses to your life challenges, grounded in Islamic wisdom.", icon: <FaHandHoldingHeart /> },
-    { title: "Interactive Study Plans", description: "Create personalized learning journeys to memorize, reflect, or study specific themes.", icon: <FaStar /> },
+    { title: "تفسیر آیه به آیه", description: "با تفاسیر متعدد از علمای برجسته، در معنای عمیق هر آیه غرق شوید.", icon: <FaQuran /> },
+    { title: "یکپارچه‌سازی با حدیث", description: "آیات قرآن را برای درک جامع، به احادیث نبوی مرتبط متصل کنید.", icon: <FaBook /> },
+    { title: "هوش مصنوعی حامی عاطفی", description: "هوش مصنوعی ما برای ارائه پاسخ‌های همدلانه به چالش‌های زندگی شما، بر پایه حکمت اسلامی آموزش دیده است.", icon: <FaHandHoldingHeart /> },
+    { title: "برنامه‌های مطالعه تعاملی", description: "مسیرهای یادگیری شخصی‌سازی شده برای حفظ، تأمل یا مطالعه موضوعات خاص ایجاد کنید.", icon: <FaStar /> },
 ];
 
-// No more darkMode or currentTheme props needed!
 const AdvancedFeatures = () => {
     return (
         <div className={styles.wrapper}>
             <h2 className={styles.title}>
-                Features that Elevate Your Experience
+                ویژگی‌هایی که تجربه شما را ارتقا می‌دهند
             </h2>
             <p className={styles.subtitle}>
-                Go beyond simple translations. Our platform is built with tools to enrich your spiritual and intellectual connection to the Quran.
+                فراتر از ترجمه‌های ساده بروید. پلتفرم ما با ابزارهایی برای غنی‌سازی ارتباط معنوی و فکری شما با قرآن ساخته شده است.
             </p>
             <motion.div
                 className={styles.grid}

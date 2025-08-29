@@ -1,59 +1,59 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaBook, FaHeart, FaSearch, FaSparkles } from 'react-icons/fa';
+import { FaBook, FaHeart, FaSearch, FaSparkles } from 'react-icons/fa'; // نام آیکون‌ها ثابت می‌ماند
 import styles from './PersonalizationPanel.module.css';
 
-// Data for the component
+// داده‌های کامپوننت به فارسی
 const suggestedTopics = [
-    'Patience in difficult times', 'Finding peace through prayer', 'The concept of destiny (Qadar)',
-    'Gratitude and contentment', 'Trust in Allah (Tawakkul)', 'The nature of true success',
-    'Compassion and mercy', 'Seeking forgiveness'
+    'صبر در زمان سختی‌ها', 'یافتن آرامش با نماز', 'مفهوم تقدیر (قَدَر)',
+    'شکرگزاری و قناعت', 'توکل به خدا', 'ماهیت موفقیت واقعی',
+    'شفقت و مهربانی', 'طلب بخشش'
 ];
 
 const moodLabels = [
-    { value: 0, emoji: '😔', label: 'Struggling', arabic: 'متعب' },
-    { value: 25, emoji: '😐', label: 'Neutral', arabic: 'محايد' },
-    { value: 50, emoji: '🙂', label: 'Content', arabic: 'راضِ' },
-    { value: 75, emoji: '😊', label: 'Happy', arabic: 'سعيد' },
-    { value: 100, emoji: '😄', label: 'Joyful', arabic: 'مبتهج' }
+    { value: 0, emoji: '😔', label: 'پریشان', arabic: 'متعب' },
+    { value: 25, emoji: '😐', label: 'خنثی', arabic: 'محايد' },
+    { value: 50, emoji: '🙂', label: 'آرام', arabic: 'راضِ' },
+    { value: 75, emoji: '😊', label: 'خوشحال', arabic: 'سعيد' },
+    { value: 100, emoji: '😄', label: 'شادمان', arabic: 'مبتهج' }
 ];
 
 const PersonalizationPanel = () => {
-    // State management with React Hooks
+    // مدیریت وضعیت با هوک‌های ری‌اکت (بدون تغییر در منطق)
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedTopic, setSelectedTopic] = useState(null);
     const [moodValue, setMoodValue] = useState(50);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const searchRef = useRef(null);
 
-    // Filter suggestions based on search query
+    // فیلتر کردن پیشنهادات بر اساس جستجو (بدون تغییر در منطق)
     const filteredSuggestions = useMemo(() =>
         searchQuery ? suggestedTopics.filter(topic => topic.toLowerCase().includes(searchQuery.toLowerCase())) : [],
         [searchQuery]
     );
 
-    // Find the closest mood label for the current slider value
+    // پیدا کردن نزدیک‌ترین برچسب حالت روحی به مقدار اسلایدر (بدون تغییر در منطق)
     const currentMood = useMemo(() =>
         moodLabels.reduce((prev, curr) =>
             Math.abs(curr.value - moodValue) < Math.abs(prev.value - moodValue) ? curr : prev
         ), [moodValue]
     );
     
-    // Determine the insight text based on mood
+    // تعیین متن بینش بر اساس حالت روحی
     const moodInsightText = useMemo(() => {
-        if (moodValue < 30) return "Your AI assistant will focus on verses of comfort and hope.";
-        if (moodValue >= 30 && moodValue < 70) return "Your AI assistant will provide balanced guidance for growth.";
-        return "Your AI assistant will share verses of gratitude and celebration.";
+        if (moodValue < 30) return "دستیار هوش مصنوعی شما بر آیات آرامش‌بخش و امیدبخش تمرکز خواهد کرد.";
+        if (moodValue >= 30 && moodValue < 70) return "دستیار هوش مصنوعی شما راهنمایی متعادلی برای رشد شما ارائه خواهد داد.";
+        return "دستیار هوش مصنوعی شما آیات شکرگزاری و شادی را به اشتراک خواهد گذاشت.";
     }, [moodValue]);
 
-    // Handle topic selection
+    // مدیریت انتخاب موضوع (بدون تغییر در منطق)
     const handleSelectTopic = (topic) => {
         setSearchQuery(topic);
         setSelectedTopic(topic);
         setShowSuggestions(false);
     };
 
-    // Effect to handle clicks outside the search box to close suggestions
+    // افکت برای بستن پیشنهادات با کلیک بیرون از کادر جستجو (بدون تغییر در منطق)
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -68,15 +68,15 @@ const PersonalizationPanel = () => {
         <section className={styles.wrapper}>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <h2 className={styles.title}>What does your assistant know today?</h2>
-                    <p className={styles.subtitle}>Personalize your experience by sharing your current spiritual needs and emotional state</p>
+                    <h2 className={styles.title}>راهنمایی خود را شخصی‌سازی کنید</h2>
+                    <p className={styles.subtitle}>با به اشتراک گذاشتن نیازهای معنوی و وضعیت عاطفی فعلی خود، تجربه خود را شخصی‌سازی کنید</p>
                 </div>
                 <div className={styles.grid}>
-                    {/* Spiritual Inquiry Card */}
+                    {/* کارت کاوش معنوی */}
                     <div className={styles.card}>
                         <div className={styles.cardHeader}>
                             <FaBook />
-                            <h3 className={styles.cardTitle}>Spiritual Inquiry</h3>
+                            <h3 className={styles.cardTitle}>کاوش معنوی</h3>
                         </div>
                         <div ref={searchRef} style={{ position: 'relative' }}>
                             <div className={styles.searchInputWrapper}>
@@ -86,7 +86,7 @@ const PersonalizationPanel = () => {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     onFocus={() => setShowSuggestions(true)}
-                                    placeholder="Search a verse or topic..."
+                                    placeholder="جستجوی آیه یا موضوع..."
                                     className={styles.searchInput}
                                 />
                             </div>
@@ -108,11 +108,11 @@ const PersonalizationPanel = () => {
                         )}
                     </div>
 
-                    {/* Mood Meter Card */}
+                    {/* کارت حال‌سنج */}
                     <div className={styles.card}>
                         <div className={styles.cardHeader}>
                             <FaHeart />
-                            <h3 className={styles.cardTitle}>Mood Meter</h3>
+                            <h3 className={styles.cardTitle}>حال‌سنج</h3>
                         </div>
                         <div className={styles.moodDisplay}>
                             <div className={styles.moodEmoji}>{currentMood.emoji}</div>
@@ -134,7 +134,7 @@ const PersonalizationPanel = () => {
                 </div>
                 <div style={{ textAlign: 'center' }}>
                     <button className={styles.actionButton}>
-                        Get Personalized Guidance
+                        دریافت راهنمایی شخصی‌سازی شده
                     </button>
                 </div>
             </div>
