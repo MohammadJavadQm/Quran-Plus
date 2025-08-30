@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import style from './SignupForm.module.css'; // مسیر اصلاح‌شده
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMail, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
-import { User, Lock, Mail, ChevronLeft, UserPlus } from 'lucide-react';
-import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
+import { User, Lock, Mail, ChevronRight } from 'lucide-react'; // آیکون برای راست‌چین
 
 const Card = ({ children }) => {
   return (
@@ -45,22 +42,22 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
 
   const validateForm = () => {
     if (!formData.name.trim()) {
-      return 'Please enter your name.';
+      return 'لطفاً نام خود را وارد کنید.';
     }
     if (!formData.email.trim()) {
-      return 'Please enter your email address.';
+      return 'لطفاً آدرس ایمیل خود را وارد کنید.';
     }
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      return 'Please enter a valid email address.';
+      return 'لطفاً یک آدرس ایمیل معتبر وارد کنید.';
     }
     if (!formData.password) {
-      return 'Please enter a password.';
+      return 'لطفاً یک رمز عبور وارد کنید.';
     }
     if (formData.password.length < 6) {
-      return 'Password must be at least 6 characters long.';
+      return 'رمز عبور باید حداقل ۶ کاراکتر باشد.';
     }
     if (formData.password !== formData.confirmPassword) {
-      return 'Passwords do not match.';
+      return 'رمزهای عبور با یکدیگر مطابقت ندارند.';
     }
     return null;
   };
@@ -78,13 +75,13 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
       await new Promise(res => setTimeout(res, 2500));
       setMessage({
         type: 'success',
-        text: 'Account created successfully!',
+        text: 'حساب کاربری با موفقیت ایجاد شد!',
       });
       setTimeout(() => {
         onSignupSuccess ? onSignupSuccess() : onSwitchToLogin();
       }, 1500);
     } catch (error) {
-      setMessage({ type: 'error', text: 'Network error. Please try again.' });
+      setMessage({ type: 'error', text: 'خطای شبکه. لطفاً دوباره تلاش کنید.' });
     } finally {
       setIsLoading(false);
     }
@@ -132,25 +129,25 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
           <motion.button
             onClick={onBack}
             className={style.backButton}
-            aria-label="Back"
+            aria-label="بازگشت"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             variants={itemVariants}
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronRight className="w-6 h-6" />
           </motion.button>
 
           <motion.h2
             variants={itemVariants}
             className={style.formHeading}
           >
-            Create Your Account
+            حساب کاربری خود را بسازید
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className={style.formSubheading}
           >
-            Join us to explore a new spiritual journey.
+            به ما بپیوندید تا یک سفر معنوی جدید را کشف کنید.
           </motion.p>
 
           <AnimatePresence>
@@ -176,7 +173,7 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 type="text"
                 value={formData.name}
                 onChange={e => handleInputChange('name', e.target.value)}
-                placeholder="Full Name"
+                placeholder="نام کامل"
                 disabled={isLoading}
                 required
                 className={style.input}
@@ -202,7 +199,7 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 type={showPassword ? 'text' : 'password'}
                 value={formData.password}
                 onChange={e => handleInputChange('password', e.target.value)}
-                placeholder="Password"
+                placeholder="رمز عبور"
                 disabled={isLoading}
                 required
                 className={style.input}
@@ -211,7 +208,7 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 disabled={isLoading}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-label={showPassword ? 'پنهان کردن رمز' : 'نمایش رمز'}
                 className={style.passwordToggle}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -226,7 +223,7 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 type={showConfirmPassword ? 'text' : 'password'}
                 value={formData.confirmPassword}
                 onChange={e => handleInputChange('confirmPassword', e.target.value)}
-                placeholder="Confirm Password"
+                placeholder="تکرار رمز عبور"
                 disabled={isLoading}
                 required
                 className={style.input}
@@ -235,7 +232,7 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 disabled={isLoading}
-                aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                aria-label={showConfirmPassword ? 'پنهان کردن رمز' : 'نمایش رمز'}
                 className={style.passwordToggle}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -260,7 +257,7 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                     transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                     className={style.loader}
                   />
-                  <span>Creating Account...</span>
+                  <span>در حال ایجاد حساب...</span>
                 </div>
               ) : (
                 <>
@@ -268,7 +265,7 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{ background: 'linear-gradient(90deg, #4f46e5 0%, #9333ea 100%)' }}
                   />
-                  <span className="relative z-10">Create Account</span>
+                  <span className="relative z-10">ایجاد حساب</span>
                 </>
               )}
             </motion.button>
@@ -278,14 +275,14 @@ export function SignupForm({ onBack, onSwitchToLogin, onSignupSuccess }) {
             variants={itemVariants}
             className={style.signinLinkContainer}
           >
-            Already have an account?{' '}
+            قبلاً حساب ساخته‌اید؟{' '}
             <motion.button
               onClick={onSwitchToLogin}
               className={style.signinLink}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Sign In
+              وارد شوید
             </motion.button>
           </motion.div>
         </Card>

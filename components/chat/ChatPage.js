@@ -1,4 +1,4 @@
-// components/chat/ChatPage.js (Final and Corrected Version)
+// components/chat/ChatPage.js (نسخه نهایی و فارسی‌شده)
 
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
@@ -7,17 +7,18 @@ import {
     FaRobot, 
     FaCommentDots, 
     FaBookOpen, 
-    FaArrowRight, 
+    FaArrowLeft, // فلش راست برای زبان فارسی
     FaBrain, 
     FaCheckCircle, 
     FaUserCog,
-    FaArrowLeft
+    FaArrowRight // فلش چپ برای زبان فارسی
 } from 'react-icons/fa';
 
+// مکالمه نمونه به فارسی
 const sampleConversation = [
-    { id: '1', type: 'user', content: "I'm feeling stressed today...", timestamp: "2:30 PM" },
-    { id: '2', type: 'ai', content: "I understand. Let me share a verse that brings peace:", verse: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا", reference: "At-Talaq 65:2", timestamp: "2:31 PM" },
-    { id: '3', type: 'ai', content: "\"And whoever fears Allah - He will make for him a way out.\" This verse reminds us that divine solutions exist for every difficulty.", timestamp: "2:31 PM" }
+    { id: '1', type: 'user', content: "امروز احساس استرس می‌کنم...", timestamp: "ساعت ۲:۳۰" },
+    { id: '2', type: 'ai', content: "درک می‌کنم. اجازه دهید آیه‌ای را با شما به اشتراک بگذارم که آرامش‌بخش است:", verse: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا", reference: "طلاق ۶۵:۲", timestamp: "ساعت ۲:۳۱" },
+    { id: '3', type: 'ai', content: "«و هر کس از خدا پروا کند، [خدا] برای او راه بیرون‌شدنی قرار می‌دهد.» این آیه به ما یادآوری می‌کند که برای هر مشکلی، راه‌حل‌های الهی وجود دارد.", timestamp: "ساعت ۲:۳۱" }
 ];
 
 const ChatPage = ({ onGoBack }) => {
@@ -25,18 +26,16 @@ const ChatPage = ({ onGoBack }) => {
     const [isTyping, setIsTyping] = useState(false);
     const chatEndRef = useRef(null);
 
-    // شبیه‌سازی مکالمه
+    // شبیه‌سازی مکالمه (منطق بدون تغییر)
     useEffect(() => {
         let currentMessageIndex = 0;
         const totalMessages = sampleConversation.length;
 
         const showNextMessage = () => {
             if (currentMessageIndex >= totalMessages) {
-                // *** تغییر کلیدی اینجاست ***
-                // بعد از اینکه همه پیام‌ها نمایش داده شدند، یک بار اسکرول کن
                 setTimeout(() => {
-                    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }); // می‌توانیم به smooth برگردانیم
-                }, 100); // یک تأخیر کوتاه برای اطمینان
+                    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
                 return;
             }
 
@@ -51,29 +50,26 @@ const ChatPage = ({ onGoBack }) => {
                     setTimeout(showNextMessage, 1200);
                 }, 1500);
             } else {
-                 setMessages(prev => [...prev, message]);
-                 currentMessageIndex++;
-                 setTimeout(showNextMessage, 1200);
+                setMessages(prev => [...prev, message]);
+                currentMessageIndex++;
+                setTimeout(showNextMessage, 1200);
             }
         };
         const timeoutId = setTimeout(showNextMessage, 1000);
         return () => clearTimeout(timeoutId);
-    }, []); // این useEffect فقط یک بار اجرا می‌شود
-
-    // *** تغییر کلیدی: useEffect قبلی برای اسکرول حذف شد ***
-    // ما دیگر نیازی به گوش دادن به تغییرات messages برای اسکرول نداریم.
+    }, []);
 
     return (
         <div className={styles.pageContainer}>
              <button onClick={onGoBack} className={styles.backButton}>
-                <FaArrowLeft />
-                <span>Back to Home</span>
+                <FaArrowRight /> {/* آیکون برای راست‌چین */}
+                <span>بازگشت به صفحه اصلی</span>
             </button>
             <div className={styles.container}>
                 <section className={styles.section}>
                     <div className={styles.header}>
-                        <h1>Experience AI-Powered Spiritual Guidance</h1>
-                        <p>See how our intelligent assistant provides personalized Quranic wisdom for life's moments</p>
+                        <h1>راهنمایی معنوی مبتنی بر هوش مصنوعی را تجربه کنید</h1>
+                        <p>ببینید چگونه دستیار هوشمند ما حکمت قرآنی شخصی‌سازی‌شده را برای لحظات زندگی شما فراهم می‌کند</p>
                     </div>
                     
                     <div className={styles.grid}>
@@ -82,8 +78,8 @@ const ChatPage = ({ onGoBack }) => {
                                 <div className={styles.chatHeaderContent}>
                                     <div className={styles.chatIcon}><FaRobot /></div>
                                     <div className={styles.chatTitle}>
-                                        <h2>QuranPlus AI</h2>
-                                        <p>Your spiritual companion</p>
+                                        <h2>هوش مصنوعی QuranPlus</h2>
+                                        <p>همراه معنوی شما</p>
                                     </div>
                                 </div>
                             </div>
@@ -108,22 +104,22 @@ const ChatPage = ({ onGoBack }) => {
                                 <div ref={chatEndRef} />
                             </div>
                             <div className={styles.actionButtons}>
-                                <button className={`${styles.btn} ${styles.btnPrimary}`}><FaCommentDots style={{marginRight: '10px'}}/>Start Real Conversation<FaArrowRight style={{marginLeft: '10px'}}/></button>
-                                <button className={`${styles.btn} ${styles.btnAccent}`}><FaBookOpen style={{marginRight: '10px'}}/>Explore Tafsir<FaArrowRight style={{marginLeft: '10px'}}/></button>
+                                <button className={`${styles.btn} ${styles.btnPrimary}`}><FaCommentDots style={{marginLeft: '10px'}}/>شروع گفتگوی واقعی<FaArrowLeft style={{marginRight: '10px'}}/></button>
+                                <button className={`${styles.btn} ${styles.btnAccent}`}><FaBookOpen style={{marginLeft: '10px'}}/>کاوش در تفسیر<FaArrowLeft style={{marginRight: '10px'}}/></button>
                             </div>
                         </div>
 
                         <div className={styles.contentSection}>
                             <div>
-                                <h2>Intelligent Conversations with Purpose</h2>
-                                <p>Our AI understands context, emotion, and spiritual needs. Every response is crafted to provide meaningful guidance rooted in authentic Islamic teachings.</p>
+                                <h2>گفتگوهای هوشمند و هدفمند</h2>
+                                <p>هوش مصنوعی ما زمینه، احساسات و نیازهای معنوی را درک می‌کند. هر پاسخ با دقت طراحی شده تا راهنمایی معناداری بر اساس آموزه‌های اصیل اسلامی ارائه دهد.</p>
                             </div>
                             <div className={styles.features}>
-                                <div className={styles.feature}><div className={styles.featureIcon}><FaBrain/></div><div className={styles.featureContent}><h3>Contextual Understanding</h3><p>AI recognizes your emotional state and life situation to provide relevant guidance.</p></div></div>
-                                <div className={styles.feature}><div className={styles.featureIcon}><FaCheckCircle/></div><div className={styles.featureContent}><h3>Authentic Sources</h3><p>All responses backed by verified Quranic verses and scholarly interpretations.</p></div></div>
-                                <div className={styles.feature}><div className={styles.featureIcon}><FaUserCog/></div><div className={styles.featureContent}><h3>Personalized Guidance</h3><p>Tailored advice that grows with your spiritual journey and personal needs.</p></div></div>
+                                <div className={styles.feature}><div className={styles.featureIcon}><FaBrain/></div><div className={styles.featureContent}><h3>درک متنی</h3><p>هوش مصنوعی وضعیت عاطفی و شرایط زندگی شما را تشخیص می‌دهد تا راهنمایی مرتبط ارائه دهد.</p></div></div>
+                                <div className={styles.feature}><div className={styles.featureIcon}><FaCheckCircle/></div><div className={styles.featureContent}><h3>منابع معتبر</h3><p>تمام پاسخ‌ها با استناد به آیات تأییدشده قرآن و تفاسیر علما پشتیبانی می‌شوند.</p></div></div>
+                                <div className={styles.feature}><div className={styles.featureIcon}><FaUserCog/></div><div className={styles.featureContent}><h3>راهنمایی شخصی‌سازی‌شده</h3><p>مشاوره‌ای متناسب با سفر معنوی و نیازهای شخصی شما که همگام با شما رشد می‌کند.</p></div></div>
                             </div>
-                            <button className={styles.ctaBtn}><FaRobot/>Try AI Assistant Now<FaArrowRight style={{marginLeft: '12px'}}/></button>
+                            <button className={styles.ctaBtn}><FaRobot/>همین حالا دستیار هوش مصنوعی را امتحان کنید<FaArrowLeft style={{marginRight: '12px'}}/></button>
                         </div>
                     </div>
                 </section>

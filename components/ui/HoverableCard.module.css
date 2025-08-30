@@ -1,28 +1,50 @@
+/* ==========================================================
+   Hoverable Card - نسخه نهایی و دقیق RTL
+   ========================================================== */
+
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* کل محتوا (آیکون و متن) را در مرکز افقی قرار می‌دهد */
+  padding: 2.5rem 2rem;
+  border-radius: var(--border-radius);
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 32px;
-  text-align: left;
-  box-shadow: 0 8px 32px -10px var(--shadow-color);
-  backdrop-filter: blur(10px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all var(--transition-speed) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px var(--shadow-color);
 }
 
 .icon {
   font-size: 2.5rem;
-  margin-bottom: 16px;
+  margin-bottom: 1.5rem;
+  color: var(--accent-primary);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.card:hover .icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px var(--accent-primary));
 }
 
 .title {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 12px;
+  margin-bottom: 1rem;
+  width: 100%; /* این خط برای کارکرد صحیح text-align ضروری است */
+  text-align: right; /* متن عنوان راست‌چین می‌شود */
 }
 
 .description {
   font-size: 1rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.7;
+  width: 100%; /* این خط برای کارکرد صحیح text-align ضروری است */
+  text-align: right; /* متن توضیحات راست‌چین می‌شود */
 }

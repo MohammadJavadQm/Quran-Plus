@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMail, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronRight } from 'lucide-react'; // آیکون برای راست‌چین
 
-// Card component for a clean, minimalistic design
+// کامپوننت کارت (بدون تغییر)
 const Card = ({ children }) => {
   return (
     <motion.div
@@ -34,7 +34,7 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
     e.preventDefault();
     setMessage(null);
     if (!formData.email.trim() || !formData.password) {
-      setMessage({ type: 'error', text: 'Please fill in all fields.' });
+      setMessage({ type: 'error', text: 'لطفاً تمام فیلدها را پر کنید.' });
       return;
     }
     setIsLoading(true);
@@ -42,28 +42,28 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
     try {
       await new Promise(res => setTimeout(res, 2000));
       if (formData.email === 'test@test.com' && formData.password === 'password') {
-        setMessage({ type: 'success', text: 'Login successful!' });
+        setMessage({ type: 'success', text: 'ورود موفقیت‌آمیز بود!' });
         setTimeout(() => {
           if (onLoginSuccess) onLoginSuccess();
           else if (onBack) onBack();
         }, 1500);
       } else {
-        setMessage({ type: 'error', text: 'Invalid email or password.' });
+        setMessage({ type: 'error', text: 'ایمیل یا رمز عبور نامعتبر است.' });
       }
     } catch (error) {
-      setMessage({ type: 'error', text: 'Network error. Please try again.' });
+      setMessage({ type: 'error', text: 'خطای شبکه. لطفاً دوباره تلاش کنید.' });
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleSocialLogin = (provider) => {
-    console.log(`Logging in with ${provider}...`);
+    console.log(`ورود با ${provider}...`);
   };
 
   return (
     <div className="relative flex items-center justify-center min-h-screen p-6 bg-gray-950 overflow-hidden">
-      {/* پس‌زمینه ستاره‌ای */}
+      {/* پس‌زمینه ستاره‌ای (بدون تغییر) */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden"
         initial={{ opacity: 0 }}
@@ -77,18 +77,18 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
       
       <div className="w-full max-w-sm z-10">
         <Card>
-          {/* Back Button */}
+          {/* دکمه بازگشت */}
           <motion.button
             onClick={onBack}
-            className="absolute top-4 left-4 p-3 bg-gray-700 text-white rounded-full transition-colors duration-200"
-            aria-label="Back"
-            whileHover={{ backgroundColor: '#6b7280' }} // تغییر رنگ پس‌زمینه به خاکستری روشن‌تر
+            className="absolute top-4 right-4 p-3 bg-gray-700 text-white rounded-full transition-colors duration-200" // تغییر از left به right
+            aria-label="بازگشت"
+            whileHover={{ backgroundColor: '#6b7280' }}
             whileTap={{ scale: 0.95 }}
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronRight className="w-6 h-6" />
           </motion.button>
           
-          {/* Animated Welcome Text */}
+          {/* متن خوش‌آمدگویی متحرک */}
           <motion.h2 
             className="text-2xl font-bold text-center mb-2 mt-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500"
             animate={{ 
@@ -104,10 +104,10 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
               backgroundImage: 'linear-gradient(to right, #6366f1, #a855f7, #6366f1)'
             }}
           >
-            Welcome Back
+            دوباره خوش آمدید
           </motion.h2>
           
-          <p className="text-gray-400 text-center mb-6 text-sm">Sign in to your account.</p>
+          <p className="text-gray-400 text-center mb-6 text-sm">به حساب کاربری خود وارد شوید.</p>
 
           <AnimatePresence>
             {message && (
@@ -126,7 +126,7 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="relative">
-              <AiOutlineMail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+              <AiOutlineMail className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
               <input
                 id="email"
                 type="email"
@@ -135,7 +135,7 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
                 placeholder="your.email@example.com"
                 disabled={isLoading}
                 required
-                className="w-full pl-10 pr-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="w-full pr-10 pl-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-right" // تغییر پدینگ و جهت متن
               />
             </div>
             <div className="relative">
@@ -147,13 +147,13 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
                 placeholder="••••••••"
                 disabled={isLoading}
                 required
-                className="w-full pl-4 pr-10 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="w-full pr-4 pl-10 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-right" // تغییر پدینگ و جهت متن
               />
               <motion.button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 disabled={isLoading}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition" // تغییر از right به left
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -169,11 +169,11 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
               whileHover={!isLoading ? { scale: 1.02 } : {}}
               whileTap={!isLoading ? { scale: 0.98 } : {}}
             >
-              {isLoading ? 'Signing In...' : 'Sign In'}
+              {isLoading ? 'در حال ورود...' : 'ورود'}
             </motion.button>
           </form>
 
-          <div className="my-6 text-center text-gray-600">— or —</div>
+          <div className="my-6 text-center text-gray-600">—— یا ——</div>
 
           <div className="flex gap-4">
             <motion.button
@@ -184,7 +184,7 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
             >
               <div className="flex items-center justify-center space-x-2">
                 <FcGoogle size={20} />
-                <span>Google</span>
+                <span>گوگل</span>
               </div>
             </motion.button>
             <motion.button
@@ -195,20 +195,20 @@ export function LoginForm({ onBack, onSwitchToSignup, onLoginSuccess }) {
             >
               <div className="flex items-center justify-center space-x-2">
                 <FaGithub size={20} />
-                <span>GitHub</span>
+                <span>گیت‌هاب</span>
               </div>
             </motion.button>
           </div>
 
           <div className="mt-6 text-center text-gray-400">
-            Don't have an account?{' '}
+            حساب کاربری ندارید؟{' '}
             <motion.button
               onClick={onSwitchToSignup}
               className="font-semibold text-blue-400 hover:text-blue-300 transition"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Create Account
+              ایجاد حساب کاربری
             </motion.button>
           </div>
         </Card>

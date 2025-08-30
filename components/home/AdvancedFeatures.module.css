@@ -1,72 +1,87 @@
-/* ==========================================================================
-   Optimized Advanced Features Styles
-   - Fully integrated with the global design system.
-   ========================================================================== */
+/* ==========================================================
+   Advanced Features - نسخه نهایی و دقیق RTL
+   ========================================================== */
 
 .wrapper {
-  max-width: 1200px;
-  margin: 80px auto;
-  text-align: center;
-  padding: 0 24px;
+  padding: 6rem 1.5rem;
+  background-color: var(--section-bg);
+  position: relative;
+  overflow: hidden;
 }
 
 .title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 900;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 .subtitle {
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  font-size: 1.125rem;
   color: var(--text-secondary);
-  margin: 0 auto 60px;
-  max-width: 800px;
   line-height: 1.7;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  text-align: left;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* --- چیدمان دقیق و نهایی کارت --- */
 .featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* کل محتوا (آیکون و متن) را در مرکز افقی قرار می‌دهد */
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 30px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
 .featureCard:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 30px -10px var(--shadow-color);
+  box-shadow: 0 10px 20px var(--shadow-color);
 }
 
 .iconWrapper {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
   width: 60px;
   height: 60px;
-  border-radius: 15px;
-  background: var(--accent-secondary);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  color: var(--btn-text-color); /* USE VAR instead of white */
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  transition: box-shadow var(--transition-speed) ease;
+}
+
+.featureCard:hover .iconWrapper {
+  box-shadow: 0 0 20px var(--accent-primary);
 }
 
 .featureTitle {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 10px;
+  margin-bottom: 0.75rem;
+  width: 100%; /* این خط برای کارکرد صحیح text-align ضروری است */
+  text-align: right; /* متن عنوان راست‌چین می‌شود */
 }
 
 .featureDescription {
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  width: 100%; /* این خط برای کارکرد صحیح text-align ضروری است */
+  text-align: right; /* متن توضیحات راست‌چین می‌شود */
 }

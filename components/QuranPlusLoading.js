@@ -1,4 +1,4 @@
-// components/QuranPlusLoading.js
+// components/QuranPlusLoading.js (نسخه فارسی‌شده)
 
 import React, { useEffect, useRef } from 'react';
 import styles from './QuranPlusLoading.module.css';
@@ -7,19 +7,21 @@ import BrandLogo from 'components/ui/BrandLogo';
 const QuranPlusLoading = () => {
     const progressRingRef = useRef(null);
     const outerGlowRef = useRef(null);
-    const englishPhraseRef = useRef(null);
+    const englishPhraseRef = useRef(null); // نام متغیر برای سادگی ثابت می‌ماند
     const arabicPhraseRef = useRef(null);
     const brandingRef = useRef(null);
     const particlesContainerRef = useRef(null);
 
     useEffect(() => {
-        // ... (تمام منطق جاوااسکریپت شما بدون تغییر باقی می‌ماند)
+        // عبارات بارگذاری به فارسی
         const loadingPhrases = [
-            { english: "Illuminating your path with wisdom...", arabic: "ننير طريقك بالحكمة..." },
-            { english: "Connecting you to divine guidance...", arabic: "نصلك بالهداية الإلهية..." },
-            { english: "Preparing your spiritual journey...", arabic: "نحضر رحلتك الروحية..." },
-            { english: "Opening the gates of knowledge...", arabic: "نفتح أبواب المعرفة..." }
+            { english: "مسیرتان را با حکمت روشن می‌سازیم...", arabic: "ننير طريقك بالحكمة..." },
+            { english: "شما را به هدایت الهی متصل می‌کنیم...", arabic: "نصلك بالهداية الإلهية..." },
+            { english: "سفر معنوی شما را آماده می‌سازیم...", arabic: "نحضر رحلتك الروحية..." },
+            { english: "دروازه‌های دانش را می‌گشاییم...", arabic: "نفتح أبواب المعرفة..." }
         ];
+        
+        // --- تمام منطق انیمیشن و جاوااسکریپت بدون تغییر باقی می‌ماند ---
         const duration = 4000;
         const circumference = 2 * Math.PI * 90;
         const { current: progressRing } = progressRingRef;
@@ -28,7 +30,8 @@ const QuranPlusLoading = () => {
         const { current: arabicPhrase } = arabicPhraseRef;
         const { current: branding } = brandingRef;
         const { current: particlesContainer } = particlesContainerRef;
-        if (particlesContainer.children.length === 0) {
+
+        if (progressRing && particlesContainer.children.length === 0) {
             for (let i = 0; i < 30; i++) {
                 const particle = document.createElement('div');
                 particle.className = styles.floatingParticle;
@@ -39,6 +42,7 @@ const QuranPlusLoading = () => {
                 particlesContainer.appendChild(particle);
             }
         }
+
         let progress = 0;
         let currentPhraseIndex = 0;
         const progressInterval = setInterval(() => {
@@ -47,29 +51,43 @@ const QuranPlusLoading = () => {
                 progress = 100;
                 clearInterval(progressInterval);
             }
-            const strokeDashoffset = circumference - (progress / 100) * circumference;
-            progressRing.style.strokeDashoffset = strokeDashoffset;
-            outerGlow.style.background = `conic-gradient(from 0deg, #D4AF37 0%, #F0D080 ${progress * 0.25}%, #FFD700 ${progress * 0.5}%, #DAA520 ${progress * 0.75}%, #B8860B ${progress}%, rgba(212, 175, 55, 0.1) ${progress}%, transparent 100%)`;
+            if (progressRing) {
+               const strokeDashoffset = circumference - (progress / 100) * circumference;
+               progressRing.style.strokeDashoffset = strokeDashoffset;
+            }
+            if (outerGlow) {
+               outerGlow.style.background = `conic-gradient(from 0deg, #D4AF37 0%, #F0D080 ${progress * 0.25}%, #FFD700 ${progress * 0.5}%, #DAA520 ${progress * 0.75}%, #B8860B ${progress}%, rgba(212, 175, 55, 0.1) ${progress}%, transparent 100%)`;
+            }
         }, 50);
+
         const phraseInterval = setInterval(() => {
             currentPhraseIndex = (currentPhraseIndex + 1) % loadingPhrases.length;
-            englishPhrase.textContent = loadingPhrases[currentPhraseIndex].english;
-            arabicPhrase.textContent = loadingPhrases[currentPhraseIndex].arabic;
-            englishPhrase.style.opacity = 0;
-            arabicPhrase.style.opacity = 0;
-            setTimeout(() => {
-                englishPhrase.style.opacity = 1;
-                arabicPhrase.style.opacity = 1;
-            }, 100);
+            if (englishPhrase && arabicPhrase) {
+                englishPhrase.textContent = loadingPhrases[currentPhraseIndex].english;
+                arabicPhrase.textContent = loadingPhrases[currentPhraseIndex].arabic;
+                englishPhrase.style.opacity = 0;
+                arabicPhrase.style.opacity = 0;
+                setTimeout(() => {
+                    englishPhrase.style.opacity = 1;
+                    arabicPhrase.style.opacity = 1;
+                }, 100);
+            }
         }, 3000);
+
         const brandingTimeout = setTimeout(() => {
-            branding.style.opacity = 1;
+            if (branding) {
+               branding.style.opacity = 1;
+            }
         }, 1000);
+
         const resetTimeout = setTimeout(() => {
             clearInterval(progressInterval);
             progress = 0;
-            progressRing.style.strokeDashoffset = circumference;
+            if (progressRing) {
+              progressRing.style.strokeDashoffset = circumference;
+            }
         }, duration + 500);
+
         return () => {
             clearInterval(progressInterval);
             clearInterval(phraseInterval);
@@ -79,7 +97,6 @@ const QuranPlusLoading = () => {
     }, []);
 
     return (
-        // به جای body از loadingScreen استفاده می‌کنیم
         <div className={styles.loadingScreen}>
             <div ref={particlesContainerRef} className={styles.particlesContainer}></div>
             
@@ -113,16 +130,15 @@ const QuranPlusLoading = () => {
             </div>
 
             <div ref={brandingRef} className={styles.textContent}>
-                {/* --- چیدمان اصلاح شد: متن‌های متحرک اول می‌آیند --- */}
+                {/* --- چیدمان متن‌ها و لوگو --- */}
                 <div className={styles.phraseContainer}>
-                    <p ref={englishPhraseRef} className={styles.englishText}>Illuminating your path with wisdom...</p>
+                    <p ref={englishPhraseRef} className={styles.englishText}>مسیرتان را با حکمت روشن می‌سازیم...</p>
                     <p ref={arabicPhraseRef} className={styles.arabicText}>ننير طريقك بالحكمة...</p>
                 </div>
 
-                {/* --- و بعد لوگو و عنوان --- */}
                 <div className={styles.branding}>
                     <BrandLogo />
-                    <p className={styles.brandingSubtitle}>Your AI-Powered Spiritual Companion</p>
+                    <p className={styles.brandingSubtitle}>همراه معنوی مبتنی بر هوش مصنوعی شما</p>
                 </div>
             </div>
         </div>
