@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaBook, FaHeart, FaSearch, FaSparkles } from 'react-icons/fa'; // نام آیکون‌ها ثابت می‌ماند
+import { FaBook, FaHeart, FaSearch, FaSparkles } from 'react-icons/fa6'; // نام آیکون‌ها ثابت می‌ماند
 import styles from './PersonalizationPanel.module.css';
 
 // داده‌های کامپوننت به فارسی
