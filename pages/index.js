@@ -14,7 +14,6 @@ import { useTheme } from 'components/ThemeToggle';
 import BackgroundEffects from 'components/home/BackgroundEffects';
 import ChatPage from 'components/chat/ChatPage';
 import HeroSection from 'components/home/HeroSection';
-import StatsSection from 'components/home/StatsSection';
 import AdvancedFeatures from 'components/home/AdvancedFeatures';
 import FeatureCards from 'components/home/FeatureCards';
 import PersonalizationPanel from 'components/home/PersonalizationPanel';
@@ -77,7 +76,6 @@ export default function Index() {
                 <BackgroundEffects springMouseX={springMouseX} springMouseY={springMouseY} />
                 <motion.div key="landing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                     <HeroSection onStartConversation={handleStartConversation} />
-                    <StatsSection />
                     <AdvancedFeatures />
                     <FeatureCards />
                     <PersonalizationPanel />
