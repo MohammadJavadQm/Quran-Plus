@@ -4,7 +4,6 @@ import { FaBook, FaHeart, FaSearch } from 'react-icons/fa';
 import { FaSparkles } from 'react-icons/fa6';
 import styles from './PersonalizationPanel.module.css';
 
-// داده‌های کامپوننت به فارسی
 const suggestedTopics = [
     'صبر در زمان سختی‌ها', 'یافتن آرامش با نماز', 'مفهوم تقدیر (قَدَر)',
     'شکرگزاری و قناعت', 'توکل به خدا', 'ماهیت موفقیت واقعی',
