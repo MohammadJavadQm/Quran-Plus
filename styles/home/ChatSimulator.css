@@ -1,0 +1,109 @@
+:root {
+  /* Light Mode Variables */
+  --primary-light: #0A5C36;
+  --secondary-light: #D4AF37;
+  --accent-light: #2e7d32;
+  --background-light: #f8f5f0;
+  --card-bg-light: #ffffff;
+  --border-light: #e2e8f0;
+  --body-text-light: #4a5568;
+  --muted-foreground-light: #718096;
+
+  /* Dark Mode Variables */
+  --primary-dark: #0A5C36;
+  --secondary-dark: #D4AF37;
+  --accent-dark: #2e7d32;
+  --background-dark: #0d0f1a;
+  --card-bg-dark: rgba(15, 18, 35, 0.85);
+  --border-dark: rgba(100, 120, 200, 0.3);
+  --body-text-dark: #e0e0ff;
+  --muted-foreground-dark: #8a9cff;
+  --neon-blue: #00d0ff;
+  --neon-purple: #aa00ff;
+  --neon-green: #00ff9d;
+  --neon-gold: #ffd700;
+  --glass-bg: rgba(20, 25, 50, 0.6);
+
+  /* Active Variables (Default: Light) */
+  --primary: var(--primary-light);
+  --secondary: var(--secondary-light);
+  --accent: var(--accent-light);
+  --background: var(--background-light);
+  --card-bg: var(--card-bg-light);
+  --border: var(--border-light);
+  --body-text: var(--body-text-light);
+  --muted-foreground: var(--muted-foreground-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: var(--primary-dark);
+    --secondary: var(--secondary-dark);
+    --accent: var(--accent-dark);
+    --background: var(--background-dark);
+    --card-bg: var(--card-bg-dark);
+    --border: var(--border-dark);
+    --body-text: var(--body-text-dark);
+    --muted-foreground: var(--muted-foreground-dark);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--background);
+  color: var(--body-text);
+  line-height: 1.6;
+  padding: 20px;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Light Mode Background */
+@media not (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(to bottom right, rgba(10, 92, 54, 0.05), var(--background), rgba(212, 175, 55, 0.05));
+  }
+}
+
+/* Dark Mode Background Effects */
+@media (prefers-color-scheme: dark) {
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(170, 0, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(0, 208, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 20%, rgba(0, 255, 157, 0.08) 0%, transparent 40%);
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(20, 25, 50, 0.2) 0px, rgba(20, 25, 50, 0.2) 1px, transparent 1px, transparent 11px),
+        repeating-linear-gradient(-45deg, rgba(20, 25, 50, 0.2) 0px, rgba(20, 25, 50, 0.2) 1px, transparent 1px, transparent 11px);
+    z-index: -1;
+    pointer-events: none;
+    animation: gridMove 40s linear infinite;
+  }
+}
+
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 300px; }
+}

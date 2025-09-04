@@ -1,0 +1,90 @@
+/* Global variables, fonts and base rules */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root{
+  /* Light theme variables (defaults) */
+  --bg: #f5efe4;
+  --bg-2: #efe7d4;
+  --accent-dark: #1f5f3a;
+  --accent-mid: #2e7d46;
+  --accent-gold: #c7a545;
+  --muted: #6b6b6b;
+  --footer-dark-1: #163a2a;
+  --footer-dark-2: #0f2a1e;
+  --body-bg: linear-gradient(135deg, #f5efe4 0%, #efe7d4 100%);
+  --footer-bg: linear-gradient(180deg, #163a2a, #0f2a1e);
+  --footer-shadow: 0 20px 40px rgba(15, 40, 25, 0.25);
+  --arabesque-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150'%3E%3Cpath fill='%23c7a545' fill-opacity='0.12' d='M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,101.3C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+  --logo-bg: linear-gradient(135deg, #2e7d46, rgba(255,255,255,0.15));
+  --logo-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  --verse-bg: rgba(255, 255, 255, 0.04);
+  --verse-border: rgba(255, 255, 255, 0.06);
+  --input-bg: rgba(255, 255, 255, 0.06);
+  --input-border: rgba(255, 255, 255, 0.08);
+  --input-focus-shadow: 0 0 0 6px rgba(199,165,69,0.06);
+  --btn-bg: linear-gradient(135deg, #2e7d46, #c7a545);
+  --btn-hover-bg: linear-gradient(135deg, #c7a545, #2e7d46);
+  --btn-shadow: 0 8px 24px rgba(30,80,40,0.18);
+  --btn-hover-shadow: 0 10px 28px rgba(18,50,30,0.22);
+  --social-bg: rgba(255, 255, 255, 0.06);
+  --social-hover-bg: rgba(255, 255, 255, 0.12);
+  --link-hover-color: #c7a545;
+  --link-underline: #c7a545;
+  --legal-link-hover: #c7a545;
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg: #0c0b15;
+    --bg-2: #070610;
+    --accent-dark: #6a2ebd;
+    --accent-mid: #00d0ff;
+    --accent-gold: #ffd700;
+    --muted: #8a9cff;
+    --footer-dark-1: #070710;
+    --footer-dark-2: #05050c;
+    --body-bg: radial-gradient(circle at top left, #0a0c1c, #070818, #030510);
+    --footer-bg: linear-gradient(180deg, #070710, #05050c);
+    --footer-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    --arabesque-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150'%3E%3Cpath fill='%23ffd700' fill-opacity='0.15' d='M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,101.3C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+    --logo-bg: linear-gradient(135deg, #6a2ebd, rgba(255,255,255,0.15));
+    --logo-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    --verse-bg: rgba(255, 255, 255, 0.04);
+    --verse-border: rgba(255, 255, 255, 0.1);
+    --input-bg: rgba(255, 255, 255, 0.06);
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-focus-shadow: 0 0 0 6px rgba(0, 208, 255, 0.1);
+    --btn-bg: linear-gradient(135deg, #6a2ebd, #00d0ff);
+    --btn-hover-bg: linear-gradient(135deg, #00d0ff, #6a2ebd);
+    --btn-shadow: 0 8px 24px rgba(106, 46, 189, 0.3);
+    --btn-hover-shadow: 0 10px 28px rgba(106, 46, 189, 0.4);
+    --social-bg: rgba(255, 255, 255, 0.06);
+    --social-hover-bg: rgba(255, 255, 255, 0.12);
+    --link-hover-color: #00d0ff;
+    --link-underline: #00d0ff;
+    --legal-link-hover: #00d0ff;
+  }
+}
+
+/* base resets */
+*{ box-sizing: border-box; margin:0; padding:0; }
+html,body,#root{ height:100%; }
+body{
+  background: var(--body-bg);
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: #e0e0ff;
+  padding: 40px 20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* small util */
+.sr-only{
+  position:absolute!important;
+  width:1px;height:1px;
+  padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}

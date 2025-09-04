@@ -1,0 +1,60 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap');
+
+:root {
+  /* Light Mode Variables (default) */
+  --primary: #0A5C36;
+  --secondary: #D4AF37;
+  --accent: #2e7d32;
+  --background: #f8f5f0;
+  --card-bg: #ffffff;
+  --border: #e2e8f0;
+  --body-text: #4a5568;
+  --muted-foreground: #718096;
+  --logo-text: #000000; /* Black for light mode */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode Variables */
+    --primary: #4C1D95;
+    --secondary: #D4AF37;
+    --accent: #6D28D9;
+    --background: #0f172a;
+    --card-bg: #1e293b;
+    --border: #334155;
+    --body-text: #cbd5e1;
+    --muted-foreground: #94a3b8;
+    --logo-text: #ffffff; /* White for dark mode */
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--body-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+  background: linear-gradient(to bottom right, rgba(10, 92, 54, 0.05), var(--background), rgba(212, 175, 55, 0.05));
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: radial-gradient(circle at top left, #0c0f1d, #0a0c18, #070810);
+  }
+}
+
+.arabic-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.2em;
+}
+
+.theme-transition * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

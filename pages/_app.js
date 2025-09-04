@@ -1,16 +1,10 @@
 // pages/_app.js
-
-import { ThemeProvider } from '../components/ThemeToggle';
-import '../styles/globals.css';
-
-// این فایل دیگر هیچ منطق Layoutـی ندارد
+import 'styles/globals.css';
 function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider>
-      <div dir="rtl">
-        <Component {...pageProps} />
-      </div>
-    </ThemeProvider>
+    <div dir="ltr">
+      <Component {...pageProps} />
+    </div>
   );
 }
 

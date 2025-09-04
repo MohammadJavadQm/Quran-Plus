@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import styles from './QuranPlusLoading.module.css';
-import BrandLogo from 'components/ui/BrandLogo';
+import BrandLogo from 'components/ui/Logo';
 
 const QuranPlusLoading = () => {
     const progressRingRef = useRef(null);

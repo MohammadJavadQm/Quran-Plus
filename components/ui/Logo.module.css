@@ -1,0 +1,35 @@
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoBook {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 4px 6px rgba(10, 92, 54, 0.3);
+  position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+  .logoBook {
+    box-shadow: 0 4px 15px rgba(76, 29, 149, 0.4);
+  }
+}
+
+
+.logoTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--logo-text);
+}
+
+.arabicText {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}

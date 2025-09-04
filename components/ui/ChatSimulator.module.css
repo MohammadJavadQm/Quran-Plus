@@ -1,0 +1,151 @@
+.btn {
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border: none;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-primary {
+    background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+    box-shadow: 0 0 20px rgba(170, 0, 255, 0.3);
+  }
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-primary:hover {
+    box-shadow: 0 10px 30px rgba(170, 0, 255, 0.4);
+  }
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(30deg);
+  transition: all 0.6s ease;
+  animation: shine 1.5s infinite;
+}
+
+.btn-accent {
+  background: linear-gradient(to right, var(--accent), #4CAF50);
+  color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-accent {
+    background: linear-gradient(to right, var(--neon-green), #00cc88);
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+  }
+}
+
+.btn-accent:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-accent:hover {
+    box-shadow: 0 10px 30px rgba(0, 255, 157, 0.4);
+  }
+}
+
+.btn-accent::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(30deg);
+  transition: all 0.6s ease;
+  animation: shine 1.5s infinite;
+}
+
+.btn-cta {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: white;
+  padding: 18px 40px;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
+  box-shadow: 0 10px 25px rgba(10, 92, 54, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-cta {
+    background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+    box-shadow: 0 10px 25px rgba(170, 0, 255, 0.4);
+  }
+}
+
+.btn-cta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(10, 92, 54, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-cta:hover {
+    box-shadow: 0 15px 30px rgba(170, 0, 255, 0.6);
+  }
+}
+
+.btn i {
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.btn:hover i {
+  transform: translateX(4px);
+}
+
+.btn-cta i {
+  margin-right: 12px;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(30deg); }
+  100% { transform: translateX(100%) rotate(30deg); }
+}

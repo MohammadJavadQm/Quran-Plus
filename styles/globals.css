@@ -1,472 +1,250 @@
-/* ==========================================================================
- * Final & Perfected Global Stylesheet (v6.0 - Warm Beige & Gold Theme)
- * - Merges "Enhanced Edition" with "Calm Dawn" themes.
- * - MODIFIED: Default light theme completely replaced with new "Warm Beige & Gold" palette.
- * - MODIFIED: Background animation removed for a static, elegant look.
- * - MODIFIED: Dark theme background is significantly darker (near-black) - UNCHANGED from v5.0.
- * - All other themes and rules remain untouched.
- * ========================================================================== */
+/* Combined Global CSS */
+/* Imports from various snippets */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
 
-/* 1) Combined & De-duplicated Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&family=Lateef:wght@400;500;600;700&family=Amiri:wght@400;700&family=Vazirmatn:wght@300;400;500;700&display=swap');
-
-/* 2) Tailwind Directives */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/*
- * [جدید] ثبت پراپرتی سفارشی برای انیمیشن بهینه نوار پیشرفت اسکرول
- */
-@property --scroll-progress {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
+/* Merged Root Variables */
+/* Prioritizing comprehensive variables, merging light and dark modes */
+:root {
+  /* Light Mode Variables (default) */
+  --primary: #0A5C36;
+  --secondary: #D4AF37;
+  --accent: #2e7d32;
+  --background: #f8f5f0;
+  --card-bg: #ffffff;
+  --border: #e2e8f0;
+  --body-text: #4a5568;
+  --muted-foreground: #718096;
+  --logo-text: #000000; /* Black for light mode */
+  --bg: #f5efe4;
+  --bg-2: #efe7d4;
+  --green-dark: #1f5f3a;
+  --green-mid: #2e7d46;
+  --gold: #c7a545;
+  --card-border: rgba(199,165,69,0.95);
+  --text-main: #1f5f3a;
+  --text-subtle: #48524a;
+  --btn-start-bg: linear-gradient(90deg, var(--green-mid) 0%, #2f8740 45%, var(--gold) 100%);
+  --btn-start-shadow: 0 8px 22px rgba(30,80,40,0.14);
+  --btn-demo-color: var(--green-mid);
+  --btn-demo-border: rgba(34,100,60,0.95);
+  --quote-bg: linear-gradient(0deg, rgba(255,255,255,0.98), rgba(255,255,255,0.99));
+  --quote-shadow: 0 10px 30px rgba(30,50,30,0.06);
+  --decoration-color: #d9d4c7;
+  --arabic-color: var(--green-dark);
+  --separator-color: var(--green-mid);
+  --accent-dark: #1f5f3a;
+  --accent-mid: #2e7d46;
+  --accent-gold: #c7a545;
+  --muted: #6b6b6b;
+  --footer-dark-1: #163a2a;
+  --footer-dark-2: #0f2a1e;
+  --body-bg: linear-gradient(135deg, #f5efe4 0%, #efe7d4 100%);
+  --footer-bg: linear-gradient(180deg, #163a2a, #0f2a1e);
+  --footer-shadow: 0 20px 40px rgba(15, 40, 25, 0.25);
+  --arabesque-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150'%3E%3Cpath fill='%23c7a545' fill-opacity='0.12' d='M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,101.3C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+  --logo-bg: linear-gradient(135deg, #2e7d46, rgba(255,255,255,0.15));
+  --logo-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  --verse-bg: rgba(255, 255, 255, 0.04);
+  --verse-border: rgba(255, 255, 255, 0.06);
+  --input-bg: rgba(255, 255, 255, 0.06);
+  --input-border: rgba(255, 255, 255, 0.08);
+  --input-focus-shadow: 0 0 0 6px rgba(199,165,69,0.06);
+  --btn-bg: linear-gradient(135deg, #2e7d46, #c7a545);
+  --btn-hover-bg: linear-gradient(135deg, #c7a545, #2e7d46);
+  --btn-shadow: 0 8px 24px rgba(30,80,40,0.18);
+  --btn-hover-shadow: 0 10px 28px rgba(18,50,30,0.22);
+  --social-bg: rgba(255, 255, 255, 0.06);
+  --social-hover-bg: rgba(255, 255, 255, 0.12);
+  --link-hover-color: #c7a545;
+  --link-underline: #c7a545;
+  --legal-link-hover: #c7a545;
 }
 
-/* 3) Custom Base Styles */
-@layer base {
-
-  /* ======================================================================== */
-  /* Theme Definitions                                                        */
-  /* ======================================================================== */
-
-  /* 3.1) Day (Light) Theme - NEW "Warm Beige & Gold" Palette */
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
   :root {
-    /* --- New "Warm Beige & Gold" Font & Generic Vars --- */
-    --font-primary: 'Vazirmatn', sans-serif;
-    --font-arabic: 'Amiri', serif;
-    --border-radius: 12px;
-    --transition-speed: 0.3s;
-
-    /* --- New "Warm Beige & Gold" Core Palette --- */
-    --background: hsl(40, 25%, 95%);          /* پس‌زمینه اصلی: کرم ملایم */
-    --foreground: hsl(30, 15%, 25%);          /* متن اصلی: قهوه‌ای-خاکستری تیره */
-    --text-primary: hsl(30, 15%, 28%);         /* متن اصلی تیره‌تر */
-    --text-secondary: hsl(35, 10%, 45%);       /* متن دوم: قهوه‌ای روشن‌تر */
-    --accent-primary: hsl(45, 65%, 55%);        /* تاکید اصلی: طلایی گرم و جذاب */
-    --accent-secondary: hsl(35, 30%, 65%);      /* تاکید دوم: بژ کاراملی */
-
-    /* --- New "Warm Beige & Gold" Gradient & Aurora --- */
-    --gradient-bg-1: oklch(98% 0.02 90);       /* کرم شیری */
-    --gradient-bg-2: oklch(96% 0.03 70);       /* بژ روشن */
-    --gradient-bg-3: oklch(97% 0.02 110);      /* شنی ملایم */
-    --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    --aurora-1: hsla(45, 80%, 90%, 0.25);    /* درخشش طلایی ملایم */
-    --aurora-2: hsla(30, 70%, 85%, 0.3);     /* درخشش هلویی گرم */
-
-    /* --- UI Elements --- */
-    --card-bg: hsla(0, 0%, 100%, 0.75);
-    --card-border: hsla(40, 25%, 85%, 0.7);
-    --card-border-gold: hsla(45, 65%, 55%, 0.5); /* Primary gold border */
-    --card-border-purple: rgba(106, 46, 189, 0.7); /* Kept for compatibility */
-    --input-bg: hsla(40, 20%, 90%, 0.6);
-    --section-bg: hsla(40, 20%, 90%, 0.3);
-
-    /* --- Interactive --- */
-    --focus-ring-color: hsla(45, 65%, 55%, 0.8);
-    --selection-bg: hsla(45, 65%, 55%, 0.25);
-    --accent-primary-bg: hsla(45, 65%, 55%, 0.1);
-    --accent-primary-border: hsla(45, 65%, 55%, 0.2);
-    --glow-color: hsla(45, 100%, 70%, 0.8);
-
-    /* --- Buttons --- */
-    --btn-text-color: hsl(0, 0%, 100%);
-    --btn-grad-start: var(--accent-primary);
-    --btn-grad-end: hsl(35, 50%, 45%);
-    --btn-grad-mid: hsl(40, 55%, 50%);
-    --btn-grad-start-hover: hsl(45, 70%, 60%);
-    --btn-grad-end-hover: hsl(35, 55%, 50%);
-    --btn-arrow-bg: hsla(0, 0%, 100%, 0.15);
-    --btn-hover-shadow: hsla(40, 60%, 50%, 0.3);
-    --btn-primary-shadow: hsla(40, 50%, 40%, 0.2);
-
-    /* --- Shadows & Effects --- */
-    --shadow-color: hsla(30, 20%, 20%, 0.1);
-    --soft-shadow: hsla(30, 20%, 20%, 0.1);
-    --pattern-color: hsl(35, 15%, 70%);
-    --pattern-opacity: 0.1;
-
-    /* --- Preserved Variables (Untouched) --- */
-    --z-scroll-progress: 9999;
-    --bg-dark: #0c0b15;
-    --bg-darker: #070610;
-    --purple-dark: #3a1f5f;
-    --purple-neon: #6a2ebd;
-    --neon-blue: #00d0ff;
-    --neon-green: #00ff9d;
-    --gold-neon: #ffd700;
-    --glass-bg: rgba(20, 15, 40, 0.45);
+    --primary: #4C1D95;
+    --secondary: #D4AF37;
+    --accent: #6D28D9;
+    --background: #0f172a;
+    --card-bg: #1e293b;
+    --border: #334155;
+    --body-text: #cbd5e1;
+    --muted-foreground: #94a3b8;
+    --logo-text: #ffffff; /* White for dark mode */
+    --bg: #0c0b15;
+    --bg-2: #070610;
+    --green-dark: #3a1f5f;
+    --green-mid: #6a2ebd;
+    --gold: #ffd700;
+    --card-border: rgba(106, 46, 189, 0.7);
     --text-main: #f0f0ff;
     --text-subtle: #b0b0d0;
-    --footer-bg: linear-gradient(135deg, hsl(30, 20%, 20%), hsl(35, 25%, 25%));
-    --footer-text: hsl(40, 30%, 88%);
-    --spinner-track-color: hsla(45, 65%, 55%, 0.2);
-    --loading-bg: var(--background);
-    --loading-text: var(--text-secondary);
-    --loading-grad-start: hsl(40, 25%, 98%);
-    --loading-grad-end: var(--background);
-    --loading-ring-bg: hsla(35, 10%, 45%, 0.1);
-    --loading-orb-shadow: hsla(45, 65%, 55%, 0.3);
-    --loading-particle-opacity: 0.6;
-    --bg: hsl(0, 0%, 7%);
-    --bg-2: hsl(0, 0%, 10%);
-    --text-light: hsl(0, 0%, 94%);
-    --text-muted: hsl(0, 0%, 63%);
-    --accent-dark: hsl(148, 51%, 25%);
-    --accent-mid: hsl(148, 47%, 33%);
-    --accent-gold: hsl(45, 52%, 53%);
-    --shadow-deep: hsla(30, 15%, 25%, 0.15);
-    --shadow-glow-green: hsla(148, 47%, 33%, 0.15);
-    --shadow-glow-gold: hsla(45, 52%, 53%, 0.2);
-    --hero-glow-1: rgba(176, 137, 104, 0.2);
-    --hero-glow-2: rgba(127, 85, 57, 0.15);
-    --page-background-color: #E0B589; /* ☀️ day - updated for theme */
-    --auth-bg: #ffffff;
-    --auth-text-primary: #1a202c;
-    --auth-text-secondary: #718096;
-    --auth-input-bg: #f7fafc;
-    --auth-input-border: #e2e8f0;
-    --auth-input-focus-border: #d4af37;
-    --auth-button-bg: linear-gradient(135deg, #a78b4b 0%, #c4a76b 100%);
-    --auth-button-text: #ffffff;
-    --auth-button-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --auth-link-color: #a78b4b;
-    --auth-container-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --auth-logo-icon-bg: linear-gradient(135deg, #fdf8f3 0%, #faecd7 100%);
-  }
-
-  /* 3.2) Night (Dark) Theme - "Night Sky & Gold" - ALL ORIGINAL VARIABLES PRESERVED */
-  [data-theme='dark'] {
-    /* --- Dark Theme ("Night Sky & Gold" + Emerald) --- */
-    /* Core Palette */
-    --background: hsl(220, 40%, 8%); /* تاریک‌تر شد */
-    --foreground: hsl(45, 33%, 93%);
-    --text-primary: hsl(46, 31%, 89%);
-    --text-secondary: hsl(220, 15%, 70%);
-    --accent-primary: hsl(45, 52%, 53%);
-    --accent-secondary: hsl(143, 45%, 45%);
-
-    /* [جدید] متغیرهای پس‌زمینه گرادینت از کیت UI */
-    --gradient-bg-1: oklch(6% 0.05 280); /* بسیار تاریک‌تر شد */
-    --gradient-bg-2: oklch(6% 0.06 310); /* بسیار تاریک‌تر شد */
-    --gradient-bg-3: oklch(6% 0.04 260); /* بسیار تاریک‌تر شد */
-    --gradient-accent: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-
-    /* [خفن‌تر شد] متغیرهای افکت شفق قطبی (Aurora) */
-    --aurora-1: hsla(143, 50%, 50%, 0.1);
-    --aurora-2: hsla(220, 60%, 60%, 0.15);
-
-    /* UI Elements */
-    --card-bg: hsla(220, 40%, 18%, 0.75);
-    --card-border: hsla(45, 52%, 53%, 0.3); /* gold border for dark */
-    --card-border-gold: hsla(45, 52%, 53%, 0.3);
-    --card-border-purple: rgba(106, 46, 189, 0.7);
-    --input-bg: hsla(220, 30%, 20%, 0.5);
-    --section-bg: hsla(220, 40%, 20%, 0.1);
-
-    /* Interactive */
-    --focus-ring-color: hsla(45, 52%, 53%, 0.8);
-    --selection-bg: hsla(45, 52%, 53%, 0.25);
-    --accent-primary-bg: hsla(45, 52%, 53%, 0.1);
-    --accent-primary-border: hsla(45, 52%, 53%, 0.25);
-    --glow-color: hsla(45, 100%, 70%, 0.7);
-
-    /* Buttons */
-    --btn-text-color: hsl(220, 30%, 95%);
-    --btn-grad-start: hsl(215, 70%, 55%);
-    --btn-grad-end: hsl(225, 75%, 60%);
-    --btn-grad-mid: hsl(220, 70%, 60%);
-    --btn-grad-start-hover: hsl(215, 70%, 65%);
-    --btn-grad-end-hover: hsl(225, 75%, 70%);
-    --btn-arrow-bg: hsla(220, 50%, 80%, 0.15);
-    --btn-hover-shadow: hsla(220, 70%, 55%, 0.4);
-    --btn-primary-shadow: hsla(220, 70%, 55%, 0.25);
-
-    /* Extra Palettes kept - PRESERVED */
-    --bg-dark: #0c0b15;
-    --bg-darker: #070610;
-    --purple-dark: #3a1f5f;
-    --purple-neon: #6a2ebd;
+    --btn-start-bg: linear-gradient(90deg, var(--green-mid) 0%, #00d0ff 100%);
+    --btn-start-shadow: 0 0 15px rgba(106, 46, 189, 0.6), 0 0 30px rgba(0, 208, 255, 0.3);
+    --btn-demo-color: #00ff9d;
+    --btn-demo-border: #00ff9d;
+    --quote-bg: rgba(20, 15, 40, 0.45);
+    --quote-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(106, 46, 189, 0.2);
+    --decoration-color: rgba(106, 46, 189, 0.15);
+    --arabic-color: var(--text-main);
+    --separator-color: #00d0ff;
+    --accent-dark: #6a2ebd;
+    --accent-mid: #00d0ff;
+    --accent-gold: #ffd700;
+    --muted: #8a9cff;
+    --card-glass: rgba(30, 30, 60, 0.6);
+    --footer-dark-1: #070710;
+    --footer-dark-2: #05050c;
     --neon-blue: #00d0ff;
+    --neon-purple: #aa00ff;
     --neon-green: #00ff9d;
-    --gold-neon: #ffd700;
-    --glass-bg: rgba(20, 15, 40, 0.45);
-    --text-main: #f0f0ff;
-    --text-subtle: #b0b0d0;
-
-    /* Shadows & Effects */
-    --shadow-color: hsla(220, 50%, 5%, 0.4);
-    --soft-shadow: hsla(220, 50%, 5%, 0.2);
-    --pattern-color: hsl(220, 15%, 60%);
-    --pattern-opacity: 0.04;
-
-    /* Component-Specific / Loading / Footer - PRESERVED */
-    --footer-bg: linear-gradient(135deg, hsl(160, 70%, 12%), hsl(175, 60%, 15%));
-    --footer-text: hsl(220, 15%, 80%);
-    --spinner-track-color: hsla(220, 40%, 30%, 0.5);
-    --loading-bg: hsl(220, 40%, 12%);
-    --loading-text: var(--text-primary);
-    --loading-grad-start: hsl(220, 45%, 25%);
-    --loading-grad-end: hsl(220, 40%, 12%);
-    --loading-ring-bg: hsla(46, 31%, 89%, 0.1);
-    --loading-orb-shadow: hsla(45, 52%, 53%, 0.4);
-    --loading-particle-opacity: 0.3;
-
-    /* Premium variables kept - PRESERVED */
-    --bg: hsl(0, 0%, 7%);
-    --bg-2: hsl(0, 0%, 10%);
-    --text-light: hsl(0, 0%, 94%);
-    --text-muted: hsl(0, 0%, 63%);
-    --accent-dark: hsl(148, 51%, 25%);
-    --accent-mid: hsl(148, 47%, 33%);
-    --accent-gold: hsl(45, 52%, 53%);
-
-    /* Extra Shadows - PRESERVED */
-    --shadow-deep: hsla(0, 0%, 0%, 0.4);
-    --shadow-glow-green: hsla(148, 47%, 33%, 0.15);
-    --shadow-glow-gold: hsla(45, 52%, 53%, 0.2);
-
-    /* Hero / Page colors - PRESERVED */
-    --hero-glow-1: rgba(106, 46, 189, 0.15);
-    --hero-glow-2: rgba(0, 208, 255, 0.1);
-    --page-background-color: #000F95; /* 🌙 night */
-
-    /* Auth Form Dark Variables - PRESERVED */
-    --auth-bg: #1A202C;
-    --auth-text-primary: #edf2f7;
-    --auth-text-secondary: #a0aec0;
-    --auth-input-bg: #2d3748;
-    --auth-input-border: #4a5568;
-    --auth-input-focus-border: #38b2ac;
-    --auth-button-bg: linear-gradient(135deg, #38b2ac 0%, #4fd1c5 100%);
-    --auth-button-text: #1a202c;
-    --auth-button-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-    --auth-link-color: #38b2ac;
-    --auth-container-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-    --auth-logo-icon-bg: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    --neon-gold: #ffd700;
+    --glass-bg: rgba(20, 25, 50, 0.6);
+    --body-bg: radial-gradient(circle at top left, #0a0c1c, #070818, #030510);
+    --footer-bg: linear-gradient(180deg, #070710, #05050c);
+    --footer-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    --arabesque-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150'%3E%3Cpath fill='%23ffd700' fill-opacity='0.15' d='M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,101.3C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+    --logo-bg: linear-gradient(135deg, #6a2ebd, rgba(255,255,255,0.15));
+    --logo-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    --verse-bg: rgba(255, 255, 255, 0.04);
+    --verse-border: rgba(255, 255, 255, 0.1);
+    --input-bg: rgba(255, 255, 255, 0.06);
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-focus-shadow: 0 0 0 6px rgba(0, 208, 255, 0.1);
+    --btn-bg: linear-gradient(135deg, #6a2ebd, #00d0ff);
+    --btn-hover-bg: linear-gradient(135deg, #00d0ff, #6a2ebd);
+    --btn-shadow: 0 8px 24px rgba(106, 46, 189, 0.3);
+    --btn-hover-shadow: 0 10px 28px rgba(106, 46, 189, 0.4);
+    --social-bg: rgba(255, 255, 255, 0.06);
+    --social-hover-bg: rgba(255, 255, 255, 0.12);
+    --link-hover-color: #00d0ff;
+    --link-underline: #00d0ff;
+    --legal-link-hover: #00d0ff;
   }
+}
 
-  /* 3.3) NEW THEME: "Calm Dawn" (Light) - from second file */
-  /* This theme is effectively superseded by the new :root theme for light mode,
-     but kept for compatibility if explicitly called by data-theme='calm-light' */
-  [data-theme='calm-light'] {
-    --background-main: #F8F7F4;       /* پس‌زمینه اصلی: کرم بسیار ملایم */
-    --background-card: #FFFFFF;     /* پس‌زمینه کارت‌ها: سفید خالص */
-    --text-primary: #2D3748;         /* رنگ متن اصلی: خاکستری تیره */
-    --text-secondary: #718096;        /* رنگ متن دوم: خاکستری روشن‌تر */
-    --accent-primary: #C0A062;         /* رنگ تاکید: طلایی ملایم و مات */
-    --accent-secondary: #E9E2D5;    /* رنگ تاکید دوم: کرم تیره‌تر */
-    --border-color: #E2E8F0;          /* رنگ حاشیه */
-    --shadow-color: rgba(45, 55, 72, 0.1); /* سایه بسیار نرم */
-    --btn-gradient-start: #C0A062;
-    --btn-gradient-end: #AD8F54;
+/* Base Resets and Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
+}
 
-  /* 3.4) NEW THEME: "Calm Dawn" (Dark) - from second file */
-  [data-theme='calm-dark'] {
-    --background-main: #121828;
-    --background-card: #1A2033;
-    --text-primary: #E2E8F0;
-    --text-secondary: #A0AEC0;
-    --accent-primary: #F0D080;
-    --accent-secondary: #2D3748;
-    --border-color: #2D3748;
-    --shadow-color: rgba(0, 0, 0, 0.2);
-    --btn-gradient-start: #F0D080;
-    --btn-gradient-end: #D4AF37;
-  }
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
 
-  /* ======================================================================== */
-  /* Global Base & Element Styles                                             */
-  /* ======================================================================== */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--body-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+  background: var(--body-bg);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px 80px;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  html {
-    scroll-behavior: smooth;
-  }
+/* Light Mode Background Effects */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>\
+          <g fill='none' stroke='var(--decoration-color)' stroke-width='1' opacity='0.25'>\
+              <path d='M40 0 L80 40 L40 80 L0 40 Z'/>\
+              <path d='M120 40 L160 80 L120 120 L80 80 Z'/>\
+              <path d='M80 0 L120 40 L80 80 L40 40 Z'/>\
+              <path d='M0 120 L40 160 L80 120 L40 80 Z'/>\
+              <path d='M80 80 L120 120 L80 160 L40 120 Z'/>\
+          </g>\
+      </svg>");
+  background-repeat: repeat;
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+}
 
-  body {
-    background:
-      radial-gradient(ellipse at 10% 10%, var(--aurora-1) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 90%, var(--aurora-2) 0%, transparent 50%),
-      linear-gradient(-45deg, var(--gradient-bg-1), var(--gradient-bg-2), var(--gradient-bg-3));
-    background-size: cover; /* Fixed background size */
-    background-attachment: fixed; /* Ensures background stays fixed during scroll */
-    /* animation: gradient-flow 35s ease infinite, aurora-1 30s ease-in-out infinite alternate, aurora-2 40s ease-in-out infinite alternate; */
-    /* All background animations are removed for a static look */
-    color: var(--text-primary);
-    font-family: var(--font-primary);
-    transition: background-color .4s ease, color .4s ease;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
-
-  /* Original base styles from second file - PRESERVED */
-  html,
-  body {
-    padding: 0;
-    margin: 0;
-    font-family: var(--font-primary);
-    /* Note: background-color is handled by the more complex `body` rule above */
-    /* background-color: var(--background-main); */
-    color: var(--text-primary);
-    transition: background-color var(--transition-speed), color var(--transition-speed);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  *, *::before, *::after {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease, stroke 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-  }
-
-  /* [جدید] نوار پیشرفت مطالعه وابسته به اسکرول */
+/* Dark Mode Background Effects */
+@media (prefers-color-scheme: dark) {
   body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--scroll-progress); /* متصل به @property */
-    height: 4px;
-    background: var(--gradient-accent);
-    z-index: var(--z-scroll-progress);
-    animation: scroll-progress-animation linear;
-    animation-timeline: scroll(root);
-    box-shadow: 0 0 10px var(--accent-primary), 0 0 5px var(--accent-primary);
+    background-image: none;
+    background: radial-gradient(circle at 20% 30%, rgba(106, 46, 189, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 208, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 20%, rgba(0, 255, 157, 0.08) 0%, transparent 40%);
+    animation: bgPulse 12s infinite alternate;
   }
 
-  /* Theme-Aware Background Pattern (Moved to ::after to allow for progress bar) */
   body::after {
-    content: '';
+    content: "";
     position: fixed;
     inset: 0;
+    background-image: radial-gradient(circle at center, rgba(106, 46, 189, 0.05) 0%, transparent 70%),
+                    repeating-linear-gradient(45deg, rgba(20, 15, 40, 0.2) 0px, rgba(20, 15, 40, 0.2) 1px, transparent 1px, transparent 11px),
+                    repeating-linear-gradient(-45deg, rgba(20, 15, 40, 0.2) 0px, rgba(20, 15, 40, 0.2) 1px, transparent 1px, transparent 11px);
     z-index: -1;
     pointer-events: none;
-    background-color: var(--pattern-color);
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='black'><path d='M40 0 L80 40 L40 80 L0 40 Z'/><path d='M120 40 L160 80 L120 120 L80 80 Z'/><path d='M80 0 L120 40 L80 80 L40 40 Z'/><path d='M0 120 L40 160 L80 120 L40 80 Z'/><path d='M80 80 L120 120 L80 160 L40 120 Z'/></g></svg>");
-    mask-repeat: repeat;
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='black'><path d='M40 0 L80 40 L40 80 L0 40 Z'/><path d='M120 40 L160 80 L120 120 L80 80 Z'/><path d='M80 0 L120 40 L80 80 L40 40 Z'/><path d='M0 120 L40 160 L80 120 L40 80 Z'/><path d='M80 80 L120 120 L80 160 L40 120 Z'/></g></svg>");
-    -webkit-mask-repeat: repeat;
-    opacity: var(--pattern-opacity);
-  }
-
-  /* Typography & Links (Enhanced) */
-  h1, h2, h3, h4, h5, h6 { color: var(--text-primary); }
-
-  a {
-    color: var(--accent-secondary);
-    text-decoration: none;
-    position: relative;
-  }
-  a:hover { color: var(--accent-primary); }
-
-  /* Animated underline for links */
-  a::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--accent-primary);
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-  }
-  a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-
-  /* Text Selection Style */
-  ::selection {
-    background-color: var(--selection-bg);
-    color: var(--text-primary);
-  }
-
-  /* Accessibility Focus Style */
-  :is(a, button, input, textarea, select):focus-visible {
-    outline: 2px solid var(--focus-ring-color);
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-
-  /* Keyframe Animations */
-  @keyframes scroll-progress-animation {
-    from { width: 0%; }
-    to { width: 100%; }
+    animation: gridMove 40s linear infinite;
   }
 }
 
-
-/* 4) Component Layer */
-@layer components {
-  /* Default Card Style */
-  .card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 15px var(--shadow-color);
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px var(--shadow-deep);
-    border-color: var(--accent-primary);
-  }
-
-  /* Default Button Style */
-  .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    background-image: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-mid), var(--btn-grad-end));
-    color: var(--btn-text-color);
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 10px var(--btn-primary-shadow);
-  }
-
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px var(--btn-hover-shadow);
-    background-image: linear-gradient(135deg, var(--btn-grad-start-hover), var(--btn-grad-start-hover), var(--btn-grad-end-hover));
-  }
-
-  .btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 1px 5px var(--btn-primary-shadow);
-  }
+/* Animations */
+@keyframes bgPulse {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
 }
 
-
-/* 5) Optional: honor system preference if no JS sets data-theme */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) body {
-    /* This section is kept for compatibility but will be overridden by the
-       more specific :root and [data-theme='dark'] rules. */
-    background-color: hsl(220, 40%, 15%);
-  }
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 300px; }
 }
 
-/* 6) Custom Scrollbar Styles */
-::-webkit-scrollbar {
-  width: 10px;
+@keyframes titleGlow {
+  0% { text-shadow: 0 0 10px rgba(106, 46, 189, 0.5); }
+  50% { text-shadow: 0 0 20px rgba(106, 46, 189, 0.8), 0 0 30px rgba(0, 208, 255, 0.6); }
+  100% { text-shadow: 0 0 10px rgba(106, 46, 189, 0.5); }
 }
 
-::-webkit-scrollbar-track {
-  background: var(--background);
+/* Additional Classes */
+.arabic-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.2em;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: var(--accent-secondary);
-  border-radius: 20px;
-  border: 2px solid var(--background);
+.theme-transition * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--accent-primary);
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }

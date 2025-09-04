@@ -1,0 +1,52 @@
+/* styles/global.css
+   Required: import this at the root of your app (e.g. index.js) with:
+   import './styles/global.css';
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #0c0b15;
+  --bg-2: #070610;
+  --accent-dark: #6a2ebd;
+  --accent-mid: #00d0ff;
+  --accent-gold: #ffd700;
+  --muted: #8a9cff;
+  --card-glass: rgba(30, 30, 60, 0.6);
+  --footer-dark-1: #070710;
+  --footer-dark-2: #05050c;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 40px 20px;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top left, #0a0c1c, #070818, #030510);
+  color: #e0e0ff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Small utility */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
